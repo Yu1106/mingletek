@@ -1,0 +1,3 @@
+[2019-11-20T02:50:34.586119+01:00] login-20191120.WARNING: logout failed[] [] []
+[2019-11-20T02:54:49.093676+01:00] login-20191120.WARNING: social failed{"r":"test"} [] []
+[2019-11-20T02:57:26.711691+01:00] login-20191120.WARNING: social failed{"r":"test"} [] []
