@@ -3,7 +3,6 @@
 use common\db\GenericDAO;
 use common\login\Login;
 use common\model\User;
-use common\model\UserLoginLog;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -15,8 +14,7 @@ session_start();
 
 if (isset($_SESSION['USER_ID'])) {
 	$user = User::exists($_SESSION['USER_ID']);
-	$userLoginLog = UserLoginLog::findByUserIdAndAction($_SESSION['USER_ID'], Login::LOGIN);
-	if (!$user || !$userLoginLog)
+	if (!$user)
 		Login::logout();
 }
 
