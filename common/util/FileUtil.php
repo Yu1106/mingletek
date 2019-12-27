@@ -6,7 +6,7 @@ use Exception;
 
 class FileUtil
 {
-	const IMG = 'D:/xamppNew/htdocs/mingletek/storage/upload/';
+	const IMG = '/home/mingletek/users/';
 	const CSV = 'D:/xamppNew/htdocs/mingletek/storage/download/';
 
 	const UPLOAD_DRESS = '/upload_dress';

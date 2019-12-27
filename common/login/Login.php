@@ -106,4 +106,11 @@ class Login
 		$_SESSION['USER_NAME'] = $name;
 		$_SESSION['USER_EMAIL'] = $email;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public static function getUserEmail(){
+		return $_SESSION['USER_EMAIL'];
+	}
 }

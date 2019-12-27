@@ -13,7 +13,7 @@ if (!Login::auth() || !UidUtil::auth() || empty($_FILES['file'])) {
 	exit;
 }
 
-$filePath = (empty($_POST['sub'])) ? UidUtil::getUid() . FileUtil::UPLOAD_DRESS : UidUtil::getUid() . FileUtil::UPLOAD_RELATED_DRESS;
+$filePath = (empty($_POST['sub'])) ? Login::getUserEmail() . FileUtil::UPLOAD_DRESS : Login::getUserEmail() . FileUtil::UPLOAD_RELATED_DRESS;
 $uid = UidUtil::getUid();
 
 if ($_POST['action'] === 'validate') {
