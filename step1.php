@@ -23,7 +23,7 @@ if ($_POST && CSRF::validate($_POST)) {
 	$mingletek = new Mingletek();
 	$HousekeepingRecord = new HousekeepingRecord();
 	$HousekeepingRecord->account = $_SESSION['USER_EMAIL'];
-	$mingletekApiLogId = MingletekApiLog::addLog(0, '', MingletekApiLog::HOUSE_KEEPING, json_encode($HousekeepingRecord));
+	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $uid, MingletekApiLog::HOUSE_KEEPING, json_encode($HousekeepingRecord));
 	$housekeeping = $mingletek->Housekeeping($HousekeepingRecord);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($housekeeping));
 	if ($housekeeping->response) {
