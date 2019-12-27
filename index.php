@@ -4,7 +4,7 @@ use common\view\Asset;
 use common\view\View;
 
 include 'library.php';
-
+//session_destroy();
 $view = new View('header');
 $view->assign('css', Asset::$indexCss);
 $view->assign('js', Asset::$indexJs);

@@ -18,16 +18,17 @@ class User extends Model
 		return "user";
 	}
 
-	public static function findUserBySocialId(string $socialId)
+	public static function findUserBySocialIdAndEmail(string $socialId, string $email)
 	{
-		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where social_id = :social_id", [":social_id" => $socialId]);
+		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where social_id = :social_id and email = :email", [":social_id" => $socialId, ":email" => $email]);
 	}
 
-	public static function addUser(string $socialId, string $email, string $name)
+	public static function addUser(string $socialId, string $account, string $email, string $name)
 	{
 		return self::getDb()->save(
 			[
 				'social_id' => $socialId,
+				'account' => $account,
 				'email' => $email,
 				'name' => $name,
 				'modify_date' => new DbExpression("now()"),
@@ -35,10 +36,11 @@ class User extends Model
 			], true, static::tableName());
 	}
 
-	public static function modifyUser(string $socialId, string $email, string $name)
+	public static function modifyUser(string $socialId, string $account, string $email, string $name)
 	{
 		return self::getDb()->update(
 			[
+				'account' => $account,
 				'email' => $email,
 				'name' => $name,
 				'modify_date' => new DbExpression("now()")
