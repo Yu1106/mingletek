@@ -142,7 +142,7 @@ abstract class FileUploadFactory
 	public function upload(): array
 	{
 		if (!$this->check() || !$this->uploadFile()) {
-			return self::message(self::FAIL, $this->fileName, "", $this->msg);
+			return self::message(self::FAIL, $this->fileName, $this->filePath, $this->msg);
 		}
 		return self::message(self::SUCCESS, $this->fileName, $this->filePath, self::type[self::SUCCESS]);
 	}
