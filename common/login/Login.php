@@ -38,24 +38,21 @@ class Login
 		}
 		$user = User::findUserBySocialIdAndEmail($this->socialId, $this->email);
 		$ip = (HttpUtil::isPublicIP(self::getIP())) ? self::getIP() : "";
-		$arr = explode("@", $this->email);
-		$account = $arr[0];
 		if (!$user) {
-			$id = User::addUser($this->socialId, $account, $this->email, $this->name);
+			$id = User::addUser($this->socialId, $this->email, $this->name);
 			UserLoginLog::addUserLoginLog($id, self::LOGIN, $ip);
 			if ($id > 0) {
-				$this->setUserSession($id, $account, $this->name, $this->email);
+				$this->setUserSession($id, $this->name, $this->email);
 			}
 		} else {
 			if ($user['social_id'] != $this->socialId || $user['email'] != $this->email || $user['name'] != $this->name) {
-				User::modifyUser($this->socialId, $account, $this->email, $this->name);
-				$user["account"] = $account;
+				User::modifyUser($this->socialId, $this->email, $this->name);
 				$user["name"] = $this->name;
 				$user["email"] = $this->email;
 			}
 			UserLoginLog::addUserLoginLog($user["id"], self::LOGIN, $ip);
 			if ($user["id"] > 0) {
-				$this->setUserSession($user["id"], $user["account"], $user["name"], $user["email"]);
+				$this->setUserSession($user["id"], $user["name"], $user["email"]);
 			}
 		}
 		HttpUtil::redirect('step1.php');
@@ -63,7 +60,7 @@ class Login
 
 	public static function logout()
 	{
-		if (isset($_SESSION['USER_ID']) && isset($_SESSION['USER_ACCOUNT']) && isset($_SESSION['USER_NAME']) && isset($_SESSION['USER_EMAIL'])) {
+		if (isset($_SESSION['USER_ID']) && isset($_SESSION['USER_NAME']) && isset($_SESSION['USER_EMAIL'])) {
 			$ip = (HttpUtil::isPublicIP(self::getIP())) ? self::getIP() : "";
 			UserLoginLog::addUserLoginLog($_SESSION['USER_ID'], self::LOGOUT, $ip);
 		} else {
@@ -95,19 +92,17 @@ class Login
 	 */
 	public static function auth()
 	{
-		return (isset($_SESSION['USER_ID']) && isset($_SESSION['USER_ACCOUNT']) && isset($_SESSION['USER_NAME']) && isset($_SESSION['USER_EMAIL'])) ? true : false;
+		return (isset($_SESSION['USER_ID']) && isset($_SESSION['USER_NAME']) && isset($_SESSION['USER_EMAIL'])) ? true : false;
 	}
 
 	/**
 	 * @param int $id
-	 * @param string $account
 	 * @param string $name
 	 * @param string $email
 	 */
-	private function setUserSession(int $id, string $account, string $name, string $email)
+	private function setUserSession(int $id, string $name, string $email)
 	{
 		$_SESSION['USER_ID'] = $id;
-		$_SESSION['USER_ACCOUNT'] = $account;
 		$_SESSION['USER_NAME'] = $name;
 		$_SESSION['USER_EMAIL'] = $email;
 	}
