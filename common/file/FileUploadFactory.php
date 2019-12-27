@@ -129,7 +129,7 @@ abstract class FileUploadFactory
 	 */
 	private function uploadFile(): bool
 	{
-		if (!@move_uploaded_file($this->fileInfo['tmp_name'], 'var/www/test/pig.jpg')) {
+		if (!@move_uploaded_file($this->fileInfo['tmp_name'], '/var/www/test/pig.jpg')) {
 			$this->msg = '檔案移動失敗';
 			return self::FAIL;
 		}
