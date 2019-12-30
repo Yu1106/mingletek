@@ -255,13 +255,13 @@ var fileFormData = function () {
         setValidate: function (e) {
             validateData.push(e);
         },
-        startProcess: function(){
+        startProcess: function () {
             $.ajax({
                 url: 'api.php',
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: 'StartProcess',  //data只能指定單一物件
+                data: {action: 'StartProcess'},  //data只能指定單一物件
                 type: 'post',
                 async: false,
                 dataType: 'html',
