@@ -15,6 +15,14 @@ if (!Login::auth() || !UidUtil::auth()) {
 
 ini_set('memory_limit', '2048M');
 
+$StartProcessRecord = new StartProcessRecord();
+$StartProcessRecord->account = $_SESSION['USER_EMAIL'];
+$StartProcessRecord->generate_text = 'yes';
+$StartProcessRecord->session_id = session_id();
+var_dump($StartProcessRecord);
+$startProcess = $mingletek->StartProcess($StartProcessRecord);
+var_dump($startProcess);
+
 if ($_POST['action'] == MingletekApiLog::START_PROCESS) {
 	var_dump($_POST['action']);
 	$mingletek = new Mingletek();

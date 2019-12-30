@@ -26,10 +26,10 @@ class HttpUtil
 		CURLOPT_AUTOREFERER => true,
 		CURLOPT_USERAGENT => "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36",
 		CURLOPT_SSL_VERIFYHOST => false,
-		CURLOPT_SSL_VERIFYPEER => false,
-		CURLOPT_CONNECTTIMEOUT => 3,
-		// timeout 10 seconds
-		CURLOPT_TIMEOUT => 10,
+		CURLOPT_SSL_VERIFYPEER => true,
+		CURLOPT_CONNECTTIMEOUT => 5,
+		// timeout 5 seconds
+		CURLOPT_TIMEOUT => 5,
 		CURLOPT_CAINFO => '/var/www/html/cacert.pem'
 	];
 
