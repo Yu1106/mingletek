@@ -291,8 +291,8 @@ var fileFormData = function () {
                     var statusUrl = request.getResponseHeader('Location');
                     fileFormData.updateProgress(statusUrl);
                 },
-                error: function (e) {
-                    alert(e);
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
         },
