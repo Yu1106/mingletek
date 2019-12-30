@@ -144,9 +144,7 @@ var fileFormData = function () {
     var status = true;
     var msg = '';
     var validateData = [];
-    var mydata = [
-        {"account": "lziqovbybc_1574304011@tfbnw.net", "generate_text": "no", "session_id": "9876543210"}
-    ];
+    var startProcessData = [];
 
     var showErrorAlert = function () {
         $("#alertMsgBox").html(msg);
@@ -169,6 +167,18 @@ var fileFormData = function () {
         form_data.append('action', '');
         form_data.append('sub', '');
         return true;
+    };
+    var setStartProcessData = function () {
+        $.ajax({
+            url: 'api_post.php',
+            data: {'action': 'startProcessData'},  //data只能指定單一物件
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                startProcessData = data;
+            }
+        });
     };
     return {
         validate: function (sub = false) {
@@ -259,14 +269,16 @@ var fileFormData = function () {
             validateData.push(e);
         },
         startProcess: function () {
+            setStartProcessData();
+            console.log(startProcessData);
             $.ajax({
                 type: 'POST',
                 url: '/longtask',
-                data: JSON.stringify(mydata),
+                data: startProcessData,
                 contentType: "application/json",
                 dataType: 'json',
                 success: function (data, status, request) {
-                    console.log(data, status, request, request.getResponseHeader('Location'));
+                    console.log(data, status, request.getResponseHeader('Location'));
                     status_url = request.getResponseHeader('Location');
                 },
                 error: function () {
