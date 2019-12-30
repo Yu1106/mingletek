@@ -16,7 +16,6 @@
 	--orange: #ce5e48;
 	--yellow: #fcc80e;
 	--purple: #9f406c;
-	
 }
 
 * {
@@ -169,6 +168,17 @@ html, body {
 	top:50%;
 	left:50%;
 	transform:translate(-50%,-50%);
+}
+
+.percent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #e2e2e2;
+    letter-spacing: 1px;
 }
 
 .spinner .dots {

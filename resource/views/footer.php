@@ -9,6 +9,7 @@
 </div>
 <div class="loading">
     <div class="spinner">
+        <div class="percent"></div>
         <div class="dots dot1"></div>
         <div class="dots dot2"></div>
         <div class="dots dot3"></div>

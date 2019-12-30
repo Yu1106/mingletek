@@ -10,9 +10,11 @@ $(function(){
 			var scrollTop = $(window).scrollTop();
 
 			//goTop
-			if ((scrollTop >= 100)){
+			if ((scrollTop >= 500)){
+				$("header.fixed").addClass("is_scroll");
 				$("#goTop").stop().fadeIn();
 			}else{
+				$("header.fixed").removeClass("is_scroll");
 				$("#goTop").fadeOut();
 			}
 
