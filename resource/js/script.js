@@ -257,7 +257,7 @@ var fileFormData = function () {
         },
         startProcess: function () {
             $.ajax({
-                url: 'api.php',
+                url: 'api_post.php',
                 data: {'action': 'StartProcess'},  //data只能指定單一物件
                 type: 'post',
                 async: false,
