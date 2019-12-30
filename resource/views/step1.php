@@ -21,12 +21,12 @@
                     </div>
                     <div class="formItem">
                         <label class="formLabel" for="qcontent">注意事項</label>
-                        <textarea id="qcontent" class="" name="settings.notice" rows="8"
+                        <textarea class="" name="settings.notice" rows="8"
                                   placeholder="貼心小叮嚀&#13;&#10; - 請水水注意, 下單後請勿任意取消訂單, 以維護其他買加權益喔!&#13;&#10; - 賣場商品均以實際銷售商品拍攝, 不是用樣版欺騙買家, 水水可以放心下標&#13;&#10;- 商品顏色因電腦螢幕設定會略有差異, 我們已經努力將色差降到最小, 寄貨以實際商品顏色為準. 對色差很敏感的水水要考慮清楚在下標喔….."></textarea>
                     </div>
                     <div class="formItem">
                         <label class="formLabel" for="qcontent">退換貨政策</label>
-                        <textarea id="qcontent" class="" name="settings.refund" rows="8"
+                        <textarea class="" name="settings.refund" rows="8"
                                   placeholder="退換貨須知：&#13;&#10;※ 七日鑑賞期&#13;&#10;根據消費者保護法第19條規定，XXX提供您商品貨到的七日鑑賞期(※非試用期)，&#13;&#10;是由消費者完成簽收取件起的隔日開始計算至第七天為止；如是以管理員代收，&#13;&#10;則以代收起隔日計算。EX: 完成簽收的時間是2/10，其七天鑑賞期起訖日即為2/11~2/17。&#13;&#10;"></textarea>
                     </div>
                 </div>
