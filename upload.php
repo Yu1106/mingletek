@@ -20,7 +20,7 @@ if ($_POST['action'] === 'validate') {
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->validate();
 	echo json_encode($return);
-} else if ($_POST['action'] === 'upload' && empty($_POST['sub'])) {
+} else if ($_POST['action'] === 'upload' && $_POST['sub'] === '') {
 	Product::delByUid($uid);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
@@ -33,7 +33,7 @@ if ($_POST['action'] === 'validate') {
 		}
 	}
 	echo json_encode($return);
-} else if ($_POST['action'] === 'upload' && isset($_POST['sub'])) {
+} else if ($_POST['action'] === 'upload' && $_POST['sub'] === 'sub') {
 	Subpicture::delByUid($uid);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();

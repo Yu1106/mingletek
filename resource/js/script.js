@@ -139,9 +139,12 @@ $(function () {
 });
 
 var fileFormData = function () {
+
+    var form_data; //建構new FormData()
     var status = true;
     var msg = '';
-    var validate = [];
+    var validateData = [];
+
     var showErrorAlert = function () {
         $("#alertMsgBox").html(msg);
         showAlertMsg();
@@ -150,22 +153,29 @@ var fileFormData = function () {
         status = true;
         msg = '';
     };
+    var setFile = function () {
+        form_data = new FormData(); //建構new FormData()
+        var file_data = $("#fileupload").prop('files');  //取得上傳檔案屬性
+        if (file_data.length == 0 || validateData.length == 0)
+            return false;
+        for (var i = 0; i < file_data.length; i++) {
+            if ($.inArray(file_data[i].name, validateData) >= 0) {
+                form_data.append('file[]', file_data[i]);
+            }
+        }
+        form_data.append('action', '');
+        form_data.append('sub', '');
+        return true;
+    };
     return {
         validate: function (sub = false) {
-            var form_data = new FormData();  //建構new FormData()
-            var file_data = $("#fileupload").prop('files');  //取得上傳檔案屬性
-            if (file_data.length == 0) {
+
+            if (!setFile())
                 return false;
-            }
+            form_data.set('action', 'validate');
+            if (sub) form_data.set('sub', 'sub');
             reset();
             showLoading();
-            for (var i = 0; i < file_data.length; i++) {
-                if ($.inArray(file_data[i].name, validate) >= 0) {
-                    form_data.append('file[]', file_data[i]);
-                }
-            }
-            form_data.append('action', 'validate');
-            if (sub) form_data.append('sub', 'sub');
 
             $.ajax({
                 url: 'upload.php',
@@ -186,8 +196,8 @@ var fileFormData = function () {
                                     fileFormData.empty(v2);
                             });
                         } else {
-                            if ($.inArray(v.name, validate) < 0) {
-                                validate.push(v.name);
+                            if ($.inArray(v.name, validateData) < 0) {
+                                validateData.push(v.name);
                             }
                         }
                     });
@@ -203,18 +213,9 @@ var fileFormData = function () {
             clearLoading();
         },
         upload: function (sub = false) {
-            var form_data = new FormData();  //建構new FormData()
-            var file_data = $("#fileupload").prop('files');  //取得上傳檔案屬性
-            if (file_data.length == 0) {
-                return false;
-            }
-            for (var i = 0; i < file_data.length; i++) {
-                if ($.inArray(file_data[i].name, validate) >= 0) {
-                    form_data.append('file[]', file_data[i]);
-                }
-            }
-            form_data.append('action', 'upload');
-            if (sub) form_data.append('sub', 'sub');
+
+            form_data.set('action', 'upload');
+            if (sub) form_data.set('sub', 'sub');
 
             $.ajax({
                 url: 'upload.php',
@@ -243,8 +244,8 @@ var fileFormData = function () {
         },
         empty: function (e) {
             var img = $(e).attr('data-img');
-            if (validate.length > 0) {
-                validate = validate.filter(function (element, index, arr) {
+            if (validateData.length > 0) {
+                validateData = validateData.filter(function (element) {
                     return element != img;
                 });
             }
@@ -252,7 +253,7 @@ var fileFormData = function () {
             el.remove();
         },
         setValidate: function (e) {
-            validate.push(e);
+            validateData.push(e);
         }
     }
 }();
