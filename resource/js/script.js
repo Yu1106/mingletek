@@ -144,6 +144,9 @@ var fileFormData = function () {
     var status = true;
     var msg = '';
     var validateData = [];
+    var mydata = [
+        {"account": "lziqovbybc_1574304011@tfbnw.net", "generate_text": "no", "session_id": "123"}
+    ];
 
     var showErrorAlert = function () {
         $("#alertMsgBox").html(msg);
@@ -257,14 +260,28 @@ var fileFormData = function () {
         },
         startProcess: function () {
             $.ajax({
-                url: 'api_post.php',
-                data: {'action': 'StartProcess'},  //data只能指定單一物件
-                type: 'post',
-                async: false,
+                type: 'POST',
+                url: '/longtask',
+                data: JSON.stringify(mydata),
+                contentType: "application/json",
                 dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function (data, status, request) {
+                    console.log(data, status, request, request.getResponseHeader('Location'));
+                    status_url = request.getResponseHeader('Location');
+                },
+                error: function () {
+                    alert('Unexpected error');
                 }
+            });
+        },
+        updateProgress: function (data) {
+            // send GET request to status URL
+            $.getJSON('/longtask', function (data) {
+                // update UI
+                console.log(data);
+                setTimeout(function () {
+                    fileFormData.updateProgress('api_post.php', nanobar, status_div);
+                }, 3000);
             });
         }
     }
