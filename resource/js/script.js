@@ -237,7 +237,7 @@ var fileFormData = function () {
                         clearLoading();
                         showErrorAlert();
                     } else {
-                        $("#uploadMajor").submit();
+                        // $("#uploadMajor").submit();
                     }
                 }
             });
@@ -254,6 +254,21 @@ var fileFormData = function () {
         },
         setValidate: function (e) {
             validateData.push(e);
+        },
+        startProcess: function(){
+            $.ajax({
+                url: 'api.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: 'StartProcess',  //data只能指定單一物件
+                type: 'post',
+                async: false,
+                dataType: 'html',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
         }
     }
 }();

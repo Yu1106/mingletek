@@ -41,7 +41,6 @@ class Mingletek
 
 	public function StartProcess(StartProcessRecord $data)
 	{
-		echo "StartProcess<br>";
 		$mingletek = new StartProcessRequest($data);
 		$startProcessRequest = $mingletek->send();
 		return $startProcessRequest;
