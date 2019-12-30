@@ -291,9 +291,10 @@ var fileFormData = function () {
             console.log(statusUrl);
             $.getJSON(statusUrl, function (data) {
                 var percent = parseInt(data['current'] * 100 / data['total']);
+                console.log(percent);
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    console.log(percent, data);
+                    console.log(data);
                 } else {
                     // rerun in 2 seconds
                     setTimeout(function () {
