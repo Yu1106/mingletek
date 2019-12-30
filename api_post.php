@@ -10,6 +10,6 @@ if (!Login::auth() || !UidUtil::auth()) {
 }
 
 if ($_POST['action'] === 'startProcessData') {
-	return json_encode(['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $_SESSION['UID']]);
+	echo json_encode(['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $_SESSION['UID']]);
 }
 
