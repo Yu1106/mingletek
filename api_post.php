@@ -18,7 +18,7 @@ ini_set('memory_limit', '2048M');
 $StartProcessRecord = new StartProcessRecord();
 $StartProcessRecord->account = $_SESSION['USER_EMAIL'];
 $StartProcessRecord->generate_text = 'yes';
-$StartProcessRecord->session_id = session_id();
+$StartProcessRecord->session_id = session_create_id();
 var_dump($StartProcessRecord);
 $startProcess = $mingletek->StartProcess($StartProcessRecord);
 var_dump($startProcess);
