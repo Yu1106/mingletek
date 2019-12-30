@@ -270,11 +270,11 @@ var fileFormData = function () {
         },
         startProcess: function () {
             setStartProcessData();
-            console.log(startProcessData);
+            var data = [startProcessData];
             $.ajax({
                 type: 'POST',
                 url: '/longtask',
-                data: startProcessData,
+                data: data,
                 contentType: "application/json",
                 dataType: 'json',
                 success: function (data, status, request) {
