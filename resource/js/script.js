@@ -261,7 +261,7 @@ var fileFormData = function () {
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: {action: 'StartProcess'},  //data只能指定單一物件
+                data: {'action': 'StartProcess'},  //data只能指定單一物件
                 type: 'post',
                 async: false,
                 dataType: 'html',
