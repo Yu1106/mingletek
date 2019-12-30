@@ -185,12 +185,14 @@ var fileFormData = function () {
     return {
         validate: function (sub = false) {
 
-            if (!setFile())
-                return false;
-            form_data.set('action', 'validate');
-            if (sub) form_data.set('sub', 'sub');
             reset();
             showLoading();
+            if (!setFile()){
+                clearLoading();
+                return false;
+            }
+            form_data.set('action', 'validate');
+            if (sub) form_data.set('sub', 'sub');
 
             $.ajax({
                 url: 'upload.php',
@@ -252,7 +254,11 @@ var fileFormData = function () {
                         clearLoading();
                         showErrorAlert();
                     } else {
-                        // $("#uploadMajor").submit();
+                        if(!sub){
+                            $("#uploadMajor").submit();
+                        }else{
+                            fileFormData.startProcess();
+                        }
                     }
                 }
             });
