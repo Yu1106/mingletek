@@ -271,10 +271,11 @@ var fileFormData = function () {
         startProcess: function () {
             setStartProcessData();
             var data = [startProcessData];
+            console.log(data, JSON.stringify(data));
             $.ajax({
                 type: 'POST',
                 url: '/longtask',
-                data: data,
+                data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: 'json',
                 success: function (data, status, request) {
