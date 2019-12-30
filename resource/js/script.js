@@ -271,7 +271,6 @@ var fileFormData = function () {
         startProcess: function () {
             setStartProcessData();
             var data = [startProcessData];
-            console.log(data, JSON.stringify(data));
             $.ajax({
                 type: 'POST',
                 url: '/longtask',
@@ -279,22 +278,27 @@ var fileFormData = function () {
                 contentType: "application/json",
                 dataType: 'json',
                 success: function (data, status, request) {
-                    console.log(data, status, request.getResponseHeader('Location'));
-                    status_url = request.getResponseHeader('Location');
+                    var statusUrl = request.getResponseHeader('Location');
+                    fileFormData.updateProgress(statusUrl);
                 },
                 error: function () {
                     alert('Unexpected error');
                 }
             });
         },
-        updateProgress: function (data) {
+        updateProgress: function (statusUrl) {
+            console.log(statusUrl)
             // send GET request to status URL
-            $.getJSON('/longtask', function (data) {
+            $.getJSON(statusUrl, function (data) {
                 // update UI
-                console.log(data);
-                setTimeout(function () {
-                    fileFormData.updateProgress('api_post.php', nanobar, status_div);
-                }, 3000);
+                if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                    console.log(data);
+                } else {
+                    // rerun in 2 seconds
+                    setTimeout(function () {
+                        fileFormData.updateProgress(statusUrl);
+                    }, 2000);
+                }
             });
         }
     }
