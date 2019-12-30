@@ -1,6 +1,6 @@
 $(function () {
 
-    var timer
+    var timer;
 
     $(window).scroll(function () {
 
@@ -43,6 +43,8 @@ $(function () {
                             $('#formErrorMsg').empty();
                         }
                     });
+                } else {
+                    return true;
                 }
             }
         });
@@ -115,7 +117,6 @@ $(function () {
             }
         });
     }
-
 
     function readURL(input, swiperUpload) {
         if (input.files && input.files.length >= 0) {
