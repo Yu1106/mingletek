@@ -285,12 +285,14 @@ var fileFormData = function () {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: 'json',
+                async: false,
                 success: function (data, status, request) {
+                    console.log(data, status, request);
                     var statusUrl = request.getResponseHeader('Location');
                     fileFormData.updateProgress(statusUrl);
                 },
-                error: function () {
-                    alert('Unexpected error');
+                error: function (e) {
+                    alert(e);
                 }
             });
         },
