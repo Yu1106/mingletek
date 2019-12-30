@@ -7,7 +7,6 @@ use common\db\DbExpression;
 
 class MingletekApiLog extends Model
 {
-	const HELLO = 'Hello';
 	const CREATE_ACCOUNT = 'CreateAccount';
 	const CHECK_ACCOUNT = 'CheckAccount';
 	const START_PROCESS = 'StartProcess';
