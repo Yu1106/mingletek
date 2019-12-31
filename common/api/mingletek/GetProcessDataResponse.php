@@ -91,7 +91,7 @@ class GetProcessDataResponse extends PropertyRecord
 			'neckline_desc',
 			'neckshoulder',
 			'neckshoulder_confidence',
-			'$neckshoulder_desc',
+			'neckshoulder_desc',
 			'sleeve',
 			'sleeve_confidence',
 			'sleeve_desc',
