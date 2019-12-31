@@ -304,7 +304,6 @@ var fileFormData = function () {
         },
         updateProgress: function (statusUrl) {
             // send GET request to status URL
-            showLoading();
             $.getJSON(statusUrl, function (data) {
                 var percent = parseInt(data['current'] * 100 / data['total']);
                 $(".percent").text(percent + "%");
