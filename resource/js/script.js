@@ -309,7 +309,7 @@ var fileFormData = function () {
                 $(".percent").text(percent + "%");
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    $("#uploadMajor").submit();
+                    // $("#uploadMajor").submit();
                 } else {
                     // rerun in 2 seconds
                     setTimeout(function () {
