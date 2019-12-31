@@ -229,7 +229,6 @@ var fileFormData = function () {
                     return false;
                 }
             });
-            clearLoading();
         },
         upload: function (sub = false) {
 
@@ -311,6 +310,7 @@ var fileFormData = function () {
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
                     clearLoading();
+                    $("#uploadMajor").submit();
                 } else {
                     // rerun in 2 seconds
                     setTimeout(function () {
