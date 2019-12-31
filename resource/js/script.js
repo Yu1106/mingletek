@@ -232,7 +232,6 @@ var fileFormData = function () {
         },
         upload: function (sub = false) {
             console.log('upload');
-            showLoading();
             form_data.set('action', 'upload');
             if (sub) form_data.set('sub', 'sub');
 
@@ -280,7 +279,6 @@ var fileFormData = function () {
         },
         startProcess: function () {
             console.log('startProcess');
-            showLoading();
             setStartProcessData();
             if (startProcessData.length == 0){
                 clearLoading();
