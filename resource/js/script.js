@@ -173,7 +173,7 @@ var fileFormData = function () {
     var setStartProcessData = function () {
         $.ajax({
             url: 'api_post.php',
-            data: {'action': 'startProcessData'},  //data只能指定單一物件
+            data: {'action': 'startProcessData'},
             type: 'post',
             async: false,
             dataType: 'json',
@@ -185,12 +185,9 @@ var fileFormData = function () {
         });
     };
     return {
-        startUpload: function(){
-            showLoading();
-            fileFormData.validate(true);
-        },
         validate: function (sub = false) {
-
+            console.log('validate');
+            showLoading();
             reset();
             if (!setFile()) {
                 clearLoading();
@@ -234,7 +231,7 @@ var fileFormData = function () {
             });
         },
         upload: function (sub = false) {
-
+            console.log('upload');
             showLoading();
             form_data.set('action', 'upload');
             if (sub) form_data.set('sub', 'sub');
@@ -282,8 +279,9 @@ var fileFormData = function () {
             validateData.push(e);
         },
         startProcess: function () {
-            setStartProcessData();
+            console.log('startProcess');
             showLoading();
+            setStartProcessData();
             if (startProcessData.length == 0){
                 clearLoading();
                 return false;
