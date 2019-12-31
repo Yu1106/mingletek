@@ -5,7 +5,6 @@ use common\api\mingletek\Mingletek;
 use common\login\Login;
 use common\model\MingletekApiLog;
 use common\model\Store;
-use common\util\UidUtil;
 use common\view\Asset;
 use common\view\View;
 use Volnix\CSRF\CSRF;
@@ -28,10 +27,10 @@ if($_POST && CSRF::validate($_POST)){
 	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["UID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
 	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($getProcessData));
-//	if ($getProcessData->response) {
-//		HttpUtil::redirect('step4.php');
-//		die();
-//	}
+	if ($mingletekApiLog) {
+		HttpUtil::redirect('step4.php');
+		die();
+	}
 }
 
 $view = new View('header');

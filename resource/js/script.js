@@ -157,7 +157,6 @@ var fileFormData = function () {
         msg = '';
     };
     var setFile = function () {
-        showLoading();
         form_data = new FormData(); //建構new FormData()
         var file_data = $("#fileupload").prop('files');  //取得上傳檔案屬性
         if (file_data.length == 0 || validateData.length == 0)
@@ -186,9 +185,12 @@ var fileFormData = function () {
         });
     };
     return {
+        startUpload: function(){
+            showLoading();
+            fileFormData.validate(true);
+        },
         validate: function (sub = false) {
 
-            showLoading();
             reset();
             if (!setFile()) {
                 clearLoading();
