@@ -203,7 +203,6 @@ var fileFormData = function () {
                 processData: false,
                 data: form_data,  //data只能指定單一物件
                 type: 'post',
-                async: false,
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (k, v) {
