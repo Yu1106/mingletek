@@ -279,7 +279,7 @@ var fileFormData = function () {
         startProcess: function () {
 
             setStartProcessData();
-            if (startProcessData.length == 0){
+            if (startProcessData.length == 0) {
                 clearLoading();
                 return false;
             }
@@ -304,7 +304,7 @@ var fileFormData = function () {
         updateProgress: function (statusUrl) {
             // send GET request to status URL
             $.getJSON(statusUrl, function (data) {
-                var percent = parseInt(data['current'] * 100 / data['total']);
+                var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
                 $(".percent").text(percent + "%");
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
