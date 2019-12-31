@@ -191,7 +191,6 @@ var fileFormData = function () {
             reset();
             if (!setFile()) {
                 clearLoading();
-                console.log("setFile");
                 return false;
             }
             form_data.set('action', 'validate');
@@ -312,7 +311,6 @@ var fileFormData = function () {
                 $(".percent").text(percent + "%");
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    clearLoading();
                     $("#uploadMajor").submit();
                 } else {
                     // rerun in 2 seconds
