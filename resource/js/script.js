@@ -186,7 +186,7 @@ var fileFormData = function () {
     };
     return {
         validate: function (sub = false) {
-            console.log('validate');
+
             showLoading();
             reset();
             if (!setFile()) {
@@ -230,7 +230,7 @@ var fileFormData = function () {
             });
         },
         upload: function (sub = false) {
-            console.log('upload');
+
             form_data.set('action', 'upload');
             if (sub) form_data.set('sub', 'sub');
 
@@ -277,7 +277,7 @@ var fileFormData = function () {
             validateData.push(e);
         },
         startProcess: function () {
-            console.log('startProcess');
+
             setStartProcessData();
             if (startProcessData.length == 0){
                 clearLoading();
@@ -308,7 +308,7 @@ var fileFormData = function () {
                 $(".percent").text(percent + "%");
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    // $("#uploadMajor").submit();
+                    $("#uploadMajor").submit();
                 } else {
                     // rerun in 2 seconds
                     setTimeout(function () {
