@@ -37,7 +37,6 @@ abstract class HttpRequest extends PropertyRecord implements HttpRequestInterfac
     {
         $this->beforeSend();
         $result = HttpUtil::curl($this->getUrl(), ObjectUtil::object2array($this, $this->properties()), $this->method, $this->curlOption);
-        var_dump($result);
         $responseClass = $this->getResponseClassName();
 //        var_dump($this->getUrl(), ObjectUtil::object2array($this, $this->properties()), $this->method, $result);
 //        exit;
