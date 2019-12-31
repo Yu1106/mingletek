@@ -1,7 +1,11 @@
 <?php
 
+use common\api\mingletek\GetProcessDataRecord;
+use common\api\mingletek\Mingletek;
 use common\login\Login;
+use common\model\MingletekApiLog;
 use common\model\Store;
+use common\util\UidUtil;
 use common\view\Asset;
 use common\view\View;
 use Volnix\CSRF\CSRF;
@@ -13,12 +17,23 @@ if(!Login::auth()){
 	HttpUtil::redirect();
 }
 
-if($_POST && CSRF::validate($_POST)){
-//	HttpUtil::redirect('step4.php');
-	die();
-}
-
 $store = Store::findStoreByUserIdAndUid($_SESSION["USER_ID"], $_SESSION["UID"]);
+
+if($_POST && CSRF::validate($_POST)){
+	$token = $store['token'];
+	$mingletek = new Mingletek();
+	$GetProcessDataRecord = new GetProcessDataRecord();
+	$GetProcessDataRecord->account = $_SESSION['USER_EMAIL'];
+	$GetProcessDataRecord->session_id = $token;
+	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["UID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
+	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
+	var_dump($getProcessData);
+//	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($getProcessData));
+//	if ($getProcessData->response) {
+//		HttpUtil::redirect('step4.php');
+//		die();
+//	}
+}
 
 $view = new View('header');
 $view->assign('css', Asset::$stepCss);
