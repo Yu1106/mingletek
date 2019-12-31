@@ -13,8 +13,6 @@ if(!Login::auth()){
 }
 
 if($_POST && CSRF::validate($_POST)){
-	echo "save";
-	HttpUtil::redirect('step5.php');
 	die();
 }
 

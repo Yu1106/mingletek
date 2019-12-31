@@ -12,171 +12,171 @@
             <div class="sectionContent">
                 <a class="itemThumbnail checked" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0001.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail checked" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0002.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail checked" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0003.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0004.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0005.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0006.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0006.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0007.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0008.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0008.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0009.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0010.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0010.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0011.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0011.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0012.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0012.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0013.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0013.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0014.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0014.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0015.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0015.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0016.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0016.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0017.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0017.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0018.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0018.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0019.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0019.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0020.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0020.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0021.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0021.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0022.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0022.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0023.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0023.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0024.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0024.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0025.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0025.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0026.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0027.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0027.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0028.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0028.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0029.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0029.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0030.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0030.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0031.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0031.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0032.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0032.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0033.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0033.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0034.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0034.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0035.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0035.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0036.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0036.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0037.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0037.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0038.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0039.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0039.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0040.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0040.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0041.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0041.jpg" alt="" class="itemImg">
                 </a>
                 <a class="itemThumbnail" href="javascript:;">
                     <i class="icon-check-square"></i>
-                    <img src="images/uploadFile/dress_0042.jpg" alt="" class="itemImg">
+                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0042.jpg" alt="" class="itemImg">
                 </a>
             </div>
         </section>
@@ -193,65 +193,65 @@
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0002.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0003.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0004.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0005.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0026.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0007.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0038.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0009.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0050.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0050.jpg');"></div>
                             </div>
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg');"></div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0002.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0003.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0004.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0005.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0026.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0007.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0038.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0009.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                                 <div class="swiper-slide"
-                                     style="background-image: url('./images/uploadFile/dress_0050.jpg');">
+                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0050.jpg');">
                                     <i class="icon-delete"></i>
                                 </div>
                             </div>
