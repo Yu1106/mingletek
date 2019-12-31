@@ -18,8 +18,9 @@ if (!Login::auth()) {
 }
 
 if ($_POST && CSRF::validate($_POST)) {
+	$settingsOnlineStore = arrayToString($_POST['settings_onlineStore']);
 	$uid = UidUtil::setUid($_SESSION['USER_ID']);
-	$store = Store::addStore($_SESSION['USER_ID'], $uid, $_POST['settings_shop'], $_POST['settings_notice'], $_POST['settings_refund'], $_POST['settings_category'], $_POST['settings_onlineStore']);
+	$store = Store::addStore($_SESSION['USER_ID'], $uid, $_POST['settings_shop'], $_POST['settings_notice'], $_POST['settings_refund'], $_POST['settings_category'], $settingsOnlineStore);
 	$mingletek = new Mingletek();
 	$HousekeepingRecord = new HousekeepingRecord();
 	$HousekeepingRecord->account = $_SESSION['USER_EMAIL'];

@@ -22,10 +22,10 @@ class Store extends Model
 	 * @param string $note
 	 * @param string $returnNotice
 	 * @param int $clothesType
-	 * @param int $uploadStoreType
+	 * @param string $uploadStoreType
 	 * @return bool
 	 */
-	public static function addStore(int $userId, string $uid, string $name, string $note, string $returnNotice, int $clothesType, int $uploadStoreType)
+	public static function addStore(int $userId, string $uid, string $name, string $note, string $returnNotice, int $clothesType, string $uploadStoreType)
 	{
 		return self::getDb()->save(
 			[
@@ -38,6 +38,27 @@ class Store extends Model
 				'upload_store_type' => $uploadStoreType,
 				'create_date' => new DbExpression("now()"),
 			], true, static::tableName());
+	}
+
+	/**
+	 * @param int $userId
+	 * @param string $uid
+	 * @param string $token
+	 * @return bool
+	 */
+	public static function modifyStoreToken(int $userId, string $uid, string $token)
+	{
+		return self::getDb()->update(
+			[
+				'token' => $token
+			],
+			"user_id = :user_id and uid = :uid",
+			[
+				'user_id' => $userId,
+				'uid' => $uid
+			],
+			static::tableName()
+		);
 	}
 
 	/**

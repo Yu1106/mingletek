@@ -18,3 +18,18 @@ if (isset($_SESSION['USER_ID'])) {
 		Login::logout();
 }
 
+/**
+ * @param array $array
+ * @return string
+ */
+function arrayToString(array $array):string
+{
+	$returnData = array();
+	foreach ($array as $val) {
+		if ((int)$val >= 0)
+			$returnData[] = (int)$val;
+	}
+	$returnData = array_unique($returnData);
+	return implode(",", $returnData);
+}
+

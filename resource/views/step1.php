@@ -81,7 +81,7 @@
                     <div class="sectionContent">
                         <div class="onlineStore checkboxWrap hoverCheckbox">
                             <input id="ruten" class="validate[required] checkbox" type="checkbox"
-                                   name="settings.onlineStore" value="0" data-prompt-target="formErrorMsg"
+                                   name="settings.onlineStore[]" value="0" data-prompt-target="formErrorMsg"
                                    data-errormessage="* 請至少選一項商城">
                             <label for="ruten">
                                 <span class="checkboxIcon"></span>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="onlineStore checkboxWrap hoverCheckbox">
                             <input id="yahoo" class="validate[required] checkbox" type="checkbox"
-                                   name="settings.onlineStore" value="1" data-prompt-target="formErrorMsg"
+                                   name="settings.onlineStore[]" value="1" data-prompt-target="formErrorMsg"
                                    data-errormessage="* 請至少選一項商城">
                             <label for="yahoo">
                                 <span class="checkboxIcon"></span>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="onlineStore checkboxWrap hoverCheckbox">
                             <input id="pchome" class="validate[required] checkbox" type="checkbox"
-                                   name="settings.onlineStore" value="2" data-prompt-target="formErrorMsg"
+                                   name="settings.onlineStore[]" value="2" data-prompt-target="formErrorMsg"
                                    data-errormessage="* 請至少選一項商城">
                             <label for="pchome">
                                 <span class="checkboxIcon"></span>

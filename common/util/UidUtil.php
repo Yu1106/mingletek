@@ -15,9 +15,14 @@ class UidUtil
 	 */
 	public static function setUid(int $userId)
 	{
-		$uid = md5($userId . uniqid());
+		$uid = self::uid($userId);
 		$_SESSION['UID'] = $uid;
 		return $uid;
+	}
+
+	public static function uid(int $userId)
+	{
+		return md5($userId . uniqid());
 	}
 
 	/**

@@ -142,7 +142,7 @@ $(function () {
 
 var fileFormData = function () {
 
-    var form_data; //建構new FormData()
+    var form_data;
     var status = true;
     var msg = '';
     var validateData = [];
@@ -178,16 +178,18 @@ var fileFormData = function () {
             async: false,
             dataType: 'json',
             success: function (data) {
-                startProcessData = data;
+                if (data.status) {
+                    startProcessData = data.data;
+                }
             }
         });
     };
     return {
         validate: function (sub = false) {
 
-            reset();
             showLoading();
-            if (!setFile()){
+            reset();
+            if (!setFile()) {
                 clearLoading();
                 return false;
             }
@@ -254,9 +256,9 @@ var fileFormData = function () {
                         clearLoading();
                         showErrorAlert();
                     } else {
-                        if(!sub){
+                        if (!sub) {
                             $("#uploadMajor").submit();
-                        }else{
+                        } else {
                             fileFormData.startProcess();
                         }
                     }
@@ -278,6 +280,11 @@ var fileFormData = function () {
         },
         startProcess: function () {
             setStartProcessData();
+            showLoading();
+            if (startProcessData.length == 0){
+                clearLoading();
+                return false;
+            }
             var data = [startProcessData];
             $.ajax({
                 type: 'POST',
@@ -287,25 +294,22 @@ var fileFormData = function () {
                 dataType: 'json',
                 async: false,
                 success: function (data, status, request) {
-                    console.log(data, status, request);
                     var statusUrl = request.getResponseHeader('Location');
                     fileFormData.updateProgress(statusUrl);
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest, textStatus, errorThrown);
+                error: function () {
+                    alert('startProcess error');
                 }
             });
         },
         updateProgress: function (statusUrl) {
             // send GET request to status URL
             showLoading();
-            console.log(statusUrl);
             $.getJSON(statusUrl, function (data) {
                 var percent = parseInt(data['current'] * 100 / data['total']);
-                $(".percent").text(percent+"%");
+                $(".percent").text(percent + "%");
                 // update UI
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    console.log(data);
                     clearLoading();
                 } else {
                     // rerun in 2 seconds

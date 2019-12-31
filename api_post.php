@@ -1,6 +1,7 @@
 <?php
 
 use common\login\Login;
+use common\model\Store;
 use common\util\UidUtil;
 
 include 'library.php';
@@ -10,6 +11,11 @@ if (!Login::auth() || !UidUtil::auth()) {
 }
 
 if ($_POST['action'] === 'startProcessData') {
-	echo json_encode(['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $_SESSION['UID']]);
+	$token = UidUtil::uid($_SESSION['USER_ID']);
+	$return = Store::modifyStoreToken($_SESSION['USER_ID'], $_SESSION['UID'], $token);
+	if ($return)
+		echo json_encode(['status' => 1, 'data' => ['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $token]]);
+	else
+		echo json_encode(['status' => 0]);
 }
 
