@@ -14,7 +14,7 @@ if(!Login::auth()){
 }
 
 if($_POST && CSRF::validate($_POST)){
-	HttpUtil::redirect('step4.php');
+//	HttpUtil::redirect('step4.php');
 	die();
 }
 

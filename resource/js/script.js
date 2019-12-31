@@ -191,6 +191,7 @@ var fileFormData = function () {
             reset();
             if (!setFile()) {
                 clearLoading();
+                console.log("setFile");
                 return false;
             }
             form_data.set('action', 'validate');
@@ -232,6 +233,7 @@ var fileFormData = function () {
         },
         upload: function (sub = false) {
 
+            showLoading();
             form_data.set('action', 'upload');
             if (sub) form_data.set('sub', 'sub');
 
@@ -298,6 +300,7 @@ var fileFormData = function () {
                 },
                 error: function () {
                     alert('startProcess error');
+                    clearLoading();
                 }
             });
         },
