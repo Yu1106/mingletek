@@ -11,10 +11,10 @@ if (!Login::auth() || !UidUtil::auth()) {
 }
 
 if ($_POST['action'] === 'startProcessData') {
-	$token = UidUtil::uid($_SESSION['USER_ID']);
-	$return = Store::modifyStoreToken($_SESSION['USER_ID'], $_SESSION['UID'], $token);
+	$uid = UidUtil::uid($_SESSION['USER_ID']);
+	$return = Store::modifyUid($_SESSION['STORE_ID'], $uid);
 	if ($return)
-		echo json_encode(['status' => 1, 'data' => ['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $token]]);
+		echo json_encode(['status' => 1, 'data' => ['account' => $_SESSION['USER_EMAIL'], 'generate_text' => 'yes', 'session_id' => $uid]]);
 	else
 		echo json_encode(['status' => 0]);
 }
