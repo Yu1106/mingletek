@@ -31,7 +31,7 @@ if ($_POST && CSRF::validate($_POST)) {
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, $_SESSION["STORE_ID"], '', json_encode($getProcessData));
 	if (isset($getProcessData) && count($getProcessData) > 0) {
 		foreach($getProcessData as $data){
-			var_dump($data);
+			var_dump($data, $data->filename, $data['filename']);
 			$product = Product::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->filename);
 			var_dump($product);
 			echo "<br>";
