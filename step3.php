@@ -29,8 +29,8 @@ if($_POST && CSRF::validate($_POST)){
 	var_dump($getProcessData);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($getProcessData));
 	if ($mingletekApiLog) {
-		HttpUtil::redirect('step4.php');
-		die();
+//		HttpUtil::redirect('step4.php');
+//		die();
 	}
 }
 
