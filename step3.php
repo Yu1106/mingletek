@@ -26,6 +26,7 @@ if($_POST && CSRF::validate($_POST)){
 	$GetProcessDataRecord->session_id = $token;
 	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["UID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
 	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
+	var_dump($getProcessData);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($getProcessData));
 	if ($mingletekApiLog) {
 		HttpUtil::redirect('step4.php');
