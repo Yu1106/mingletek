@@ -3,7 +3,7 @@
 use common\file\MultiFileUpload;
 use common\login\Login;
 use common\model\Product;
-use common\model\Subpicture;
+use common\model\SubPicture;
 use common\util\FileUtil;
 use common\util\UidUtil;
 
@@ -34,15 +34,15 @@ if ($_POST['action'] === 'validate') {
 	}
 	echo json_encode($return);
 } else if ($_POST['action'] === 'upload' && $_POST['sub'] === 'sub') {
-	Subpicture::delByStoreId($storeId);
+	SubPicture::delByStoreId($storeId);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
 	foreach ($return as $k => $v) {
 		if ($v['status'] == 1) {
-			$product = Subpicture::findByStoreIdAndPicture($storeId, $v['name']);
+			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
 			if (isset($product))
-				Subpicture::delByStoreIdAndPicture($storeId, $v['name']);
-			Subpicture::addSubPicture($storeId, $v['name']);
+				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
+			SubPicture::addSubPicture($storeId, $v['name']);
 		}
 	}
 	echo json_encode($return);
