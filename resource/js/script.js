@@ -310,7 +310,7 @@ var fileFormData = function () {
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
                     $("#uploadMajor").submit();
                 } else {
-                    // rerun in 2 seconds
+                    // return in 2 seconds
                     setTimeout(function () {
                         fileFormData.updateProgress(statusUrl);
                     }, 2000);
