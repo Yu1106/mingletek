@@ -17,7 +17,6 @@ class Store extends Model
 
 	/**
 	 * @param int $userId
-	 * @param string $uid
 	 * @param string $name
 	 * @param string $note
 	 * @param string $returnNotice
@@ -25,12 +24,11 @@ class Store extends Model
 	 * @param string $uploadStoreType
 	 * @return bool
 	 */
-	public static function addStore(int $userId, string $uid, string $name, string $note, string $returnNotice, int $clothesType, string $uploadStoreType)
+	public static function addStore(int $userId, string $name, string $note, string $returnNotice, int $clothesType, string $uploadStoreType)
 	{
 		return self::getDb()->save(
 			[
 				'user_id' => $userId,
-				'uid' => $uid,
 				'name' => $name,
 				'note' => $note,
 				'return_notice' => $returnNotice,
@@ -41,33 +39,21 @@ class Store extends Model
 	}
 
 	/**
-	 * @param int $userId
+	 * @param int $id
 	 * @param string $uid
-	 * @param string $token
 	 * @return bool
 	 */
-	public static function modifyStoreToken(int $userId, string $uid, string $token)
+	public static function modifyUid(int $id, string $uid)
 	{
 		return self::getDb()->update(
 			[
-				'token' => $token
-			],
-			"user_id = :user_id and uid = :uid",
-			[
-				'user_id' => $userId,
 				'uid' => $uid
+			],
+			"id = :id",
+			[
+				'id' => $id
 			],
 			static::tableName()
 		);
-	}
-
-	/**
-	 * @param int $userId
-	 * @param string $uid
-	 * @return mixed|null
-	 */
-	public static function findStoreByUserIdAndUid(int $userId, string $uid)
-	{
-		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where user_id = :user_id and uid = :uid", [":user_id" => $userId, ":uid" => $uid]);
 	}
 }

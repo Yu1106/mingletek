@@ -30,18 +30,18 @@ $response->name = 'Sandra Aldciaibhggjh Adeagbostein';
 
 $mingletek = new Mingletek();
 $account = $response->email;
-$mingletekApiLogId = MingletekApiLog::addLog(0, '', MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
+$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
 $CheckAccountRecord = new CheckAccountRecord();
 $CheckAccountRecord->account = $account;
 $check = $mingletek->CheckAccount($CheckAccountRecord);
-$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($check));
+$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($check));
 
 if (!$check->response) {
-	$mingletekApiLogId = MingletekApiLog::addLog(0, '', MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
+	$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
 	$CreateAccountRecord = new CreateAccountRecord();
 	$CreateAccountRecord->account = $account;
 	$create = $mingletek->CreateAccount($CreateAccountRecord);
-	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($create));
+	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($create));
 }
 if ($check->response || $create->response) {
 	$login = new Login($response);
@@ -63,18 +63,18 @@ if ($check->response || $create->response) {
 //
 //		$mingletek = new Mingletek();
 //		$account = $response->email;
-//		$mingletekApiLogId = MingletekApiLog::addLog(0, '', MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
+//		$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
 //		$CheckAccountRecord = new CheckAccountRecord();
 //		$CheckAccountRecord->account = $account;
 //		$check = $mingletek->CheckAccount($CheckAccountRecord);
-//		$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($check));
+//		$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($check));
 //
 //		if (!$check->response) {
-//			$mingletekApiLogId = MingletekApiLog::addLog(0, '', MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
+//			$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
 //			$CreateAccountRecord = new CreateAccountRecord();
 //			$CreateAccountRecord->account = $account;
 //			$create = $mingletek->CreateAccount($CreateAccountRecord);
-//			$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($create));
+//			$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($create));
 //		}
 //		if ($check->response || $create->response) {
 //			$login = new Login($response);

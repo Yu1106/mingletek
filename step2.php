@@ -19,7 +19,7 @@ if ($_POST && CSRF::validate($_POST)) {
 	die();
 }
 
-$store = Store::findStoreByUserIdAndUid($_SESSION["USER_ID"], $_SESSION["UID"]);
+$store = Store::findById($_SESSION["STORE_ID"]);
 
 $view = new View('header');
 $view->assign('css', Asset::$stepCss);

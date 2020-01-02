@@ -4,20 +4,22 @@ namespace common\util;
 
 class UidUtil
 {
-	public static function getUid()
+	public static function getStoreId()
 	{
-		return $_SESSION['UID'];
+		return $_SESSION['STORE_ID'];
 	}
 
 	/**
-	 * @param int $userId
-	 * @return string
+	 * @param int $storeId
 	 */
-	public static function setUid(int $userId)
+	public static function setStoreId(int $storeId)
 	{
-		$uid = self::uid($userId);
-		$_SESSION['UID'] = $uid;
-		return $uid;
+		$_SESSION['STORE_ID'] = $storeId;
+	}
+
+	public static function unsetStoreId()
+	{
+		unset($_SESSION['STORE_ID']);
 	}
 
 	public static function uid(int $userId)
@@ -30,14 +32,6 @@ class UidUtil
 	 */
 	public static function auth()
 	{
-		return (isset($_SESSION['UID'])) ? true : false;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public static function unsetUid()
-	{
-		unset($_SESSION['UID']);
+		return (isset($_SESSION['STORE_ID'])) ? true : false;
 	}
 }

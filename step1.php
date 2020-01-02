@@ -19,21 +19,21 @@ if (!Login::auth()) {
 
 if ($_POST && CSRF::validate($_POST)) {
 	$settingsOnlineStore = arrayToString($_POST['settings_onlineStore']);
-	$uid = UidUtil::setUid($_SESSION['USER_ID']);
-	$store = Store::addStore($_SESSION['USER_ID'], $uid, $_POST['settings_shop'], $_POST['settings_notice'], $_POST['settings_refund'], $_POST['settings_category'], $settingsOnlineStore);
+	$store = Store::addStore($_SESSION['USER_ID'], $_POST['settings_shop'], $_POST['settings_notice'], $_POST['settings_refund'], $_POST['settings_category'], $settingsOnlineStore);
+	UidUtil::setStoreId($store);
 	$mingletek = new Mingletek();
 	$HousekeepingRecord = new HousekeepingRecord();
 	$HousekeepingRecord->account = $_SESSION['USER_EMAIL'];
-	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $uid, MingletekApiLog::HOUSE_KEEPING, json_encode($HousekeepingRecord));
+	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $store, MingletekApiLog::HOUSE_KEEPING, json_encode($HousekeepingRecord));
 	$housekeeping = $mingletek->Housekeeping($HousekeepingRecord);
-	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, '', '', json_encode($housekeeping));
+	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, $store, '', json_encode($housekeeping));
 	if ($housekeeping->response) {
 		HttpUtil::redirect('step2.php');
 		die();
 	}
 }
 
-UidUtil::unsetUid();
+UidUtil::unsetStoreId();
 
 $view = new View('header');
 $view->assign('css', Asset::$stepCss);

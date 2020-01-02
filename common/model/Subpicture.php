@@ -12,56 +12,56 @@ class Subpicture extends Model
 	}
 
 	/**
-	 * @param string $uid
+	 * @param int $storeId
 	 * @param string $picture
 	 * @return bool
 	 */
-	public static function addSubpicture(string $uid, string $picture)
+	public static function addSubpicture(int $storeId, string $picture)
 	{
 		return self::getDb()->save(
 			[
-				'uid' => $uid,
+				'store_id' => $storeId,
 				'picture' => $picture
 			], true, static::tableName());
 	}
 
 	/**
-	 * @param string $uid
+	 * @param int $storeId
 	 * @param string $picture
 	 * @return bool
 	 */
-	public static function delByUidAndPicture(string $uid, string $picture)
+	public static function delByStoreIdAndPicture(int $storeId, string $picture)
 	{
 		return self::getDb()->delete(
-			"uid = :uid and picture = :picture",
+			"store_id = :store_id and picture = :picture",
 			[
-				'uid' => $uid,
+				'store_id' => $storeId,
 				'picture' => $picture
 			],
 			static::tableName());
 	}
 
 	/**
-	 * @param string $uid
+	 * @param int $storeId
 	 * @return bool
 	 */
-	public static function delByUid(string $uid)
+	public static function delByStoreId(int $storeId)
 	{
 		return self::getDb()->delete(
-			"uid = :uid",
+			"store_id = :store_id",
 			[
-				'uid' => $uid,
+				'store_id' => $storeId,
 			],
 			static::tableName());
 	}
 
 	/**
-	 * @param string $uid
+	 * @param int $storeId
 	 * @param string $picture
-	 * @return bool
+	 * @return mixed|null
 	 */
-	public static function findByUidAndPicture(string $uid, string $picture)
+	public static function findByStoreIdAndPicture(int $storeId, string $picture)
 	{
-		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where uid = :uid and picture = :picture", [":uid" => $uid, ":picture" => $picture]);
+		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where store_id = :store_id and picture = :picture", [":store_id" => $storeId, ":picture" => $picture]);
 	}
 }
