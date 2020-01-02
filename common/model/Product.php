@@ -1,8 +1,6 @@
 <?php
 
-
 namespace common\model;
-
 
 use common\db\DbExpression;
 

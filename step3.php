@@ -4,7 +4,9 @@ use common\api\mingletek\GetProcessDataRecord;
 use common\api\mingletek\Mingletek;
 use common\login\Login;
 use common\model\MingletekApiLog;
+use common\model\Product;
 use common\model\Store;
+use common\model\SubPicture;
 use common\view\Asset;
 use common\view\View;
 use Volnix\CSRF\CSRF;
@@ -12,13 +14,13 @@ use common\util\HttpUtil;
 
 include 'library.php';
 
-if(!Login::auth()){
+if (!Login::auth()) {
 	HttpUtil::redirect();
 }
 
 $store = Store::findById($_SESSION["STORE_ID"]);
 
-if($_POST && CSRF::validate($_POST)){
+if ($_POST && CSRF::validate($_POST)) {
 	$uid = $store['uid'];
 	$mingletek = new Mingletek();
 	$GetProcessDataRecord = new GetProcessDataRecord();
@@ -26,8 +28,22 @@ if($_POST && CSRF::validate($_POST)){
 	$GetProcessDataRecord->session_id = $uid;
 	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["STORE_ID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
 	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
-	var_dump($getProcessData);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, $_SESSION["STORE_ID"], '', json_encode($getProcessData));
+	if (isset($getProcessData) && count($getProcessData) > 0) {
+		foreach($getProcessData as $data){
+			$product = Product::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->filename);
+			var_dump($product);
+			echo "<br>";
+			for($i=1;$i<=10;$i++){
+				$filename_add = 'filename_add_'.$i;
+				if(isset($data->$$filename_add)){
+					$subPicture = SubPicture::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$$filename_add);
+					var_dump($subPicture);
+					echo "<br>";
+				}
+			}
+		}
+	}
 	if ($mingletekApiLog) {
 //		HttpUtil::redirect('step4.php');
 //		die();
