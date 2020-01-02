@@ -15,14 +15,15 @@ include 'library.php';
 if(!Login::auth()){
 	HttpUtil::redirect();
 }
+
 $store = Store::findById($_SESSION["STORE_ID"]);
 
 if($_POST && CSRF::validate($_POST)){
-	$token = $store['token'];
+	$uid = $store['uid'];
 	$mingletek = new Mingletek();
 	$GetProcessDataRecord = new GetProcessDataRecord();
 	$GetProcessDataRecord->account = $_SESSION['USER_EMAIL'];
-	$GetProcessDataRecord->session_id = $token;
+	$GetProcessDataRecord->session_id = $uid;
 	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["STORE_ID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
 	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
 	var_dump($getProcessData);
