@@ -42,7 +42,7 @@ if ($_POST['action'] === 'validate') {
 			$product = Subpicture::findByStoreIdAndPicture($storeId, $v['name']);
 			if (isset($product))
 				Subpicture::delByStoreIdAndPicture($storeId, $v['name']);
-			Subpicture::addSubpicture($storeId, $v['name']);
+			Subpicture::addSubPicture($storeId, $v['name']);
 		}
 	}
 	echo json_encode($return);

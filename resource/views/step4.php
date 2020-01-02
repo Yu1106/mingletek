@@ -624,6 +624,11 @@
                                     <span class="radioIcon"></span>
                                     短袖
                                 </label>
+                                <input id="short" type="radio" name="sleeve" value="short">
+                                <label for="short">
+                                    <span class="radioIcon"></span>
+                                    長袖
+                                </label>
                                 <input id="cap" type="radio" name="sleeve" value="cap">
                                 <label for="cap">
                                     <span class="radioIcon"></span>

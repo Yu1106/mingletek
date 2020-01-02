@@ -4,11 +4,11 @@
 namespace common\model;
 
 
-class Subpicture extends Model
+class SubPicture extends Model
 {
 	protected static function tableName()
 	{
-		return "subpicture";
+		return "sub_picture";
 	}
 
 	/**
@@ -16,7 +16,7 @@ class Subpicture extends Model
 	 * @param string $picture
 	 * @return bool
 	 */
-	public static function addSubpicture(int $storeId, string $picture)
+	public static function addSubPicture(int $storeId, string $picture)
 	{
 		return self::getDb()->save(
 			[
