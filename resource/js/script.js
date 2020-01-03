@@ -255,7 +255,7 @@ var fileFormData = function () {
                         showErrorAlert();
                     } else {
                         if (!sub) {
-                            $("#uploadMajor").submit();
+                            // $("#uploadMajor").submit();
                         } else {
                             fileFormData.startProcess();
                         }
