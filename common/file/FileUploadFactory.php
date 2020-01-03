@@ -62,7 +62,7 @@ abstract class FileUploadFactory
 	 */
 	protected function getUploadPath(): string
 	{
-		return FileUtil::IMG . $this->directory . "/";
+		return FileUtil::IMG_UPLOAD_PATH . $this->directory . "/";
 	}
 
 	/**

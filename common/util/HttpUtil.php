@@ -4,6 +4,7 @@ namespace common\util;
 
 class HttpUtil
 {
+	const WEB_BASIC = 'https://219.91.63.48/';
 	const METHOD_GET = 'get';
 	const METHOD_POST = 'post';
 	const METHOD_WWW_URLENCODED = 'www-urlencoded';
@@ -143,12 +144,12 @@ class HttpUtil
 
 	public static function SSOUrl(string $endpoint)
 	{
-		return "https://219.91.63.48/mingletek/login.php" . $endpoint;
+		return self::WEB_BASIC . "mingletek/login.php" . $endpoint;
 	}
 
 	public static function redirect(string $path = 'index.php')
 	{
-		header('location:https://219.91.63.48/mingletek/' . $path);
+		header('location:' . self::WEB_BASIC . 'mingletek/' . $path);
 		die();
 	}
 }
