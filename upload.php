@@ -32,7 +32,7 @@ if ($_POST['action'] === 'validate') {
 			if (isset($product))
 				Product::delByStoreIdAndPicture($storeId, $v['name']);
 			$b = Product::addProduct($storeId, $v['name']);
-			var_dump($b);
+			var_dump($b, $storeId, $v['name']);
 		}
 	}
 	echo json_encode($return);
