@@ -25,20 +25,31 @@ class SubPicture extends Model
 			], true, static::tableName());
 	}
 
-	/**
-	 * @param int $storeId
-	 * @param string $picture
-	 * @return bool
-	 */
-	public static function delByStoreIdAndPicture(int $storeId, string $picture)
+	public static function modifyByStoreIdAndPicture(int $storeId, string $picture)
 	{
-		return self::getDb()->delete(
-			"store_id = :store_id and picture = :picture",
+		return self::getDb()->save(
 			[
 				'store_id' => $storeId,
 				'picture' => $picture
+			], true, static::tableName());
+	}
+
+	/**
+	 * @param int $storeId
+	 * @param string $picture
+	 * @param int $productId
+	 * @return bool
+	 */
+	public static function delByStoreIdAndPicture(int $storeId, string $picture, int $productId)
+	{
+		return self::getDb()->update(
+			[
+				'product_id' => $productId
 			],
-			static::tableName());
+			"store_id = :store_id and picture = :picture",
+			['store_id' => $storeId, ':picture' => $picture],
+			static::tableName()
+		);
 	}
 
 	/**
