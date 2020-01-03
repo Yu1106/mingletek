@@ -11,15 +11,16 @@
             </div>
             <div class="sectionContent">
 				<?php foreach ($data['picture'] as $key => $val): ?>
-                    <a class="itemThumbnail checked" href="javascript:;">
+                    <a class="itemThumbnail checked <?= ($data['first']['picture'] == $val['img']) ? "current" : "" ?>"
+                       href="javascript:;">
                         <i class="icon-check-square"></i>
-                        <img src="<?= $val['img'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
+                        <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
                     </a>
 				<?php endforeach; ?>
 				<?php foreach ($data['subPicture'] as $key => $val): ?>
                     <a class="itemThumbnail" href="javascript:;">
                         <i class="icon-check-square"></i>
-                        <img src="<?= $val['img'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
+                        <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
                     </a>
 				<?php endforeach; ?>
             </div>
@@ -36,68 +37,28 @@
                         <!-- Swiper -->
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0050.jpg');"></div>
+								<?php foreach ($data['swiper']['picture'] as $key => $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val["path"] ?>');"></div>
+                                <?php endforeach; ?>
+								<?php foreach ($data['swiper']['subPicture'] as $key => $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val["path"] ?>');"></div>
+								<?php endforeach; ?>
                             </div>
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg');"></div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
-                                <div class="swiper-slide"
-                                     style="background-image: url('./<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0050.jpg');">
-                                    <i class="icon-delete"></i>
-                                </div>
+								<?php foreach ($data['swiper']['picture'] as $key => $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val["path"] ?>');"></div>
+								<?php endforeach; ?>
+								<?php foreach ($data['swiper']['subPicture'] as $key => $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val["path"] ?>');">
+                                        <i class="icon-delete"></i>
+                                    </div>
+								<?php endforeach; ?>
                             </div>
                         </div>
                         <div class="btnRow">

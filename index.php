@@ -5,6 +5,7 @@ use common\view\View;
 
 include 'library.php';
 //session_destroy();
+//$_SESSION['STORE_ID'] = 125;
 $view = new View('header');
 $view->assign('css', Asset::$indexCss);
 $view->assign('js', Asset::$indexJs);
