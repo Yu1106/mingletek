@@ -4,6 +4,7 @@ use common\login\Login;
 use common\model\Product;
 use common\model\Store;
 use common\model\SubPicture;
+use common\util\FileUtil;
 use common\util\UidUtil;
 use common\view\Asset;
 use common\view\View;
@@ -12,17 +13,35 @@ use common\util\HttpUtil;
 
 include 'library.php';
 
-if(!Login::auth() || !UidUtil::auth()){
+if (!Login::auth() || !UidUtil::auth()) {
 	HttpUtil::redirect();
 }
 
-if($_POST && CSRF::validate($_POST)){
+if ($_POST && CSRF::validate($_POST)) {
 	die();
 }
 
 $store = Store::findById($_SESSION["STORE_ID"]);
 $product = Product::findByStoreId($_SESSION["STORE_ID"]);
 $subPicture = SubPicture::findByStoreId($_SESSION["STORE_ID"]);
+
+$pictureArr = array();
+$subPictureArr = array();
+
+foreach($product as $val){
+	$pictureArr[$val['picture']] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+}
+
+foreach($subPicture as $val){
+	$subPictureArr[$val['picture']] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+}
+
+$data = [
+	'picture' => $pictureArr,
+	'subPicture' => $subPictureArr
+];
+
+var_dump($data);
 
 $view = new View('header');
 $view->assign('css', Asset::$step4Css);

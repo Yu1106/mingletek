@@ -17,7 +17,7 @@ class Product extends Model
 	 */
 	public static function findByStoreId(int $storeId)
 	{
-		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id", [":store_id" => $storeId]);
+		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id order by id", [":store_id" => $storeId]);
 	}
 
 	/**
