@@ -5,9 +5,9 @@ namespace common\model\parameter;
 /**
  * Class Color
  * @package common\model\parameter
- * api傳入欄位名[Colorname]
+ * api傳入欄位名[color_name]
  */
-class Colorspreadcollar
+class Color
 {
 	const RED = 'red';
 	const YELLOW = 'yellow';

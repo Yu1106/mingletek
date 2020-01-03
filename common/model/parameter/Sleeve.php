@@ -5,7 +5,7 @@ namespace common\model\parameter;
 /**
  * Class Sleeve
  * @package common\model\parameter
- * api傳入欄位名[Sleeve]
+ * api傳入欄位名[sleeve]
  */
 class Sleeve
 {

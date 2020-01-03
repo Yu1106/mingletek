@@ -4,6 +4,17 @@ use common\api\mingletek\GetProcessDataRecord;
 use common\api\mingletek\Mingletek;
 use common\login\Login;
 use common\model\MingletekApiLog;
+use common\model\parameter\Category;
+use common\model\parameter\Characteristic1;
+use common\model\parameter\Characteristic2;
+use common\model\parameter\Characteristic3;
+use common\model\parameter\Characteristic4;
+use common\model\parameter\Characteristic5;
+use common\model\parameter\Collar;
+use common\model\parameter\Color;
+use common\model\parameter\Neckline;
+use common\model\parameter\Sleeve;
+use common\model\parameter\SubCategory;
 use common\model\Product;
 use common\model\Store;
 use common\model\SubPicture;
@@ -29,25 +40,59 @@ if ($_POST && CSRF::validate($_POST)) {
 	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["STORE_ID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($GetProcessDataRecord));
 	$getProcessData = $mingletek->GetProcessData($GetProcessDataRecord);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, $_SESSION["STORE_ID"], '', json_encode($getProcessData));
+
 	if (isset($getProcessData) && count($getProcessData) > 0) {
-		foreach($getProcessData as $data){
-			var_dump($data, $data->filename, $data['filename']);
+		foreach ($getProcessData as $data) {
 			$product = Product::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->filename);
-			var_dump($product);
-			echo "<br>";
-			for($i=1;$i<=10;$i++){
-				$filename_add = 'filename_add_'.$i;
-				if(isset($data->$$filename_add)){
-					$subPicture = SubPicture::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$$filename_add);
-					var_dump($subPicture);
-					echo "<br>";
+			if (isset($product)) {
+				for ($i = 1; $i <= 10; $i++) {
+					$filename_add = 'filename_add_' . $i;
+					if (isset($data->$filename_add)) {
+						$subPicture = SubPicture::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add);
+						if ($subPicture)
+							SubPicture::modifyByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add, $subPicture['id']);
+					}
 				}
+				$array = array();
+				if (isset($data->sub_category))
+					$array['sub_category'] = SubCategory::SubCategoryType[$data->sub_category];
+				if (isset($data->category))
+					$array['category'] = Category::CategoryType[$data->category];
+				if (isset($data->color_name))
+					$array['color'] = Color::ColorType[$data->color_name];
+				if (isset($data->collar))
+					$array['collar'] = Collar::CollarType[$data->collar];
+				if (isset($data->neckline))
+					$array['neckline'] = Neckline::NecklineType[$data->neckline];
+				if (isset($data->sleeve))
+					$array['sleeve'] = Sleeve::SleeveType[$data->sleeve];
+				if (isset($data->texture_1) || isset($data->texture_2) || isset($data->texture_3) || isset($data->pattern)) {
+					$characteristic1 = array();
+					if (isset($data->texture_1))
+						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_1];
+					if (isset($data->texture_2))
+						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_2];
+					if (isset($data->texture_3))
+						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_3];
+					if (isset($data->pattern))
+						$characteristic1[] = Characteristic1::Characteristic1Type[$data->pattern];
+					$array['characteristic_1'] = implode(",", $characteristic1);
+				}
+				if (isset($data->neckshoulder))
+					$array['characteristic_2'] = Characteristic2::Characteristic2Type[$data->neckshoulder];
+				if (isset($data->accessory_1))
+					$array['characteristic_3'] = Characteristic3::Characteristic3Type[$data->accessory_1];
+				if (isset($data->waist))
+					$array['characteristic_4'] = Characteristic4::Characteristic4Type[$data->waist];
+				if (isset($data->texture_4))
+					$array['characteristic_5'] = Characteristic5::Characteristic5Type[$data->texture_4];
+				Product::modifyProductData($product['id'], $array);
 			}
 		}
 	}
 	if ($mingletekApiLog) {
-//		HttpUtil::redirect('step4.php');
-//		die();
+		HttpUtil::redirect('step4.php');
+		die();
 	}
 }
 

@@ -26,6 +26,21 @@ class Product extends Model
 	}
 
 	/**
+	 * @param int $id
+	 * @param array $data
+	 * @return bool
+	 */
+	public static function modifyProductData(int $id, array $data)
+	{
+		return self::getDb()->update(
+			$data,
+			"id = :id",
+			['id' => $id],
+			static::tableName()
+		);
+	}
+
+	/**
 	 * @param int $storeId
 	 * @param string $picture
 	 * @return bool
