@@ -86,6 +86,34 @@ if ($_POST && CSRF::validate($_POST)) {
 					$array['characteristic_4'] = Characteristic4::Characteristic4Type[$data->waist];
 				if (isset($data->texture_4))
 					$array['characteristic_5'] = Characteristic5::Characteristic5Type[$data->texture_4];
+				if (isset($data->collar_desc) || isset($data->neckline_desc) || isset($data->neckshoulder_desc) || isset($data->sleeve_desc)
+					|| isset($data->accessory_1_desc) || isset($data->pattern_desc) || isset($data->waist_desc) || isset($data->texture_1_desc)
+					|| isset($data->texture_2_desc) || isset($data->texture_3_desc) || isset($data->texture_4_desc)) {
+					$productDescription = array();
+					if (isset($data->collar_desc))
+						$productDescription[] = $data->collar_desc;
+					if (isset($data->neckline_desc))
+						$productDescription[] = $data->neckline_desc;
+					if (isset($data->neckshoulder_desc))
+						$productDescription[] = $data->neckshoulder_desc;
+					if (isset($data->sleeve_desc))
+						$productDescription[] = $data->sleeve_desc;
+					if (isset($data->accessory_1_desc))
+						$productDescription[] = $data->accessory_1_desc;
+					if (isset($data->pattern_desc))
+						$productDescription[] = $data->pattern_desc;
+					if (isset($data->waist_desc))
+						$productDescription[] = $data->waist_desc;
+					if (isset($data->texture_1_desc))
+						$productDescription[] = $data->texture_1_desc;
+					if (isset($data->texture_2_desc))
+						$productDescription[] = $data->texture_2_desc;
+					if (isset($data->texture_3_desc))
+						$productDescription[] = $data->texture_3_desc;
+					if (isset($data->texture_4_desc))
+						$productDescription[] = $data->texture_4_desc;
+					$array['product_description'] = implode(",", $productDescription);
+				}
 				Product::modifyProductData($product['id'], $array);
 			}
 		}

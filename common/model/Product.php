@@ -13,6 +13,15 @@ class Product extends Model
 
 	/**
 	 * @param int $storeId
+	 * @return bool
+	 */
+	public static function findByStoreId(int $storeId)
+	{
+		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id", [":store_id" => $storeId]);
+	}
+
+	/**
+	 * @param int $storeId
 	 * @param string $picture
 	 * @return bool
 	 */
