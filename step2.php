@@ -15,7 +15,7 @@ if (!Login::auth() || !UidUtil::auth()) {
 }
 
 if ($_POST && CSRF::validate($_POST)) {
-	HttpUtil::redirect('step3.php');
+//	HttpUtil::redirect('step3.php');
 	die();
 }
 
