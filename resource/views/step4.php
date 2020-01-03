@@ -10,174 +10,18 @@
                 <h5><i class="icon-subTitle"></i>點選各商品主圖 (小圖) 即可編輯該筆商品內容，編輯完成並儲存後，商品主圖上會顯示 v 符號。</h5>
             </div>
             <div class="sectionContent">
-                <a class="itemThumbnail checked" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0001.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail checked" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0002.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail checked" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0003.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0004.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0005.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0006.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0007.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0008.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0009.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0010.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0011.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0012.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0013.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0014.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0015.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0016.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0017.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0018.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0019.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0020.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0021.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0022.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0023.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0024.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0025.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0026.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0027.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0028.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0029.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0030.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0031.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0032.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0033.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0034.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0035.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0036.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0037.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0038.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0039.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0040.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0041.jpg" alt="" class="itemImg">
-                </a>
-                <a class="itemThumbnail" href="javascript:;">
-                    <i class="icon-check-square"></i>
-                    <img src="<?php echo RESOURCE_IMAGES_DIR ?>/uploadFile/dress_0042.jpg" alt="" class="itemImg">
-                </a>
+				<?php foreach ($data['picture'] as $key => $val): ?>
+                    <a class="itemThumbnail checked" href="javascript:;">
+                        <i class="icon-check-square"></i>
+                        <img src="<?= $val['img'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
+                    </a>
+				<?php endforeach; ?>
+				<?php foreach ($data['subPicture'] as $key => $val): ?>
+                    <a class="itemThumbnail" href="javascript:;">
+                        <i class="icon-check-square"></i>
+                        <img src="<?= $val['img'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
+                    </a>
+				<?php endforeach; ?>
             </div>
         </section>
         <section class="sectionItemEdit">

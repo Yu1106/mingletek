@@ -50,7 +50,7 @@ if ($_POST && CSRF::validate($_POST)) {
 					if (isset($data->$filename_add)) {
 						$subPicture = SubPicture::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add);
 						if ($subPicture)
-							SubPicture::modifyByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add, $subPicture['id']);
+							SubPicture::modifyByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add, $product['id']);
 					}
 				}
 				$array = array();

@@ -75,11 +75,12 @@ class SubPicture extends Model
 
 	/**
 	 * @param int $storeId
+	 * @param int $productId
 	 * @return bool
 	 */
-	public static function findByStoreId(int $storeId)
+	public static function findByStoreIdAndProductId(int $storeId, int $productId)
 	{
-		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id order by id", [":store_id" => $storeId]);
+		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id and product_id = :product_id order by id", [":store_id" => $storeId, ":product_id" => $productId]);
 	}
 
 	/**
