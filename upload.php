@@ -21,15 +21,18 @@ if ($_POST['action'] === 'validate') {
 	$return = $fileUpload->validate();
 	echo json_encode($return);
 } else if ($_POST['action'] === 'upload' && $_POST['sub'] === '') {
-	Product::delByStoreId($storeId);
+	$a = Product::delByStoreId($storeId);
+	var_dump($a);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
 	foreach ($return as $k => $v) {
 		if ($v['status'] == 1) {
 			$product = Product::findByStoreIdAndPicture($storeId, $v['name']);
+			var_dump($product);
 			if (isset($product))
 				Product::delByStoreIdAndPicture($storeId, $v['name']);
-			Product::addProduct($storeId, $v['name']);
+			$b = Product::addProduct($storeId, $v['name']);
+			var_dump($b);
 		}
 	}
 	echo json_encode($return);
