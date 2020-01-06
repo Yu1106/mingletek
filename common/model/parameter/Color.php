@@ -10,30 +10,45 @@ namespace common\model\parameter;
 class Color
 {
 	const RED = 'red';
+	const ORANGE = 'orange';
 	const YELLOW = 'yellow';
 	const GREEN = 'green';
-	const ORANGE = 'orange';
-	const WHITE = 'white';
-	const BLACK = 'black';
 	const BLUE = 'blue';
 	const VIOLET = 'violet';
-	const BROWN = 'brown';
+	const WHITE = 'white';
+	const BLACK = 'black';
 	const CYAN = 'cyan';
 	const GREY = 'grey';
 	const PINK = 'pink';
+	const BROWN = 'brown';
 
 	const ColorType = [
 		self::RED => '紅色',
+		self::ORANGE => '橘色',
 		self::YELLOW => '黄色',
 		self::GREEN => '绿色',
-		self::ORANGE => '橙色',
-		self::WHITE => '白色',
-		self::BLACK => '黑色',
 		self::BLUE => '藍色',
 		self::VIOLET => '紫色',
-		self::BROWN => '棕色',
+		self::WHITE => '白色',
+		self::BLACK => '黑色',
 		self::CYAN => '青色',
 		self::GREY => '灰色',
-		self::PINK => '粉红色'
+		self::PINK => '粉色',
+		self::BROWN => '棕色'
+	];
+
+	const ColorLBClass = [
+		self::RED => 'lbRed',
+		self::ORANGE => 'lbOrange',
+		self::YELLOW => 'lbYellow',
+		self::GREEN => 'lbGreen',
+		self::BLUE => 'lbBlue',
+		self::VIOLET => 'lbPurple',
+		self::WHITE => 'lbWhite',
+		self::BLACK => 'lbBlack',
+		self::CYAN => 'lbCyan',
+		self::GREY => 'lbGrey',
+		self::PINK => 'lbPink',
+		self::BROWN => 'lbBrown'
 	];
 }

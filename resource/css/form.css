@@ -390,7 +390,7 @@ label.lbNude::before {background-color: #fec79a;}
 label.lbGrey::before {background-color: #c9c9c9;}
 label.lbPink::before {background-color: #fecfcf;}
 label.lbBrown::before {background-color: #5b3601;}
-
+label.lbCyan::before {background-color: #2CA01C;}
 
 .radioWrap {
 	position: relative;

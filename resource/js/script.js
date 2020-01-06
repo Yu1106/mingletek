@@ -113,6 +113,8 @@ $(function () {
                             $('#formErrorMsg').empty();
                         }
                     });
+                } else {
+                    return true;
                 }
             }
         });

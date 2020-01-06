@@ -18,4 +18,9 @@ class Collar
 		self::CHINESE_COLLAR => '立領',
 		self::HOOD => '連身帽',
 	];
+
+	const CollarRadio = [
+		self::SPREAD_COLLAR => '立領',
+		self::HOOD => '連身帽'
+	];
 }

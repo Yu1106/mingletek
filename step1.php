@@ -4,6 +4,7 @@ use common\api\mingletek\HousekeepingRecord;
 use common\api\mingletek\Mingletek;
 use common\login\Login;
 use common\model\MingletekApiLog;
+use common\model\parameter\Clothes;
 use common\model\Store;
 use common\util\UidUtil;
 use common\view\Asset;
@@ -18,7 +19,15 @@ if (!Login::auth()) {
 }
 
 if ($_POST && CSRF::validate($_POST)) {
-	$settingsOnlineStore = arrayToString($_POST['settings_onlineStore']);
+	if (isset($_POST['settings_onlineStore'])) {
+		$settingsOnlineStoreArr = array();
+		foreach ($_POST['settings_onlineStore'] as $key => $val) {
+			if (array_key_exists ($val, Clothes::ClothesType)) {
+				$settingsOnlineStoreArr[] = $val;
+			}
+		}
+		$settingsOnlineStore = arrayToString($settingsOnlineStoreArr);
+	}
 	$store = Store::addStore($_SESSION['USER_ID'], $_POST['settings_shop'], $_POST['settings_notice'], $_POST['settings_refund'], $_POST['settings_category'], $settingsOnlineStore);
 	UidUtil::setStoreId($store);
 	$mingletek = new Mingletek();

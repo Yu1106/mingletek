@@ -21,6 +21,16 @@ class Product extends Model
 	}
 
 	/**
+	 * @param int $id
+	 * @param int $storeId
+	 * @return bool
+	 */
+	public static function findByIdAndStoreId(int $id, int $storeId)
+	{
+		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where id = :id and store_id = :store_id order by id", [":id" => $id, ":store_id" => $storeId]);
+	}
+
+	/**
 	 * @param int $storeId
 	 * @param string $picture
 	 * @return bool

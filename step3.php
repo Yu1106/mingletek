@@ -5,13 +5,13 @@ use common\api\mingletek\Mingletek;
 use common\login\Login;
 use common\model\MingletekApiLog;
 use common\model\parameter\Category;
-use common\model\parameter\Characteristic1;
-use common\model\parameter\Characteristic2;
-use common\model\parameter\Characteristic3;
-use common\model\parameter\Characteristic4;
-use common\model\parameter\Characteristic5;
 use common\model\parameter\Collar;
 use common\model\parameter\Color;
+use common\model\parameter\Feature1;
+use common\model\parameter\Feature2;
+use common\model\parameter\Feature3;
+use common\model\parameter\Feature4;
+use common\model\parameter\Feature5;
 use common\model\parameter\Neckline;
 use common\model\parameter\Sleeve;
 use common\model\parameter\SubCategory;
@@ -69,23 +69,23 @@ if ($_POST && CSRF::validate($_POST)) {
 				if (isset($data->texture_1) || isset($data->texture_2) || isset($data->texture_3) || isset($data->pattern)) {
 					$characteristic1 = array();
 					if (isset($data->texture_1))
-						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_1];
+						$characteristic1[] = Feature1::Feature1Type[$data->texture_1];
 					if (isset($data->texture_2))
-						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_2];
+						$characteristic1[] = Feature1::Feature1Type[$data->texture_2];
 					if (isset($data->texture_3))
-						$characteristic1[] = Characteristic1::Characteristic1Type[$data->texture_3];
+						$characteristic1[] = Feature1::Feature1Type[$data->texture_3];
 					if (isset($data->pattern))
-						$characteristic1[] = Characteristic1::Characteristic1Type[$data->pattern];
-					$array['characteristic_1'] = implode(",", $characteristic1);
+						$characteristic1[] = Feature1::Feature1Type[$data->pattern];
+					$array['feature_1'] = implode(",", $characteristic1);
 				}
 				if (isset($data->neckshoulder))
-					$array['characteristic_2'] = Characteristic2::Characteristic2Type[$data->neckshoulder];
+					$array['feature_2'] = Feature2::Feature2Type[$data->neckshoulder];
 				if (isset($data->accessory_1))
-					$array['characteristic_3'] = Characteristic3::Characteristic3Type[$data->accessory_1];
+					$array['feature_3'] = Feature3::Feature3Type[$data->accessory_1];
 				if (isset($data->waist))
-					$array['characteristic_4'] = Characteristic4::Characteristic4Type[$data->waist];
+					$array['feature_4'] = Feature4::Feature4Type[$data->waist];
 				if (isset($data->texture_4))
-					$array['characteristic_5'] = Characteristic5::Characteristic5Type[$data->texture_4];
+					$array['feature_5'] = Feature5::Feature5Type[$data->texture_4];
 				if (isset($data->collar_desc) || isset($data->neckline_desc) || isset($data->neckshoulder_desc) || isset($data->sleeve_desc)
 					|| isset($data->accessory_1_desc) || isset($data->pattern_desc) || isset($data->waist_desc) || isset($data->texture_1_desc)
 					|| isset($data->texture_2_desc) || isset($data->texture_3_desc) || isset($data->texture_4_desc)) {

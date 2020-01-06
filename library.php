@@ -26,8 +26,8 @@ function arrayToString(array $array):string
 {
 	$returnData = array();
 	foreach ($array as $val) {
-		if ((int)$val >= 0)
-			$returnData[] = (int)$val;
+		if (isset($val))
+			$returnData[] = $val;
 	}
 	$returnData = array_unique($returnData);
 	return implode(",", $returnData);

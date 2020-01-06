@@ -22,4 +22,11 @@ class Neckline
 		self::SQUARE => '方型領',
 		self::BOAT => '船型領'
 	];
+
+	const NecklineRadio = [
+		self::V_NECK => 'V型領',
+		self::SCOOP => '圓領',
+		self::SQUARE => '方型領',
+		self::BOAT => '船型領'
+	];
 }
