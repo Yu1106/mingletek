@@ -16,7 +16,6 @@ use common\model\parameter\Size;
 use common\model\parameter\Sleeve;
 use common\model\parameter\SubCategory;
 use common\model\Product;
-use common\model\Store;
 use common\model\SubPicture;
 use common\util\FileUtil;
 use common\util\UidUtil;
@@ -93,9 +92,8 @@ if ($_POST && CSRF::validate($_POST)) {
 			}
 			$array['color'] = arrayToString($colorArr);
 		}
-		if (isset($_POST['size'])) {
+		if (isset($_POST['size']) && in_array($_POST['collar'], Size::SizeType))
 			$array['size'] = $_POST['size'];
-		}
 		if (isset($_POST['collar']) && in_array($_POST['collar'], Collar::CollarType))
 			$array['collar'] = $_POST['collar'];
 		if (isset($_POST['collar']) && $_POST['collar'] == 'custom') {
