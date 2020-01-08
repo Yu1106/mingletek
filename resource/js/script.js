@@ -343,7 +343,7 @@ var step3Action = function () {
                 async: false,
                 success: function (data, status, request) {
                     var statusUrl = request.getResponseHeader('Location');
-                    fileFormData.updateProgress(statusUrl);
+                    step3Action.updateProgress(statusUrl);
                 },
                 error: function () {
                     alert('startProcess error');
