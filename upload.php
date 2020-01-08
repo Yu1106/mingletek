@@ -46,4 +46,19 @@ if ($_POST['action'] === 'validate') {
 		}
 	}
 	echo json_encode($return);
+} else if ($_POST['action'] === 'upload' && $_POST['sub'] === 'swiper') {
+	if (empty($_POST['product_id']) && (int)$_POST['product_id'] <= 0)
+		die();
+	$id = (int)$_POST['product_id'];
+	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
+	$return = $fileUpload->upload();
+	foreach ($return as $k => $v) {
+		if ($v['status'] == 1) {
+			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
+			if (isset($product))
+				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
+			SubPicture::addSubPicture($storeId, $v['name'], $id);
+		}
+	}
+	echo json_encode($return);
 }
