@@ -249,7 +249,7 @@
                 </div>
                 <div id="previewBox" class="sectionContent"></div>
             </section>
-            <input id="next" type="button" onclick="fileFormData.validate()">
+            <input id="next" type="button" onclick="step2Action.submit();">
         </form>
         <a id="goTop" class="icon-arrow-right" href="javascript:;"></a>
     </main>

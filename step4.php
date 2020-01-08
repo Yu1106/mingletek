@@ -26,7 +26,7 @@ use Volnix\CSRF\CSRF;
 include 'library.php';
 
 if (!Login::auth() || !UidUtil::auth()) {
-	var_dump($_POST);
+	HttpUtil::redirect();
 }
 
 $firstArr = array();
@@ -92,7 +92,7 @@ if ($_POST && CSRF::validate($_POST)) {
 			}
 			$array['color'] = arrayToString($colorArr);
 		}
-		if (isset($_POST['size']) && in_array($_POST['collar'], Size::SizeType))
+		if (isset($_POST['size']) && in_array($_POST['size'], Size::SizeType))
 			$array['size'] = $_POST['size'];
 		if (isset($_POST['collar']) && in_array($_POST['collar'], Collar::CollarType))
 			$array['collar'] = $_POST['collar'];
@@ -193,7 +193,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		$savePictureArr[$firstArr['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $firstArr['picture']);
 		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $firstArr['id']);
 		foreach ($subPicture as $val2) {
-			$saveSubPictureArr[$val2['picture']]['id'] = $val2['id'];
+			$saveSubPictureArr[$val2['picture']]['id'] = $firstArr['id'];
 			$saveSubPictureArr[$val2['picture']]['img'] = $val2['picture'];
 			$saveSubPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
 		}
@@ -214,7 +214,7 @@ foreach ($product as $val) {
 	$pictureArr[$val['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
 	$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $val['id']);
 	foreach ($subPicture as $val2) {
-		$subPictureArr[$val2['picture']]['id'] = $val2['id'];
+		$subPictureArr[$val2['picture']]['id'] = $val['id'];
 		$subPictureArr[$val2['picture']]['img'] = $val2['picture'];
 		$subPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
 	}

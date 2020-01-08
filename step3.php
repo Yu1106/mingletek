@@ -18,6 +18,7 @@ use common\model\parameter\SubCategory;
 use common\model\Product;
 use common\model\Store;
 use common\model\SubPicture;
+use common\util\UidUtil;
 use common\view\Asset;
 use common\view\View;
 use Volnix\CSRF\CSRF;
@@ -25,7 +26,7 @@ use common\util\HttpUtil;
 
 include 'library.php';
 
-if (!Login::auth()) {
+if (!Login::auth() || !UidUtil::auth()) {
 	HttpUtil::redirect();
 }
 

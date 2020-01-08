@@ -21,6 +21,7 @@
         "monolog/monolog": "^2.0",
         "volnix/csrf": "~1.0",
         "ext-json": "^1.7",
-        "league/csv": "^9.4"
+        "league/csv": "^9.4",
+        "ext-http": "*"
     }
 }
