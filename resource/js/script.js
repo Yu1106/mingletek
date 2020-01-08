@@ -311,7 +311,7 @@ var step3Action = function () {
     };
     return {
         submit: function () {
-            showLoading();
+            $('.loading').show();
             $.ajax({
                 type: 'POST',
                 url: 'get_data.php',
