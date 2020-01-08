@@ -276,19 +276,9 @@ var step2Action = function () {
     return {
         submit: function () {
             showLoading();
-            $.ajax({
-                type: 'POST',
-                url: 'get_data.php',
-                data: {action: 'check'},
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        formData.validate();
-                        if (formData.getStatus())
-                            $("#uploadMajor").submit();
-                    }
-                }
-            });
+            formData.validate();
+            if (formData.getStatus())
+                $("#uploadMajor").submit();
         }
     }
 }();
@@ -311,21 +301,11 @@ var step3Action = function () {
     };
     return {
         submit: function () {
-            $('.loading').show();
-            $.ajax({
-                type: 'POST',
-                url: 'get_data.php',
-                data: {action: 'check'},
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        formData.validate(true);
-                        if (formData.getStatus()){
-                            step3Action.startProcess();
-                        }
-                    }
-                }
-            });
+            showLoading();
+            formData.validate(true);
+            if (formData.getStatus()){
+                step3Action.startProcess();
+            }
         },
         startProcess: function () {
 
@@ -603,7 +583,7 @@ function clearLoading() {
 
 //show loading spinner
 async function showLoading() {
-    $('.loading').fadeIn();
+    $('.loading').show();
 }
 
 //show alertMsgBox
