@@ -162,6 +162,7 @@ var formData = function () {
     var status = true;
     var msg = '';
     var validateData = [];
+    var emptyData = [];
     var showErrorAlert = function () {
         $("#alertMsgBox").html(msg);
         showAlertMsg();
@@ -209,6 +210,7 @@ var formData = function () {
                     $.each(data, function (k, v) {
                         if (v.status == 0) {
                             status = false;
+                            emptyData.push(v.name);
                             msg += v.name + ":" + v.msg + "<br>";
                         } else {
                             if ($.inArray(v.name, validateData) < 0) {
@@ -220,7 +222,7 @@ var formData = function () {
                         clearLoading();
                         showErrorAlert();
                     } else {
-                        formData.upload(sub = false);
+                        formData.upload(sub);
                     }
                     return false;
                 }
@@ -256,6 +258,9 @@ var formData = function () {
         getStatus: function () {
             return status;
         },
+        getEmptyData: function () {
+            return emptyData;
+        },
         setValidate: function (e) {
             validateData.push(e);
         },
@@ -284,8 +289,14 @@ var step2Action = function () {
                 success: function (data) {
                     if (data) {
                         formData.validate();
-                        if (formData.getStatus())
+                        if (formData.getStatus()) {
                             $("#uploadMajor").submit();
+                        } else {
+                            $.each($(".icon-x-square"), function (k2, v2) {
+                                if ($.inArray($(v2).attr("data-img"), formData.getEmptyData()))
+                                    formData.empty(v2);
+                            });
+                        }
                     }
                 }
             });
@@ -320,8 +331,13 @@ var step3Action = function () {
                 success: function (data) {
                     if (data) {
                         formData.validate(true);
-                        if (formData.getStatus()){
+                        if (formData.getStatus()) {
                             step3Action.startProcess();
+                        } else {
+                            $.each($(".icon-x-square"), function (k2, v2) {
+                                if ($.inArray($(v2).attr("data-img"), formData.getEmptyData()))
+                                    formData.empty(v2);
+                            });
                         }
                     }
                 }
