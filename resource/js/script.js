@@ -292,9 +292,9 @@ var step2Action = function () {
                         if (formData.getStatus()) {
                             $("#uploadMajor").submit();
                         } else {
-                            $.each($(".icon-x-square"), function (k2, v2) {
-                                if ($.inArray($(v2).attr("data-img"), formData.getEmptyData()))
-                                    formData.empty(v2);
+                            $.each($(".icon-x-square"), function (k, v) {
+                                if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
+                                    formData.empty(v);
                             });
                         }
                     }
@@ -334,9 +334,9 @@ var step3Action = function () {
                         if (formData.getStatus()) {
                             step3Action.startProcess();
                         } else {
-                            $.each($(".icon-x-square"), function (k2, v2) {
-                                if ($.inArray($(v2).attr("data-img"), formData.getEmptyData()))
-                                    formData.empty(v2);
+                            $.each($(".icon-x-square"), function (k, v) {
+                                if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
+                                    formData.empty(v);
                             });
                         }
                     }
