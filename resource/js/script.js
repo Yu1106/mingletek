@@ -159,7 +159,7 @@ $(function () {
 var formData = function () {
 
     var form_data;
-    var status = true;
+    var status = false;
     var msg = '';
     var validateData = [];
     var emptyData = [];
@@ -168,7 +168,7 @@ var formData = function () {
         showAlertMsg();
     };
     var reset = function () {
-        status = true;
+        status = false;
         msg = '';
     };
     var setFile = function () {
@@ -209,7 +209,6 @@ var formData = function () {
                 success: function (data) {
                     $.each(data, function (k, v) {
                         if (v.status == 0) {
-                            status = false;
                             emptyData.push(v.name);
                             msg += v.name + ":" + v.msg + "<br>";
                         } else {
@@ -218,6 +217,8 @@ var formData = function () {
                             }
                         }
                     });
+                    if (msg == '')
+                        status = true;
                     if (!status) {
                         clearLoading();
                         showErrorAlert();
