@@ -108,6 +108,15 @@ $(function () {
 
         $("#swiperupload").change(function () {
             readURL(this, true);
+            step4Action.upload();
+            galleryThumbs.removeAllSlides();
+            galleryTop.removeAllSlides();
+            galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
+            galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
+            $.each(step4Action.getSubPicture(), function (k, v) {
+                galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"></div>');
+                galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
+            });
         });
     }
 
@@ -139,10 +148,7 @@ $(function () {
                 reader.fileName = input.files[i].name;
                 formData.setValidate(input.files[i].name);
                 reader.onload = function (e) {
-                    if (swiperUpload) {
-                        galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + e.target.result + ');"><i class="icon-delete"></i></div>');
-                        galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + e.target.result + ');"></div>');
-                    } else {
+                    if (!swiperUpload) {
                         var img = $("<img class='previewImg'>").attr('src', e.target.result);
                         var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
                         $("#previewBox").prepend(thumbnail);
@@ -158,6 +164,8 @@ $(function () {
 
 var formData = function () {
 
+    var form_id = '#fileupload';
+    var product_id = 0;
     var form_data;
     var status = false;
     var msg = '';
@@ -173,7 +181,8 @@ var formData = function () {
     };
     var setFile = function () {
         form_data = new FormData(); //建構new FormData()
-        var file_data = $("#fileupload").prop('files');  //取得上傳檔案屬性
+        var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
+
         if (file_data.length == 0 || validateData.length == 0)
             return false;
         for (var i = 0; i < file_data.length; i++) {
@@ -183,19 +192,23 @@ var formData = function () {
         }
         form_data.append('action', '');
         form_data.append('sub', '');
+        form_data.append('product_id', '');
         return true;
     };
     return {
-        validate: function (sub = false) {
+        validate: function (sub = '') {
 
             reset();
             if (!setFile()) {
                 clearLoading();
                 return false;
             }
+
             form_data.set('action', 'validate');
-            if (sub)
-                form_data.set('sub', 'sub');
+            if (sub != '')
+                form_data.set('sub', sub);
+            if(product_id > 0)
+                form_data.set('product_id', product_id);
 
             $.ajax({
                 url: 'upload.php',
@@ -275,6 +288,10 @@ var formData = function () {
             var el = $(e).parent(".previewThumbnail");
             el.remove();
         },
+        setFormData: function (new_form_id, new_product_id) {
+            form_id = new_form_id;
+            product_id = new_product_id;
+        }
     }
 }();
 
@@ -331,7 +348,7 @@ var step3Action = function () {
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
-                        formData.validate(true);
+                        formData.validate('sub');
                         if (formData.getStatus()) {
                             step3Action.startProcess();
                         } else {
@@ -608,7 +625,15 @@ var step4Action = function () {
                 setData();
             }
             clearLoading();
-        }
+        },
+        upload: function () {
+            showLoading();
+            var id = $("#id").val();
+            formData.setFormData('#swiperupload', id);
+            formData.validate('swiper');
+            getData(id);
+            clearLoading();
+        },
     }
 }();
 

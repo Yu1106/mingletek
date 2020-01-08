@@ -14,14 +14,16 @@ class SubPicture extends Model
 	/**
 	 * @param int $storeId
 	 * @param string $picture
+	 * @param int $productId
 	 * @return bool
 	 */
-	public static function addSubPicture(int $storeId, string $picture)
+	public static function addSubPicture(int $storeId, string $picture, int $productId = 0)
 	{
 		return self::getDb()->save(
 			[
 				'store_id' => $storeId,
-				'picture' => $picture
+				'picture' => $picture,
+				'product_id' => $productId
 			], true, static::tableName());
 	}
 
