@@ -60,11 +60,11 @@ use common\model\parameter\Yahoo;
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
 								<?php foreach ($data['swiper']['picture'] as $key => $val): ?>
-                                    <div class="swiper-slide"
+                                    <div data-img="<?= $val["img"] ?>" class="swiper-slide"
                                          style="background-image: url('<?= $val["path"] ?>');"></div>
 								<?php endforeach; ?>
 								<?php foreach ($data['swiper']['subPicture'] as $key => $val): ?>
-                                    <div class="swiper-slide"
+                                    <div data-img="<?= $val["img"] ?>" class="swiper-slide"
                                          style="background-image: url('<?= $val["path"] ?>');"></div>
 								<?php endforeach; ?>
                             </div>
@@ -72,11 +72,11 @@ use common\model\parameter\Yahoo;
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
 								<?php foreach ($data['swiper']['picture'] as $key => $val): ?>
-                                    <div class="swiper-slide"
+                                    <div data-img="<?= $val["img"] ?>" class="swiper-slide"
                                          style="background-image: url('<?= $val["path"] ?>');"></div>
 								<?php endforeach; ?>
 								<?php foreach ($data['swiper']['subPicture'] as $key => $val): ?>
-                                    <div class="swiper-slide"
+                                    <div data-img="<?= $val["img"] ?>" class="swiper-slide"
                                          style="background-image: url('<?= $val["path"] ?>');">
                                         <i class="icon-delete"></i>
                                     </div>

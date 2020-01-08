@@ -62,8 +62,8 @@ $(function () {
             galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             $.each(step4Action.getSubPicture(), function (k, v) {
-                galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"></div>');
-                galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
+                galleryTop.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"></div>');
+                galleryThumbs.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
             });
         }
     });
@@ -102,8 +102,12 @@ $(function () {
 
         $('body').on("click", '.swiper-slide .icon-delete', function () {
             var i = $('.gallery-thumbs .swiper-slide').index($(this).closest(".swiper-slide"));
-            galleryThumbs.removeSlide(i);
-            galleryTop.removeSlide(i);
+            var img = $(this).parent().attr("data-img");
+            formData.delete(img);
+            if (formData.getStatus()) {
+                galleryThumbs.removeSlide(i);
+                galleryTop.removeSlide(i);
+            }
         });
 
         $("#swiperupload").change(function () {
@@ -114,9 +118,8 @@ $(function () {
             galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             $.each(step4Action.getSubPicture(), function (k, v) {
-                console.log(v);
-                galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"></div>');
-                galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
+                galleryTop.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"></div>');
+                galleryThumbs.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
             });
         });
     }
@@ -208,7 +211,7 @@ var formData = function () {
             form_data.set('action', 'validate');
             if (sub != '')
                 form_data.set('sub', sub);
-            if(product_id > 0)
+            if (product_id > 0)
                 form_data.set('product_id', product_id);
 
             $.ajax({
@@ -269,6 +272,26 @@ var formData = function () {
                     }
                 }
             });
+        },
+        delete: function (img) {
+            reset();
+            $.ajax({
+                url: 'upload.php',
+                data: {action: 'delete', sub: 'sub', image: img},  //data只能指定單一物件
+                type: 'post',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    if (data.status == 0) {
+                        status = false;
+                        msg = data.msg;
+                        showErrorAlert();
+                    } else {
+                        status = true;
+                    }
+                }
+            });
+            return false;
         },
         getStatus: function () {
             return status;
@@ -409,11 +432,11 @@ var step3Action = function () {
 var step4Action = function () {
     var status = true;
     var picture;
-    var sub_picture = [];
+    var sub_picture = {};
     var product = {};
     var empty = function () {
         picture = '';
-        sub_picture = [];
+        sub_picture = {};
         product = {};
         if (typeof ($("#id")) != 'undefined')
             $("#id").val('');
@@ -504,7 +527,7 @@ var step4Action = function () {
                 } else {
                     picture = data.data.picture;
                     $.each(data.data.sub_picture, function (k, v) {
-                        sub_picture.push(v);
+                        sub_picture[k] = v;
                     });
                     $.each(data.data.product, function (k, v) {
                         product[k] = v;
@@ -628,13 +651,15 @@ var step4Action = function () {
             clearLoading();
         },
         upload: function () {
+            product = {};
+            sub_picture = {};
             showLoading();
             var id = $("#id").val();
             formData.setFormData('#swiperupload', id);
             formData.validate('swiper');
             getData(id);
             clearLoading();
-        },
+        }
     }
 }();
 

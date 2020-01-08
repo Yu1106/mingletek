@@ -35,7 +35,7 @@ if ($_POST['action'] === 'check') {
 			$productArr[$key] = $val;
 	}
 	foreach ($subPicture as $key => $val) {
-		$subPictureArr[$key] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+		$subPictureArr[$val['picture']] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
 	}
 	if ($product)
 		echo json_encode(['status' => 1, 'data' => ['product' => $productArr, 'picture' => $picture, 'sub_picture' => $subPictureArr]]);
