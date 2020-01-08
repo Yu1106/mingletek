@@ -362,7 +362,7 @@ var step3Action = function () {
                 } else {
                     // return in 2 seconds
                     setTimeout(function () {
-                        fileFormData.updateProgress(statusUrl);
+                        step3Action.updateProgress(statusUrl);
                     }, 2000);
                 }
             });
