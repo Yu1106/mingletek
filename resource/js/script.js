@@ -114,6 +114,7 @@ $(function () {
             galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
             $.each(step4Action.getSubPicture(), function (k, v) {
+                console.log(v);
                 galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"></div>');
                 galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
             });
