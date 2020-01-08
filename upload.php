@@ -56,8 +56,9 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 	foreach ($return as $k => $v) {
 		if ($v['status'] == 1) {
 			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
-			if (empty($product))
-				SubPicture::addSubPicture($storeId, $v['name'], $id);
+			if (isset($product))
+				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
+			SubPicture::addSubPicture($storeId, $v['name'], $id);
 		}
 	}
 	echo json_encode($return);
