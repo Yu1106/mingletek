@@ -294,6 +294,7 @@ var step2Action = function () {
 }();
 
 var step3Action = function () {
+    var startProcessData = [];
     var setStartProcessData = function () {
         $.ajax({
             url: 'get_data.php',
