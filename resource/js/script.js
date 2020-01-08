@@ -276,9 +276,19 @@ var step2Action = function () {
     return {
         submit: function () {
             showLoading();
-            formData.validate();
-            if (formData.getStatus())
-                $("#uploadMajor").submit();
+            $.ajax({
+                type: 'POST',
+                url: 'get_data.php',
+                data: {action: 'check'},
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        formData.validate();
+                        if (formData.getStatus())
+                            $("#uploadMajor").submit();
+                    }
+                }
+            });
         }
     }
 }();
@@ -301,11 +311,20 @@ var step3Action = function () {
     };
     return {
         submit: function () {
-            showLoading();
-            formData.validate(true);
-            if (formData.getStatus()){
-                step3Action.startProcess();
-            }
+            $.ajax({
+                type: 'POST',
+                url: 'get_data.php',
+                data: {action: 'check'},
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        formData.validate(true);
+                        if (formData.getStatus()){
+                            step3Action.startProcess();
+                        }
+                    }
+                }
+            });
         },
         startProcess: function () {
 
