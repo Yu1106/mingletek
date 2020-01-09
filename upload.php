@@ -14,7 +14,7 @@ if (!Login::auth() || !UidUtil::auth()) {
 	exit;
 }
 
-$filePath = (empty($_POST['sub'])) ? Login::getUserEmail() . FileUtil::UPLOAD_DRESS : Login::getUserEmail() . FileUtil::UPLOAD_RELATED_DRESS;
+$filePath = (isset($_POST['step']) && $_POST['step'] === 'step2') ? Login::getUserEmail() . FileUtil::UPLOAD_DRESS : Login::getUserEmail() . FileUtil::UPLOAD_RELATED_DRESS;
 $storeId = UidUtil::getStoreId();
 
 if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
