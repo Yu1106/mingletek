@@ -398,7 +398,7 @@ var step3Action = function () {
             } else {
                 // return in 2 seconds
                 setTimeout(function () {
-                    step3Action.updateProgress(statusUrl);
+                    updateProgress(statusUrl);
                 }, 2000);
             }
         });
