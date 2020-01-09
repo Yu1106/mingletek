@@ -734,7 +734,7 @@ var step4Action = function () {
             var strings = getString();
             strings = strings.trim();
             var mydata = [
-                {"strings": strings}
+                {"strings": '七分袖 打摺'}
             ];
             $.ajax({
                 type: 'POST',
