@@ -200,7 +200,7 @@ var formData = function () {
         return true;
     };
     return {
-        validate: function (sub = '') {
+        validate: function (sub) {
 
             reset();
             if (!setFormData()) {
@@ -246,7 +246,7 @@ var formData = function () {
                 }
             });
         },
-        upload: function (sub = false) {
+        upload: function (sub) {
 
             form_data.set('action', 'upload');
 
