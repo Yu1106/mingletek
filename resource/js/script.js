@@ -672,7 +672,7 @@ function clearLoading() {
 }
 
 //show loading spinner
-async function showLoading() {
+function showLoading() {
     $('.loading').show();
 }
 
