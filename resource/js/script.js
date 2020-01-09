@@ -104,6 +104,7 @@ $(function () {
         });
 
         $("#swiperupload").change(function () {
+            showLoading();
             readURL(this, true);
             step4Action.upload();
             var id = $("#id").val();
@@ -658,7 +659,6 @@ var step4Action = function () {
             clearLoading();
         },
         upload: function () {
-            showLoading();
             reset();
             var id = $("#id").val();
             formData.setFormData('#swiperupload', id);
