@@ -57,14 +57,7 @@ $(function () {
         var id = $(this).find("img").attr("data-id");
         if (step4Action.check(id)) {
             step4Action.checkImage(id);
-            galleryThumbs.removeAllSlides();
-            galleryTop.removeAllSlides();
-            galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
-            galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
-            $.each(step4Action.getSubPicture(), function (k, v) {
-                galleryTop.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"></div>');
-                galleryThumbs.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
-            });
+            reload();
         }
     });
 
@@ -113,14 +106,7 @@ $(function () {
         $("#swiperupload").change(function () {
             readURL(this, true);
             step4Action.upload();
-            galleryThumbs.removeAllSlides();
-            galleryTop.removeAllSlides();
-            galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
-            galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
-            $.each(step4Action.getSubPicture(), function (k, v) {
-                galleryTop.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"></div>');
-                galleryThumbs.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
-            });
+            reload();
         });
     }
 
@@ -142,6 +128,17 @@ $(function () {
                     return true;
                 }
             }
+        });
+    }
+
+    function reload() {
+        galleryThumbs.removeAllSlides();
+        galleryTop.removeAllSlides();
+        galleryTop.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
+        galleryThumbs.appendSlide('<div class="swiper-slide" style="background-image: url(' + step4Action.getPicture() + ');"></div>');
+        $.each(step4Action.getSubPicture(), function (k, v) {
+            galleryTop.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"></div>');
+            galleryThumbs.appendSlide('<div data-img=' + k + ' class="swiper-slide" style="background-image: url(' + v + ');"><i class="icon-delete"></i></div>');
         });
     }
 
@@ -183,7 +180,7 @@ var formData = function () {
         status = false;
         msg = '';
     };
-    var setFile = function () {
+    var setFormData = function () {
         form_data = new FormData(); //建構new FormData()
         var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
 
@@ -203,7 +200,7 @@ var formData = function () {
         validate: function (sub = '') {
 
             reset();
-            if (!setFile()) {
+            if (!setFormData()) {
                 clearLoading();
                 return false;
             }
@@ -362,6 +359,47 @@ var step3Action = function () {
             }
         });
     };
+    var startProcess = function () {
+
+        setStartProcessData();
+        if (startProcessData.length == 0) {
+            clearLoading();
+            return false;
+        }
+        var data = [startProcessData];
+        $.ajax({
+            type: 'POST',
+            url: '/longtask',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: 'json',
+            async: false,
+            success: function (data, status, request) {
+                var statusUrl = request.getResponseHeader('Location');
+                updateProgress(statusUrl);
+            },
+            error: function () {
+                alert('startProcess error');
+                clearLoading();
+            }
+        });
+    };
+    var updateProgress = function (statusUrl) {
+        // send GET request to status URL
+        $.getJSON(statusUrl, function (data) {
+            var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
+            $(".percent").text(percent + "%");
+            // update UI
+            if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                $("#uploadMajor").submit();
+            } else {
+                // return in 2 seconds
+                setTimeout(function () {
+                    step3Action.updateProgress(statusUrl);
+                }, 2000);
+            }
+        });
+    };
     return {
         submit: function () {
             showLoading();
@@ -374,7 +412,7 @@ var step3Action = function () {
                     if (data) {
                         formData.validate('sub');
                         if (formData.getStatus()) {
-                            step3Action.startProcess();
+                            startProcess();
                         } else {
                             $.each($(".icon-x-square"), function (k, v) {
                                 if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
@@ -385,47 +423,6 @@ var step3Action = function () {
                 }
             });
         },
-        startProcess: function () {
-
-            setStartProcessData();
-            if (startProcessData.length == 0) {
-                clearLoading();
-                return false;
-            }
-            var data = [startProcessData];
-            $.ajax({
-                type: 'POST',
-                url: '/longtask',
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                dataType: 'json',
-                async: false,
-                success: function (data, status, request) {
-                    var statusUrl = request.getResponseHeader('Location');
-                    step3Action.updateProgress(statusUrl);
-                },
-                error: function () {
-                    alert('startProcess error');
-                    clearLoading();
-                }
-            });
-        },
-        updateProgress: function (statusUrl) {
-            // send GET request to status URL
-            $.getJSON(statusUrl, function (data) {
-                var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
-                $(".percent").text(percent + "%");
-                // update UI
-                if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    $("#uploadMajor").submit();
-                } else {
-                    // return in 2 seconds
-                    setTimeout(function () {
-                        step3Action.updateProgress(statusUrl);
-                    }, 2000);
-                }
-            });
-        }
     }
 }();
 
@@ -434,10 +431,13 @@ var step4Action = function () {
     var picture;
     var sub_picture = {};
     var product = {};
-    var empty = function () {
+    var reset = function (){
         picture = '';
         sub_picture = {};
         product = {};
+    };
+    var empty = function () {
+        reset();
         if (typeof ($("#id")) != 'undefined')
             $("#id").val('');
         if (typeof ($("#pchome_category")) != 'undefined')
@@ -651,9 +651,8 @@ var step4Action = function () {
             clearLoading();
         },
         upload: function () {
-            product = {};
-            sub_picture = {};
             showLoading();
+            reset();
             var id = $("#id").val();
             formData.setFormData('#swiperupload', id);
             formData.validate('swiper');
