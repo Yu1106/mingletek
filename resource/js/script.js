@@ -194,9 +194,6 @@ var formData = function () {
                 form_data.append('file[]', file_data[i]);
             }
         }
-        form_data.append('action', '');
-        form_data.append('sub', '');
-        form_data.append('product_id', '');
         return true;
     };
     return {
@@ -207,12 +204,11 @@ var formData = function () {
                 clearLoading();
                 return false;
             }
-
             form_data.set('action', 'validate');
             if (sub != '')
-                form_data.set('sub', sub);
+                form_data.append('sub', sub);
             if (product_id > 0)
-                form_data.set('product_id', product_id);
+                form_data.append('product_id', product_id);
 
             $.ajax({
                 url: 'upload.php',
@@ -248,7 +244,15 @@ var formData = function () {
         },
         upload: function (sub) {
 
+            if (!setFormData()) {
+                clearLoading();
+                return false;
+            }
             form_data.set('action', 'upload');
+            if (sub != '')
+                form_data.append('sub', sub);
+            if (product_id > 0)
+                form_data.append('product_id', product_id);
 
             $.ajax({
                 url: 'upload.php',
