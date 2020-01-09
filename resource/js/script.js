@@ -675,15 +675,29 @@ var step4Action = function () {
         var className = "." + id;
         $.each($(className), function (k, v) {
             if ($(v).is(":checked")) {
-                if ($(v).val() == 'custom') {
-                    var name = '#' + id + '_custom_field';
-                    string += $(name).val() + " ";
-                } else {
+                if ($(v).val() != 'custom') {
                     string += $(v).val() + " ";
                 }
             }
         });
         return string;
+    };
+    var updateProgress = function (statusUrl) {
+        // send GET request to status URL
+        $.getJSON(statusUrl, function (data) {
+            var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
+            $(".percent").text(percent + "%");
+            // update UI
+            if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                console.log(data);
+                clearLoading();
+            } else {
+                // return in 2 seconds
+                setTimeout(function () {
+                    updateProgress(statusUrl);
+                }, 2000);
+            }
+        });
     };
     return {
         getPicture: function () {
@@ -717,17 +731,21 @@ var step4Action = function () {
         buildProductDescription: function () {
             showLoading();
             var strings = getString();
+            var mydata = [
+                {strings}
+            ];
             $.ajax({
                 type: 'POST',
-                url: 'get_data.php',
-                data: {action: 'buildProductDescription', string: strings},
+                url: '/renewsentence',
+                data: JSON.stringify(mydata),
+                contentType: "application/json",
                 dataType: 'json',
-                success: function (data) {
-                    console.log(data);
+                success: function (data, status, request) {
+                    status_url = request.getResponseHeader('Location');
+                    updateProgress(status_url, nanobar, div[0]);
                 },
                 error: function () {
-                    clearLoading();
-                    alert("buildDescription Error");
+                    alert('Renewsentence error');
                 }
             });
         }
