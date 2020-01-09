@@ -204,7 +204,7 @@ var formData = function () {
                 clearLoading();
                 return false;
             }
-            form_data.set('action', 'validate');
+            form_data.append('action', 'validate');
             if (sub != '')
                 form_data.append('sub', sub);
             if (product_id > 0)
@@ -248,7 +248,7 @@ var formData = function () {
                 clearLoading();
                 return false;
             }
-            form_data.set('action', 'upload');
+            form_data.append('action', 'upload');
             if (sub != '')
                 form_data.append('sub', sub);
             if (product_id > 0)
