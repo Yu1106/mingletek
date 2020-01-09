@@ -50,7 +50,7 @@ if ($_POST['action'] === 'check') {
 	$mingletek = new Mingletek();
 	$RenewSentenceRecord = new RenewSentenceRecord();
 	$RenewSentenceRecord->strings = $_POST['string'];
-	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["STORE_ID"], MingletekApiLog::GET_PROCESS_DATA, json_encode($RenewSentenceRecord));
+	$mingletekApiLogId = MingletekApiLog::addLog($_SESSION['USER_ID'], $_SESSION["STORE_ID"], MingletekApiLog::RENEW_SENTENCE, json_encode($RenewSentenceRecord));
 	$renewSentence = $mingletek->RenewSentence($RenewSentenceRecord);
 	$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, $_SESSION["STORE_ID"], '', json_encode($renewSentence));
 	var_dump($renewSentence);
