@@ -236,7 +236,7 @@ var formData = function () {
                         clearLoading();
                         showErrorAlert();
                     } else {
-                        formData.upload(sub);
+                        formData.upload(step);
                     }
                     return false;
                 }
@@ -250,7 +250,7 @@ var formData = function () {
             }
             form_data.append('action', 'upload');
             if (step != '')
-                form_data.append('step', sub);
+                form_data.append('step', step);
             if (product_id > 0)
                 form_data.append('product_id', product_id);
 
