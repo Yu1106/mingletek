@@ -9,13 +9,13 @@
 
     <link rel="Shortcut Icon" type="image/x-icon" href="<?php echo RESOURCE_IMAGES_DIR ?>/favicon.ico">
     <!-- CSS -->
-    <?= $css ?>
+	<?= $css ?>
     <!-- Script -->
 	<?= $js ?>
 </head>
 <body>
 <div class="wrapper">
-    <header class="fixed">
+    <header class="<?= (strpos($_SERVER['PHP_SELF'], 'index.php')) ? "fixed" : "" ?>">
         <a href="index.php"><img id="logo" src="<?php echo RESOURCE_IMAGES_DIR ?>/logo.png" alt="logo"></a>
         <nav class="mainNav">
             <ul class="navList clearfix">
