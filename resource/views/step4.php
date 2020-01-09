@@ -39,12 +39,6 @@ use common\model\parameter\Yahoo;
                         <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
                     </a>
 				<?php endforeach; ?>
-				<?php foreach ($data['subPicture'] as $key => $val): ?>
-                    <a class="itemThumbnail" href="javascript:">
-                        <i class="icon-check-square"></i>
-                        <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
-                    </a>
-				<?php endforeach; ?>
             </div>
         </section>
         <section class="sectionItemEdit">
