@@ -741,8 +741,8 @@ var step4Action = function () {
                 contentType: "application/json",
                 dataType: 'json',
                 success: function (data, status, request) {
-                    status_url = request.getResponseHeader('Location');
-                    updateProgress(status_url, nanobar, div[0]);
+                    var status_url = request.getResponseHeader('Location');
+                    updateProgress(status_url);
                 },
                 error: function () {
                     alert('Renewsentence error');
