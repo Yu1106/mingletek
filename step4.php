@@ -35,7 +35,6 @@ $subPictureArr = array();
 $swiperArr = array();
 
 if ($_POST && CSRF::validate($_POST)) {
-	var_dump(1);
 	$check = Product::findByIdAndStoreId($_POST['id'], $_SESSION["STORE_ID"]);
 	if ($check) {
 		$array = array();
@@ -233,7 +232,7 @@ $data = [
 	'swiper' => $swiperArr
 ];
 
-var_dump($data);
+var_dump($_SESSION["STORE_ID"], $product);
 exit;
 
 $view = new View('header');
