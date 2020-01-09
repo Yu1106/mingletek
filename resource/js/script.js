@@ -683,6 +683,26 @@ var step4Action = function () {
         if (string == '') string += 'None ';
         return string;
     };
+    var renewsentence = function(strings){
+        var mydata = [
+            {"strings": strings}
+        ];
+        $.ajax({
+            type: 'POST',
+            url: '/renewsentence',
+            data: JSON.stringify(mydata),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (data, status, request) {
+                var status_url = request.getResponseHeader('Location');
+                updateProgress(status_url);
+            },
+            error: function () {
+                alert('Renewsentence error');
+                clearLoading();
+            }
+        });
+    };
     var updateProgress = function (statusUrl) {
         // send GET request to status URL
         $.getJSON(statusUrl, function (data) {
@@ -731,24 +751,15 @@ var step4Action = function () {
         },
         buildProductDescription: function () {
             showLoading();
-            var strings = getString();
-            strings = strings.trim();
-            var mydata = [
-                {"strings": '七分袖 打摺'}
-            ];
             $.ajax({
                 type: 'POST',
-                url: '/renewsentence',
-                data: JSON.stringify(mydata),
-                contentType: "application/json",
+                url: 'get_data.php',
+                data: {action: 'buildProductDescription'},
                 dataType: 'json',
-                success: function (data, status, request) {
-                    var status_url = request.getResponseHeader('Location');
-                    updateProgress(status_url);
-                },
-                error: function () {
-                    alert('Renewsentence error');
-                    clearLoading();
+                success: function (data) {
+                    if (data) {
+
+                    }
                 }
             });
         }
