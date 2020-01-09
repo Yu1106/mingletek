@@ -732,7 +732,7 @@ var step4Action = function () {
             showLoading();
             var strings = getString();
             var mydata = [
-                {strings}
+                {"strings": strings}
             ];
             $.ajax({
                 type: 'POST',
@@ -746,6 +746,7 @@ var step4Action = function () {
                 },
                 error: function () {
                     alert('Renewsentence error');
+                    clearLoading();
                 }
             });
         }
