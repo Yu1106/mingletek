@@ -39,7 +39,6 @@ if ($_POST && CSRF::validate($_POST)) {
 	if ($check) {
 		$array = array();
 		$array['is_edit'] = 1;
-		var_dump(nl2br($_POST['product_description']));
 		if (isset($_POST['product_description']))
 			$array['product_description'] = $_POST['product_description']."\n";
 		if (isset($_POST['pchome_category']))
