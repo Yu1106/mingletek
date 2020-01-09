@@ -106,11 +106,21 @@ $(function () {
         $("#swiperupload").change(function () {
             showLoading();
             readURL(this, true);
-            step4Action.upload();
-            var id = $("#id").val();
-            if (id > 0) {
-                reload();
-            }
+            $.ajax({
+                type: 'POST',
+                url: 'get_data.php',
+                data: {action: 'check'},
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        step4Action.upload();
+                        if (formData.getStatus()) {
+                            reload();
+                            clearLoading();
+                        }
+                    }
+                }
+            });
         });
     }
 
@@ -664,7 +674,6 @@ var step4Action = function () {
             formData.setFormData('#swiperupload', id);
             formData.validate('step4');
             getData(id);
-            clearLoading();
         }
     }
 }();
