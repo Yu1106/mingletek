@@ -680,6 +680,7 @@ var step4Action = function () {
                 }
             }
         });
+        if (string == '') string += 'None ';
         return string;
     };
     var updateProgress = function (statusUrl) {
