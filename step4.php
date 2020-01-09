@@ -233,7 +233,7 @@ $data = [
 	'swiper' => $swiperArr
 ];
 
-var_dump($data);
+var_dump(2);
 exit;
 
 $view = new View('header');
