@@ -21,7 +21,7 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->validate();
 	echo json_encode($return);
-} else if ($_POST['action'] === 'upload' && $_POST['sub'] === '' && isset($_FILES['file'])) {
+} else if ($_POST['action'] === 'upload' && $_POST['step'] === 'step2' && isset($_FILES['file'])) {
 	Product::delByStoreId($storeId);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
@@ -34,7 +34,7 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 		}
 	}
 	echo json_encode($return);
-} else if ($_POST['action'] === 'upload' && $_POST['sub'] === 'sub' && isset($_FILES['file'])) {
+} else if ($_POST['action'] === 'upload' && $_POST['step'] === 'step3' && isset($_FILES['file'])) {
 	SubPicture::delByStoreId($storeId);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
@@ -47,7 +47,7 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 		}
 	}
 	echo json_encode($return);
-} else if ($_POST['action'] === 'upload' && $_POST['sub'] === 'swiper' && isset($_FILES['file'])) {
+} else if ($_POST['action'] === 'upload' && $_POST['step'] === 'step4' && isset($_FILES['file'])) {
 	if (empty($_POST['product_id']) && (int)$_POST['product_id'] <= 0)
 		die();
 	$id = (int)$_POST['product_id'];
@@ -62,7 +62,7 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 		}
 	}
 	echo json_encode($return);
-} else if ($_POST['action'] === 'delete' && $_POST['sub'] === 'sub' && $_POST['image'] != '') {
+} else if ($_POST['action'] === 'delete' && $_POST['step'] === 'step4' && $_POST['image'] != '') {
 	$return = FileUpload::remove(FileUtil::IMG_UPLOAD_PATH . $filePath . "/" . $_POST['image']);
 	if ($return['status'] == 1)
 		SubPicture::delByStoreIdAndPicture($storeId, $_POST['image']);

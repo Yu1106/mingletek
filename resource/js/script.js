@@ -197,7 +197,7 @@ var formData = function () {
         return true;
     };
     return {
-        validate: function (sub) {
+        validate: function (step) {
 
             reset();
             if (!setFormData()) {
@@ -205,8 +205,8 @@ var formData = function () {
                 return false;
             }
             form_data.append('action', 'validate');
-            if (sub != '')
-                form_data.append('sub', sub);
+            if (step != '')
+                form_data.append('step', step);
             if (product_id > 0)
                 form_data.append('product_id', product_id);
 
@@ -242,15 +242,15 @@ var formData = function () {
                 }
             });
         },
-        upload: function (sub) {
+        upload: function (step) {
 
             if (!setFormData()) {
                 clearLoading();
                 return false;
             }
             form_data.append('action', 'upload');
-            if (sub != '')
-                form_data.append('sub', sub);
+            if (step != '')
+                form_data.append('step', sub);
             if (product_id > 0)
                 form_data.append('product_id', product_id);
 
@@ -281,7 +281,7 @@ var formData = function () {
             reset();
             $.ajax({
                 url: 'upload.php',
-                data: {action: 'delete', sub: 'sub', image: img},  //data只能指定單一物件
+                data: {action: 'delete', step: 'step4', image: img},  //data只能指定單一物件
                 type: 'post',
                 dataType: 'json',
                 async: false,
@@ -334,9 +334,9 @@ var step2Action = function () {
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
-                        formData.validate();
+                        formData.validate('step2');
                         if (formData.getStatus()) {
-                            // $("#uploadMajor").submit();
+                            $("#uploadMajor").submit();
                         } else {
                             $.each($(".icon-x-square"), function (k, v) {
                                 if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
@@ -417,7 +417,7 @@ var step3Action = function () {
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
-                        formData.validate('sub');
+                        formData.validate('step3');
                         if (formData.getStatus()) {
                             startProcess();
                         } else {
@@ -662,7 +662,7 @@ var step4Action = function () {
             reset();
             var id = $("#id").val();
             formData.setFormData('#swiperupload', id);
-            formData.validate('swiper');
+            formData.validate('step4');
             getData(id);
             clearLoading();
         }
