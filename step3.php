@@ -113,7 +113,7 @@ if ($_POST && CSRF::validate($_POST)) {
 						$productDescription[] = $data->texture_3_desc;
 					if (isset($data->texture_4_desc))
 						$productDescription[] = $data->texture_4_desc;
-					$array['product_description'] = implode(",", $productDescription);
+					$array['product_description'] = implode("\n", $productDescription);
 				}
 				Product::modifyProductData($product['id'], $array);
 			}

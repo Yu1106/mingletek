@@ -119,6 +119,10 @@ $(function () {
                             clearLoading();
                         }
                     }
+                },
+                error: function () {
+                    clearLoading();
+                    alert("Upload Error");
                 }
             });
         });
@@ -674,6 +678,9 @@ var step4Action = function () {
             formData.setFormData('#swiperupload', id);
             formData.validate('step4');
             getData(id);
+        },
+        buildDescription: function(){
+            alert(123);
         }
     }
 }();
