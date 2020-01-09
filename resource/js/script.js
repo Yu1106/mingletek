@@ -731,6 +731,7 @@ var step4Action = function () {
         buildProductDescription: function () {
             showLoading();
             var strings = getString();
+            strings = strings.trim();
             var mydata = [
                 {"strings": strings}
             ];
