@@ -524,7 +524,7 @@ use common\model\parameter\Yahoo;
                 </div>
             </div>
             <div class="sectionContent flexBtnRow">
-                <a class="btn" href="javascript:step4Action.buildDescription();">產生商品特色說明</a>
+                <a class="btn" href="javascript:step4Action.buildProductDescription();">產生商品特色說明</a>
                 <input class="btn" type="submit" value="儲存商品規格"/>
                 <a class="btn" href="javascript:;">預覽商品頁</a>
                 <a class="btn btnYellow" href="javascript:;">產生下載檔案</a>

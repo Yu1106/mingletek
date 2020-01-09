@@ -650,6 +650,41 @@ var step4Action = function () {
                 $(v).attr("checked", true);
         });
     };
+    var getString = function () {
+        var string = '';
+        if (typeof ($(".collar")) != 'undefined')
+            string += getCheckedString("collar");
+        if (typeof ($(".neckline")) != 'undefined')
+            string += getCheckedString("neckline");
+        if (typeof ($(".sleeve")) != 'undefined')
+            string += getCheckedString("sleeve");
+        if (typeof ($(".feature1")) != 'undefined')
+            string += getCheckedString("feature1");
+        if (typeof ($(".feature2")) != 'undefined')
+            string += getCheckedString("feature2");
+        if (typeof ($(".feature3")) != 'undefined')
+            string += getCheckedString("feature3");
+        if (typeof ($(".feature4")) != 'undefined')
+            string += getCheckedString("feature4");
+        if (typeof ($(".feature5")) != 'undefined')
+            string += getCheckedString("feature5");
+        return string;
+    };
+    var getCheckedString = function (id) {
+        var string = '';
+        var className = "." + id;
+        $.each($(className), function (k, v) {
+            if ($(v).is(":checked")) {
+                if ($(v).val() == 'custom') {
+                    var name = '#' + id + '_custom_field';
+                    string += $(name).val() + " ";
+                } else {
+                    string += $(v).val() + " ";
+                }
+            }
+        });
+        return string;
+    };
     return {
         getPicture: function () {
             return picture;
@@ -679,8 +714,22 @@ var step4Action = function () {
             formData.validate('step4');
             getData(id);
         },
-        buildDescription: function(){
-            alert(123);
+        buildProductDescription: function () {
+            showLoading();
+            var strings = getString();
+            $.ajax({
+                type: 'POST',
+                url: 'get_data.php',
+                data: {action: 'buildProductDescription', string: strings},
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+                    clearLoading();
+                    alert("buildDescription Error");
+                }
+            });
         }
     }
 }();
