@@ -336,7 +336,7 @@ var step2Action = function () {
                     if (data) {
                         formData.validate();
                         if (formData.getStatus()) {
-                            $("#uploadMajor").submit();
+                            // $("#uploadMajor").submit();
                         } else {
                             $.each($(".icon-x-square"), function (k, v) {
                                 if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)

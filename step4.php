@@ -232,9 +232,6 @@ $data = [
 	'swiper' => $swiperArr
 ];
 
-var_dump($_SESSION["STORE_ID"], $product);
-exit;
-
 $view = new View('header');
 $view->assign('css', Asset::$step4Css);
 $view->assign('js', Asset::$step4Js);
