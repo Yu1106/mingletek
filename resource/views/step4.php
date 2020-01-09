@@ -35,7 +35,7 @@ use common\model\parameter\Yahoo;
 				<?php foreach ($data['picture'] as $key => $val): ?>
                     <a class="itemThumbnail checked <?= ($data['first']['picture'] == $val['img']) ? "current" : "" ?>"
                        href="javascript:">
-                        <i class="icon-check-square"></i>
+						<?php if ($val['edit']) { ?><i class="icon-check-square"></i><?php } ?>
                         <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
                     </a>
 				<?php endforeach; ?>
@@ -381,7 +381,8 @@ use common\model\parameter\Yahoo;
                             <div class="checkboxWrap">
 								<?php foreach (Feature1::Feature1Type as $key => $val): ?>
                                     <input <?= in_array($val, explode(",", $data['first']['feature_1'])) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="checkbox" class="feature1" name="feature1[]" value="<?= $val ?>">
+                                            id="<?= $key ?>" type="checkbox" class="feature1" name="feature1[]"
+                                            value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="checkboxIcon"></span>
 										<?= $val ?>
@@ -430,7 +431,8 @@ use common\model\parameter\Yahoo;
                             <div class="checkboxWrap">
 								<?php foreach (Feature3::Feature3Type as $key => $val): ?>
                                     <input <?= in_array($val, explode(",", $data['first']['feature_3'])) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="checkbox" class="feature3" name="feature3[]" value="<?= $val ?>">
+                                            id="<?= $key ?>" type="checkbox" class="feature3" name="feature3[]"
+                                            value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="checkboxIcon"></span>
 										<?= $val ?>
@@ -454,7 +456,8 @@ use common\model\parameter\Yahoo;
                             <div class="radioWrap">
 								<?php foreach (Feature4::Feature4Type as $key => $val): ?>
                                     <input <?= ($data['first']['feature_4'] == $val) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="radio" class="feature4" name="feature4" value="<?= $val ?>">
+                                            id="<?= $key ?>" type="radio" class="feature4" name="feature4"
+                                            value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="radioIcon"></span>
 										<?= $val ?>
@@ -478,7 +481,8 @@ use common\model\parameter\Yahoo;
                             <div class="checkboxWrap">
 								<?php foreach (Feature5::Feature5Type as $key => $val): ?>
                                     <input <?= in_array($val, explode(",", $data['first']['feature_5'])) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="checkbox" class="feature5" name="feature5[]" value="<?= $val ?>">
+                                            id="<?= $key ?>" type="checkbox" class="feature5" name="feature5[]"
+                                            value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="checkboxIcon"></span>
 										<?= $val ?>
@@ -502,14 +506,16 @@ use common\model\parameter\Yahoo;
                             <div class="checkboxWrap">
 								<?php foreach (Keyword::KeywordType as $key => $val): ?>
                                     <input <?= in_array($val, explode(",", $data['first']['keyword'])) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="checkbox" class="keyword" name="keyword[]" value="<?= $val ?>">
+                                            id="<?= $key ?>" type="checkbox" class="keyword" name="keyword[]"
+                                            value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="checkboxIcon"></span>
 										<?= $val ?>
                                     </label>
 								<?php endforeach; ?>
                                 <input <?= in_array('custom', explode(",", $data['first']['keyword'])) ? "checked" : "" ?>
-                                        id="keywordCustom" class="keyword customCheckbox" type="checkbox" name="keyword[]"
+                                        id="keywordCustom" class="keyword customCheckbox" type="checkbox"
+                                        name="keyword[]"
                                         value="custom">
                                 <label for="keywordCustom">
                                     <span class="checkboxIcon"></span>

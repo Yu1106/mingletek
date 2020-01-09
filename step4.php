@@ -38,6 +38,7 @@ if ($_POST && CSRF::validate($_POST)) {
 	$check = Product::findByIdAndStoreId($_POST['id'], $_SESSION["STORE_ID"]);
 	if ($check) {
 		$array = array();
+		$array['is_edit'] = 1;
 		if (isset($_POST['product_description']))
 			$array['product_description'] = $_POST['product_description'];
 		if (isset($_POST['pchome_category']))
@@ -189,6 +190,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		$savePictureArr = array();
 		$saveSubPictureArr = array();
 		$savePictureArr[$firstArr['picture']]['id'] = $firstArr['id'];
+		$savePictureArr[$firstArr['picture']]['edit'] = $firstArr['is_edit'];
 		$savePictureArr[$firstArr['picture']]['img'] = $firstArr['picture'];
 		$savePictureArr[$firstArr['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $firstArr['picture']);
 		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $firstArr['id']);
@@ -210,6 +212,7 @@ foreach ($product as $val) {
 	if (empty($firstArr))
 		$firstArr = $val;
 	$pictureArr[$val['picture']]['id'] = $val['id'];
+	$pictureArr[$val['picture']]['edit'] = $val['is_edit'];
 	$pictureArr[$val['picture']]['img'] = $val['picture'];
 	$pictureArr[$val['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
 	$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $val['id']);
