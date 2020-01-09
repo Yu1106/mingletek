@@ -106,7 +106,10 @@ $(function () {
         $("#swiperupload").change(function () {
             readURL(this, true);
             step4Action.upload();
-            reload();
+            var id = $("#id").val();
+            if (id > 0) {
+                reload();
+            }
         });
     }
 
@@ -431,7 +434,7 @@ var step4Action = function () {
     var picture;
     var sub_picture = {};
     var product = {};
-    var reset = function (){
+    var reset = function () {
         picture = '';
         sub_picture = {};
         product = {};
