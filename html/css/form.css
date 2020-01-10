@@ -15,6 +15,7 @@ form {
 	border-style: solid;
 	border-width: 0 0 2px 0;
 	/*border-color: #ccc;*/
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
 }
 
@@ -53,7 +54,7 @@ form {
 .required:after {
 	content: "*";
 	margin: 0 0 0 2px;
-	color: #ff0000;
+	color: #d30102;
 	/*color: var(--mainRed);*/
 }
 
@@ -106,10 +107,12 @@ select{
 	border-style: solid;
 	border-width: 1px;
 	/*border-color: #ccc;*/
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
 	/*color: #333;*/
 	/*color: var(--mainDkGrey);*/
 	/*background-color: #f8f8f8;*/
+	background-color: #f1f1f1;
 	background-color: var(--ltgrey);
 	font-size: 16px;
 	text-align: left;
@@ -130,10 +133,12 @@ input:not([type="checkbox"]) {
 	border-style: solid;
 	border-width: 1px;
 	/*border-color: #ccc;*/
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
 	/*color: #333;*/
 	/*color: var(--mainDkGrey);*/
 	/*background-color: #f8f8f8;*/
+	background-color: #f1f1f1;
 	background-color: var(--ltgrey);
 	font-size: 16px;
 	text-align: left;
@@ -171,6 +176,7 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="file"]::-ms-browse {
     font-size: 16px;
     line-height: 32px;
+    border: 1px solid #f1f1f1;
     border: 1px solid var(--ltgrey);
     background-color: #fff;
 }
@@ -185,8 +191,10 @@ input[type="file"]::before {
     border-style: solid;
     border-width: 1px;
     /*border-color: #ccc;*/
+    border-color: #f1f1f1;
     border-color: var(--ltgrey);
     /*background-color: #f8f8f8;*/
+    background-color: #f1f1f1;
     background-color: var(--ltgrey);
 }
 
@@ -199,10 +207,12 @@ textarea {
 	border-style: solid;
 	border-width: 1px;
 	/*border-color: #ccc;*/
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
 	/*color: #333;*/
 	/*color: var(--mainDkGrey);*/
 	/*background-color: #f8f8f8;*/
+	background-color: #f1f1f1;
 	background-color: var(--ltgrey);
 	font-size: 16px;
 	text-align: left;
@@ -241,6 +251,7 @@ input[type="checkbox"] + label {
     padding: 5px 10px;
     line-height: 24px;
     cursor: pointer;
+    border: 1.5px solid #f1f1f1;
     border: 1.5px solid var(--ltgrey);
     transition: all .2s;
 }
@@ -298,6 +309,7 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"]:disabled + label {
 	/*color: #333;*/
+	color: #ababab;
 	color: var(--grey);
 	cursor: not-allowed;
 }
@@ -329,6 +341,7 @@ input[type="checkbox"]:disabled + label {
 	border-style: solid;
 	border-width: 1.5px;
 	/*border-color: #ccc;*/
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
 	background-color: #fff;
 	display: none;
@@ -343,6 +356,7 @@ input[type="checkbox"]:disabled + label > .checkboxIcon {
 }
 
 input[type="checkbox"]:checked + label {
+	border: 1.5px solid #f4aeac;
 	border: 1.5px solid var(--pink);
 }
 
@@ -376,7 +390,7 @@ input[type="checkbox"]:checked + label::after {
 }
 
 input[type="checkbox"] + label.lbColor {padding: 3px;}
-input[type="checkbox"]:checked + label.lbColor {border: 1.5px solid var(--pink);}
+input[type="checkbox"]:checked + label.lbColor {border: 1.5px solid #f4aeac; border: 1.5px solid var(--pink);}
 label.lbColor::before {content: ""; display: block; width: 70px; padding: 3px 0px;}
 label.lbRed::before {background-color: #b81c22;}
 label.lbOrange::before {background-color: #ff8a00;}
@@ -421,6 +435,7 @@ input[type="radio"] + label {
     padding: 5px 10px;
     line-height: 24px;
     cursor: pointer;
+    border: 1.5px solid #f1f1f1;
     border: 1.5px solid var(--ltgrey);
 }
 
@@ -475,6 +490,7 @@ input[type="radio"] + label {
 
 input[type="radio"]:disabled + label {
     /*color: #ccc;*/
+    color: #ababab;
     color: var(--grey);
     /*cursor: default;*/
     cursor: not-allowed;
@@ -500,7 +516,7 @@ input[type="radio"]:disabled + label {
     border-radius: 100%;
     border-style: solid;
 	border-width: 1.5px;
-	border-color: #ccc;
+	border-color: #f1f1f1;
 	border-color: var(--ltgrey);
     background-color: #fff;
     display: none;
@@ -511,7 +527,7 @@ input[type="radio"]:disabled + label {
 }
 
 input[type="radio"]:disabled + label > .radioIcon {
-	background-color: #ccc;
+	background-color: #f1f1f1;
 	background-color: var(--ltgrey);
 }
 
@@ -522,6 +538,7 @@ input[type="radio"] + label {
 input[type="radio"]:checked + label {
 	/*background-color: var(--pink);*/
 	/*color: #fff;*/
+	border: 1.5px solid #f4aeac;
 	border: 1.5px solid var(--pink);
 }
 
@@ -587,6 +604,7 @@ input[type="reset"].btn {
 	line-height: 44px;
 	padding: 0;
 	border-radius: 4px;
+	background-color: #666;
 	background-color: var(--dkgrey);
 	color: #fff;
 	letter-spacing: 1.5px;
@@ -598,6 +616,7 @@ input[type="reset"].btn {
 }
 
 .btn:hover {
+	background-color: #f4aeac!important;
 	background-color: var(--pink)!important;
 }
 
@@ -607,11 +626,13 @@ input[type="reset"].btn {
 
 .btn.btnYellow {
 	color: #fff;
+	background-color: #fcc80e;
 	background-color: var(--yellow);
 }
 
 input.btn.btnYellow {
 	color: #fff;
+	background-color: #fcc80e;
 	background-color: var(--yellow);
 	/*background-color: var(--mainRed);*/
 }

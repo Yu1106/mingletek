@@ -32,13 +32,23 @@
 				<nav class="mainNav">
 					<ul class="navList clearfix">
 						<li class="navItem">
-					    	<a class="navLink logout" href="index.html">
+					    	<a class="navLink logout" href="#logoutBox" data-fancybox>
 					    		<span class="nickname">mingle 您好</span>
 					    		<i class="icon-user"></i>
 					    	</a>
 						</li>
 					</ul>
 				</nav>
+				<div id="logoutBox" class="fancybox-content lightBox">
+					<h4>請問確定要登出嗎?</h4>
+					<label class="noticeTxt">
+						<span class="txtRed">! 請注意：</span>帳號登出後，本次執行的內容恕不保留，請確認是否已完成並產生下載檔案匯出
+					</label>
+					<div class="flexBtnRow">
+						<a class="btn" href="index.html">確認</a>
+						<a class="btn" href="javascript:;" data-fancybox-close>取消</a>
+					</div>
+				</div>
 			</header>
 			<main>
 				<div id="alertMsgBox" class="fancybox-content lightBox">分析錯誤!! 請砍掉重練</div>
@@ -943,6 +953,11 @@
 							<input class="btn" type="submit" value="儲存商品規格" />
 							<a class="btn" href="javascript:;">預覽商品頁</a>
 							<a class="btn btnYellow" href="javascript:;">產生下載檔案</a>
+						</div>
+						<div class="sectionContent notice">
+							<label class="noticeTxt">
+								<span class="txtRed">! 請注意：</span>資料匯出成CSV或EXCEL後, 系統將刪除您所上傳的照片<br>如果要修改商品內容, 請重新上傳商品照片
+							</label>
 						</div>
 					</section>
 				</form>
