@@ -25,7 +25,14 @@ $(function () {
 
     //Scroll To Top
     $("#goTop").click(function goTop() {
-        $("html,body").animate({scrollTop: 0}, 800);
+        $("html,body").stop().animate({scrollTop: 0}, 800);
+    });
+
+    //首頁
+    $('.scrollTrigger').click(function () {
+        var targetId = $(this).attr('data-target');
+        var pos = $('#' + targetId).offset().top;
+        $('html,body').stop().animate({scrollTop: (pos - 150)}, 1000);
     });
 
 

@@ -7,6 +7,7 @@ class Asset
 	public static $indexCss = <<<EOF
 <link rel="stylesheet" type="text/css" href="resource/css/reset.css">
 <link rel="stylesheet" type="text/css" href="resource/css/style.css">
+<link rel="stylesheet" type="text/css" href="resource/css/form.css">
 <link rel="stylesheet" type="text/css" href="resource/css/jquery.fancybox.min.css">
 EOF;
 

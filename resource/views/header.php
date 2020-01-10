@@ -21,11 +21,21 @@
             <ul class="navList clearfix">
 				<?php if (\common\login\Login::auth()) { ?>
                     <li class="navItem">
-                        <a class="navLink logout" href="index.php">
-                            <span class="nickname"><?php echo $_SESSION["USER_NAME"] ?> 您好</span>
+                        <a class="navLink logout" href="#logoutBox" data-fancybox>
+                            <span class="nickname"><?= $_SESSION["USER_NAME"] ?> 您好</span>
                             <i class="icon-user"></i>
                         </a>
                     </li>
+                    <div id="logoutBox" class="fancybox-content lightBox">
+                        <h4>請問確定要登出嗎?</h4>
+                        <label class="noticeTxt">
+                            <span class="txtRed">! 請注意：</span>帳號登出後，本次執行的內容恕不保留，請確認是否已完成並產生下載檔案匯出
+                        </label>
+                        <div class="flexBtnRow">
+                            <a class="btn" href="logout.php?<?= \Volnix\CSRF\CSRF::getQueryString() ?>">確認</a>
+                            <a class="btn" href="javascript:;" data-fancybox-close>取消</a>
+                        </div>
+                    </div>
 				<?php } else { ?>
                     <li class="navItem">
                         <a class="navLink" href="#loginBox" data-fancybox>快速上架</a>

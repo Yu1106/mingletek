@@ -163,6 +163,7 @@ header {
 }
 
 main {
+	display: block;
 	/*width: 1250px;*/
 	width: 1030px;
 	margin: 0 auto 20px;
