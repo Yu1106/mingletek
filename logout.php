@@ -1,7 +1,6 @@
 <?php
 
 use common\login\Login;
-use common\util\UidUtil;
 use common\util\HttpUtil;
 use Volnix\CSRF\CSRF;
 
