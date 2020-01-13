@@ -23,7 +23,7 @@ if ($_POST['action'] === 'check') {
 		die();
 	$id = (int)$_POST['id'];
 	$product = Product::findById($id);
-	$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION['STORE_ID'], $id);
+	$subPicture = SubPicture::findByStoreIdAndProductId((int)$_SESSION['STORE_ID'], $id);
 	if (empty($product))
 		die();
 	$picture = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $product['picture']);
@@ -34,8 +34,10 @@ if ($_POST['action'] === 'check') {
 		if (!is_numeric($key))
 			$productArr[$key] = $val;
 	}
-	foreach ($subPicture as $key => $val) {
-		$subPictureArr[$val['picture']] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+	if (is_array($subPicture) || is_object($subPicture)) {
+		foreach ($subPicture as $key => $val) {
+			$subPictureArr[$val['picture']] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+		}
 	}
 	if ($product)
 		echo json_encode(['status' => 1, 'data' => ['product' => $productArr, 'picture' => $picture, 'sub_picture' => $subPictureArr]]);
@@ -49,11 +51,11 @@ if ($_POST['action'] === 'check') {
 	$analysis = json_decode($product['product_description_analysis'], true);
 	$strings = '';
 	$data = array();
-	foreach($_POST['data'] as $key => $val){
-		if(array_key_exists($val, $analysis))
+	foreach ($_POST['data'] as $key => $val) {
+		if (array_key_exists($val, $analysis))
 			$data[$val] = $analysis[$val];
 		else
-			$strings .= $val." ";
+			$strings .= $val . " ";
 
 	}
 	$strings = trim($strings);

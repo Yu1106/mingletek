@@ -719,7 +719,6 @@ var step4Action = function () {
                 $.each(data['result'], function (k, v) {
                     productDescription.push(v);
                 });
-                console.log(productDescription);
                 replaceProductDescription();
                 clearLoading();
             } else {
