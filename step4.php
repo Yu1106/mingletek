@@ -22,6 +22,7 @@ use common\util\UidUtil;
 use common\view\Asset;
 use common\view\View;
 use Volnix\CSRF\CSRF;
+use common\util\HttpUtil;
 
 include 'library.php';
 
@@ -40,7 +41,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		$array = array();
 		$array['is_edit'] = 1;
 		if (isset($_POST['product_description']))
-			$array['product_description'] = $_POST['product_description']."\n";
+			$array['product_description'] = $_POST['product_description'] . "\n";
 		if (isset($_POST['pchome_category']))
 			$array['pchome_category'] = $_POST['pchome_category'];
 		if (isset($_POST['ruten_category']))
@@ -194,10 +195,12 @@ if ($_POST && CSRF::validate($_POST)) {
 		$savePictureArr[$firstArr['picture']]['img'] = $firstArr['picture'];
 		$savePictureArr[$firstArr['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $firstArr['picture']);
 		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $firstArr['id']);
-		foreach ($subPicture as $val2) {
-			$saveSubPictureArr[$val2['picture']]['id'] = $firstArr['id'];
-			$saveSubPictureArr[$val2['picture']]['img'] = $val2['picture'];
-			$saveSubPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
+		if (is_array($subPicture) || is_object($subPicture)) {
+			foreach ($subPicture as $val2) {
+				$saveSubPictureArr[$val2['picture']]['id'] = $firstArr['id'];
+				$saveSubPictureArr[$val2['picture']]['img'] = $val2['picture'];
+				$saveSubPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
+			}
 		}
 		$swiperArr = [
 			'picture' => $savePictureArr,
@@ -208,24 +211,28 @@ if ($_POST && CSRF::validate($_POST)) {
 
 $product = Product::findByStoreId($_SESSION["STORE_ID"]);
 
-foreach ($product as $val) {
-	if (empty($firstArr))
-		$firstArr = $val;
-	$pictureArr[$val['picture']]['id'] = $val['id'];
-	$pictureArr[$val['picture']]['edit'] = $val['is_edit'];
-	$pictureArr[$val['picture']]['img'] = $val['picture'];
-	$pictureArr[$val['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
-	$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $val['id']);
-	foreach ($subPicture as $val2) {
-		$subPictureArr[$val2['picture']]['id'] = $val['id'];
-		$subPictureArr[$val2['picture']]['img'] = $val2['picture'];
-		$subPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
+if (is_array($product) || is_object($product)) {
+	foreach ($product as $val) {
+		if (empty($firstArr))
+			$firstArr = $val;
+		$pictureArr[$val['picture']]['id'] = $val['id'];
+		$pictureArr[$val['picture']]['edit'] = $val['is_edit'];
+		$pictureArr[$val['picture']]['img'] = $val['picture'];
+		$pictureArr[$val['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
+		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $val['id']);
+		if (is_array($subPicture) || is_object($subPicture)) {
+			foreach ($subPicture as $val2) {
+				$subPictureArr[$val2['picture']]['id'] = $val['id'];
+				$subPictureArr[$val2['picture']]['img'] = $val2['picture'];
+				$subPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
+			}
+		}
+		if (empty($swiperArr))
+			$swiperArr = [
+				'picture' => $pictureArr,
+				'subPicture' => $subPictureArr,
+			];
 	}
-	if (empty($swiperArr))
-		$swiperArr = [
-			'picture' => $pictureArr,
-			'subPicture' => $subPictureArr,
-		];
 }
 
 $data = [
