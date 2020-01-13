@@ -28,7 +28,7 @@ class MingletekApiLog extends Model
 	 * @param string $modifyData
 	 * @return bool
 	 */
-	public static function addLog(int $user_id = 0, int $storeId = 0, string $action, string $data = '', string $returnData = '', string $modifyData = '')
+	public static function addLog(int $user_id = 0, int $storeId = 0, string $action, string $data = '', string $returnData = '')
 	{
 		return self::getDb()->save(
 			[
@@ -37,7 +37,6 @@ class MingletekApiLog extends Model
 				'action' => $action,
 				'data' => $data,
 				'return_data' => $returnData,
-				'modify_data' => $modifyData,
 				'modify_date' => new DbExpression("now()"),
 				'create_date' => new DbExpression("now()")
 			], true, static::tableName());
@@ -51,7 +50,7 @@ class MingletekApiLog extends Model
 	 * @param string $modifyData
 	 * @return bool
 	 */
-	public static function modifyLogById(int $id, int $storeId = 0, string $data = '', string $returnData = '', string $modifyData = '')
+	public static function modifyLogById(int $id, int $storeId = 0, string $data = '', string $returnData = '')
 	{
 		$array = [
 			'modify_date' => new DbExpression("now()")
@@ -62,8 +61,6 @@ class MingletekApiLog extends Model
 			$array['data'] = $data;
 		if ($returnData)
 			$array['return_data'] = $returnData;
-		if ($modifyData)
-			$array['modify_data'] = $modifyData;
 		return self::getDb()->update(
 			$array,
 			"id = :id",
