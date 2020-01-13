@@ -786,6 +786,7 @@ var step4Action = function () {
                                     productDescription[k] = v;
                                 });
                                 replaceProductDescription();
+                                clearLoading();
                             } else {
                                 renewsentence(data.data.strings);
                             }
