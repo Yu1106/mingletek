@@ -461,13 +461,13 @@ var step4Action = function () {
     var sub_picture = {};
     var product = {};
     var checkedData = [];
-    var productDescription = {};
+    var productDescription = [];
     var reset = function () {
         picture = '';
         sub_picture = {};
         product = {};
         checkedData = [];
-        productDescription = {};
+        productDescription = [];
     };
     var empty = function () {
         reset();
@@ -716,10 +716,11 @@ var step4Action = function () {
             $(".percent").text(percent + "%");
             // update UI
             if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                $.each(data, function (k, v) {
-                    productDescription[k] = v;
+                $.each(data['result'], function (k, v) {
+                    productDescription.push(v);
                 });
                 console.log(productDescription);
+                replaceProductDescription();
                 clearLoading();
             } else {
                 // return in 2 seconds
@@ -732,7 +733,10 @@ var step4Action = function () {
     var replaceProductDescription = function () {
         var string = "";
         $.each(productDescription, function (k, v) {
-            string += v + "\n";
+            if (string == "")
+                string += v;
+            else
+                string += "\n" + v;
         });
         $("#product_description").val(string);
     };
@@ -783,7 +787,7 @@ var step4Action = function () {
                         } else {
                             if (data.data.strings == '') {
                                 $.each(data.data.data, function (k, v) {
-                                    productDescription[k] = v;
+                                    productDescription.push(v);
                                 });
                                 replaceProductDescription();
                                 clearLoading();
