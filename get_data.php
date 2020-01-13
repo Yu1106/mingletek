@@ -41,6 +41,27 @@ if ($_POST['action'] === 'check') {
 		echo json_encode(['status' => 1, 'data' => ['product' => $productArr, 'picture' => $picture, 'sub_picture' => $subPictureArr]]);
 	else
 		echo json_encode(['status' => 0]);
+} else if ($_POST['action'] === 'buildProductDescription' && Login::auth() && UidUtil::auth()) {
+	if (empty($_POST['id']) && (int)$_POST['id'] <= 0)
+		die();
+	$id = (int)$_POST['id'];
+	$product = Product::findById($id);
+	$analysis = json_decode($product['product_description_analysis'], true);
+	$strings = '';
+	$data = array();
+	foreach($_POST['data'] as $key => $val){
+		if(array_key_exists($val, $analysis))
+			$data[$val] = $analysis[$val];
+		else
+			$strings .= $val." ";
+
+	}
+	$strings = trim($strings);
+
+	if ($product)
+		echo json_encode(['status' => 1, 'data' => ['strings' => $strings, 'data' => $data]]);
+	else
+		echo json_encode(['status' => 0]);
 } else {
 	echo 'No Data';
 }

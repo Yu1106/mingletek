@@ -460,10 +460,14 @@ var step4Action = function () {
     var picture;
     var sub_picture = {};
     var product = {};
+    var checkedData = [];
+    var productDescription = {};
     var reset = function () {
         picture = '';
         sub_picture = {};
         product = {};
+        checkedData = [];
+        productDescription = {};
     };
     var empty = function () {
         reset();
@@ -657,40 +661,35 @@ var step4Action = function () {
                 $(v).attr("checked", true);
         });
     };
-    var getString = function () {
-        var string = '';
+    var getCheckedData = function () {
         if (typeof ($(".collar")) != 'undefined')
-            string += getCheckedString("collar");
+            buildCheckedData("collar");
         if (typeof ($(".neckline")) != 'undefined')
-            string += getCheckedString("neckline");
+            buildCheckedData("neckline");
         if (typeof ($(".sleeve")) != 'undefined')
-            string += getCheckedString("sleeve");
+            buildCheckedData("sleeve");
         if (typeof ($(".feature1")) != 'undefined')
-            string += getCheckedString("feature1");
+            buildCheckedData("feature1");
         if (typeof ($(".feature2")) != 'undefined')
-            string += getCheckedString("feature2");
+            buildCheckedData("feature2");
         if (typeof ($(".feature3")) != 'undefined')
-            string += getCheckedString("feature3");
+            buildCheckedData("feature3");
         if (typeof ($(".feature4")) != 'undefined')
-            string += getCheckedString("feature4");
+            buildCheckedData("feature4");
         if (typeof ($(".feature5")) != 'undefined')
-            string += getCheckedString("feature5");
-        return string;
+            buildCheckedData("feature5");
     };
-    var getCheckedString = function (id) {
-        var string = '';
+    var buildCheckedData = function (id) {
         var className = "." + id;
         $.each($(className), function (k, v) {
             if ($(v).is(":checked")) {
                 if ($(v).val() != 'custom') {
-                    string += $(v).val() + " ";
+                    checkedData.push($(v).val());
                 }
             }
         });
-        if (string == '') string += 'None ';
-        return string;
     };
-    var renewsentence = function(strings){
+    var renewsentence = function (strings) {
         var mydata = [
             {"strings": strings}
         ];
@@ -717,7 +716,10 @@ var step4Action = function () {
             $(".percent").text(percent + "%");
             // update UI
             if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                console.log(data);
+                $.each(data, function (k, v) {
+                    productDescription[k] = v;
+                });
+                console.log(productDescription);
                 clearLoading();
             } else {
                 // return in 2 seconds
@@ -726,6 +728,13 @@ var step4Action = function () {
                 }, 2000);
             }
         });
+    };
+    var replaceProductDescription = function () {
+        var string = "";
+        $.each(productDescription, function (k, v) {
+            string += v + "\n";
+        });
+        $("#product_description").val(string);
     };
     return {
         getPicture: function () {
@@ -758,14 +767,29 @@ var step4Action = function () {
         },
         buildProductDescription: function () {
             showLoading();
+            reset();
+            var id = $("#id").val();
+            getCheckedData();
             $.ajax({
                 type: 'POST',
                 url: 'get_data.php',
-                data: {action: 'buildProductDescription'},
+                data: {action: 'buildProductDescription', id: id, data: checkedData},
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
-
+                        if (!data.status) {
+                            status = false;
+                            clearLoading();
+                        } else {
+                            if (data.data.strings == '') {
+                                $.each(data.data.data, function (k, v) {
+                                    productDescription[k] = v;
+                                });
+                                replaceProductDescription();
+                            } else {
+                                renewsentence(data.data.strings);
+                            }
+                        }
                     }
                 }
             });
