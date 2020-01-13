@@ -115,6 +115,30 @@ if ($_POST && CSRF::validate($_POST)) {
 						$productDescription[] = $data->texture_4_desc;
 					$array['product_description'] = implode("\n", $productDescription);
 				}
+				$productDescriptionAnalysis = array();
+				if (isset($data->collar) && isset($data->collar_desc) && $data->collar_desc != "")
+					$productDescriptionAnalysis[Collar::CollarType[$data->collar]] = $data->collar_desc;
+				if (isset($data->neckline) && isset($data->neckline_desc) && $data->neckline_desc != "")
+					$productDescriptionAnalysis[Neckline::NecklineType[$data->neckline]] = $data->neckline_desc;
+				if (isset($data->sleeve) && isset($data->sleeve_desc) && $data->sleeve_desc != "")
+					$productDescriptionAnalysis[Sleeve::SleeveType[$data->sleeve]] = $data->sleeve_desc;
+				if (isset($data->texture_1) && isset($data->texture_1_desc) && $data->texture_1_desc != "")
+					$productDescriptionAnalysis[Feature1::Feature1Type[$data->texture_1]] = $data->texture_1_desc;
+				if (isset($data->texture_2) && isset($data->texture_2_desc) && $data->texture_2_desc != "")
+					$productDescriptionAnalysis[Feature1::Feature1Type[$data->texture_2]] = $data->texture_2_desc;
+				if (isset($data->texture_3) && isset($data->texture_3_desc) && $data->texture_3_desc != "")
+					$productDescriptionAnalysis[Feature1::Feature1Type[$data->texture_3]] = $data->texture_3_desc;
+				if (isset($data->pattern) && isset($data->pattern_desc) && $data->pattern_desc != "")
+					$productDescriptionAnalysis[Feature1::Feature1Type[$data->pattern]] = $data->pattern_desc;
+				if (isset($data->neckshoulder) && isset($data->neckshoulder_desc) && $data->neckshoulder_desc != "")
+					$productDescriptionAnalysis[Feature2::Feature2Type[$data->neckshoulder]] = $data->neckshoulder_desc;
+				if (isset($data->accessory_1) && isset($data->accessory_1_desc) && $data->accessory_1_desc != "")
+					$productDescriptionAnalysis[Feature3::Feature3Type[$data->accessory_1]] = $data->accessory_1_desc;
+				if (isset($data->waist) && isset($data->waist_desc) && $data->waist_desc != "")
+					$productDescriptionAnalysis[Feature4::Feature4Type[$data->waist]] = $data->waist_desc;
+				if (isset($data->texture_4) && isset($data->texture_4_desc) && $data->texture_4_desc != "")
+					$productDescriptionAnalysis[Feature5::Feature5Type[$data->texture_4]] = $data->texture_4_desc;
+				$array['product_description_analysis'] = json_encode($productDescriptionAnalysis);
 				Product::modifyProductData($product['id'], $array);
 			}
 		}
