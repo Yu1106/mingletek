@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Yahoo奇摩拍賣 | 網紅必買側開叉長款毛衣連身裙 坑條紋綁帶收腰洋裝 過膝小香風長袖打底內搭針織連身裙</title>
+		<title>Yahoo奇摩拍賣 | <?= $data['product']['name'] ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="format-detection" content="telephone=no">
