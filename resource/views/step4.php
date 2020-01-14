@@ -35,7 +35,7 @@ use common\model\parameter\Yahoo;
 				<?php foreach ($data['picture'] as $key => $val): ?>
                     <a class="itemThumbnail checked <?= ($data['first']['picture'] == $val['img']) ? "current" : "" ?>"
                        href="javascript:">
-						<?php if ($val['edit']) { ?><i class="icon-check-square"></i><?php } ?>
+						<?php if ($val['is_edit']) { ?><i class="icon-check-square"></i><?php } ?>
                         <img src="<?= $val['path'] ?>" data-id="<?= $val['id'] ?>" alt="" class="itemImg">
                     </a>
 				<?php endforeach; ?>
@@ -526,8 +526,10 @@ use common\model\parameter\Yahoo;
             <div class="sectionContent flexBtnRow">
                 <a class="btn" href="javascript:step4Action.buildProductDescription();">產生商品特色說明</a>
                 <input class="btn" type="submit" value="儲存商品規格"/>
-                <a class="btn" href="javascript:;">預覽商品頁</a>
-                <a class="btn btnYellow" href="javascript:;">產生下載檔案</a>
+                <a id="preview" style="visibility:<?= (!$data['first']['is_edit']) ? "hidden;" : "visible;" ?>" class="btn"
+                   href="javascript:step4Action.previewProductPage('<?= $data['store']['upload_store_type'] ?>');">預覽商品頁</a>
+                <a style="visibility:<?= (!$data['isUpload']) ? "hidden;" : "visible" ?>" class="btn btnYellow"
+                   href="javascript:;">產生下載檔案</a>
             </div>
         </section>
     </form>

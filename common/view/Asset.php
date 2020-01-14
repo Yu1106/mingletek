@@ -50,4 +50,21 @@ EOF;
 <script type="text/javascript" src="resource/js/swiper.min.js"></script>
 <script type="text/javascript" src="resource/js/script.js"></script>
 EOF;
+	public static $yahooCss = <<<EOF
+<link rel="stylesheet" type="text/css" href="resource/css/reset.css">
+<link rel="stylesheet" type="text/css" href="resource/css/yahoo.css">
+<link rel="stylesheet" type="text/css" href="resource/css/swiper.min.css">
+EOF;
+
+	public static $rutenCss = <<<EOF
+<link rel="stylesheet" type="text/css" href="resource/css/reset.css">
+<link rel="stylesheet" type="text/css" href="resource/css/ruten.css">
+<link rel="stylesheet" type="text/css" href="resource/css/swiper.min.css">
+EOF;
+
+	public static $pchomeCss = <<<EOF
+<link rel="stylesheet" type="text/css" href="resource/css/reset.css">
+<link rel="stylesheet" type="text/css" href="resource/css/pchome.css">
+<link rel="stylesheet" type="text/css" href="resource/css/swiper.min.css">
+EOF;
 }

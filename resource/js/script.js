@@ -650,6 +650,9 @@ var step4Action = function () {
                     $("#keyword_custom_field").val(v);
                 if (k == 'product_description')
                     $("#product_description").val(v);
+                if (k == 'is_edit') {
+                    (v == 1) ? $("#preview").css("visibility", "visible") : $("#preview").css("visibility", "hidden");
+                }
             }
         });
     };
@@ -799,6 +802,13 @@ var step4Action = function () {
                         }
                     }
                 }
+            });
+        },
+        previewProductPage: function (type) {
+            var id = $("#id").val();
+            var typeArr = type.split(",");
+            $.each(typeArr, function (k, v) {
+                window.open('preview.php?type=' + v + '&product_id=' + id);
             });
         }
     }

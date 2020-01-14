@@ -16,6 +16,7 @@ use common\model\parameter\Size;
 use common\model\parameter\Sleeve;
 use common\model\parameter\SubCategory;
 use common\model\Product;
+use common\model\Store;
 use common\model\SubPicture;
 use common\util\FileUtil;
 use common\util\UidUtil;
@@ -191,7 +192,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		$savePictureArr = array();
 		$saveSubPictureArr = array();
 		$savePictureArr[$firstArr['picture']]['id'] = $firstArr['id'];
-		$savePictureArr[$firstArr['picture']]['edit'] = $firstArr['is_edit'];
+		$savePictureArr[$firstArr['picture']]['is_edit'] = $firstArr['is_edit'];
 		$savePictureArr[$firstArr['picture']]['img'] = $firstArr['picture'];
 		$savePictureArr[$firstArr['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $firstArr['picture']);
 		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $firstArr['id']);
@@ -209,14 +210,16 @@ if ($_POST && CSRF::validate($_POST)) {
 	}
 }
 
+$store = Store::findById($_SESSION["STORE_ID"]);
 $product = Product::findByStoreId($_SESSION["STORE_ID"]);
+$isUpload = true;
 
 if (is_array($product) || is_object($product)) {
 	foreach ($product as $val) {
 		if (empty($firstArr))
 			$firstArr = $val;
 		$pictureArr[$val['picture']]['id'] = $val['id'];
-		$pictureArr[$val['picture']]['edit'] = $val['is_edit'];
+		$pictureArr[$val['picture']]['is_edit'] = $val['is_edit'];
 		$pictureArr[$val['picture']]['img'] = $val['picture'];
 		$pictureArr[$val['picture']]['path'] = FileUtil::getPicturePath($_SESSION['USER_EMAIL'], $val['picture']);
 		$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $val['id']);
@@ -227,6 +230,8 @@ if (is_array($product) || is_object($product)) {
 				$subPictureArr[$val2['picture']]['path'] = FileUtil::getSubPicturePath($_SESSION['USER_EMAIL'], $val2['picture']);
 			}
 		}
+		if (!$val['is_edit'])
+			$isUpload = false;
 		if (empty($swiperArr))
 			$swiperArr = [
 				'picture' => $pictureArr,
@@ -236,10 +241,12 @@ if (is_array($product) || is_object($product)) {
 }
 
 $data = [
+	'store' => $store,
 	'first' => $firstArr,
 	'picture' => $pictureArr,
 	'subPicture' => $subPictureArr,
-	'swiper' => $swiperArr
+	'swiper' => $swiperArr,
+	'isUpload' => $isUpload
 ];
 
 $view = new View('header');
