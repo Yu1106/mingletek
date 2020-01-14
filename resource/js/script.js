@@ -702,7 +702,7 @@ var step4Action = function () {
             data: JSON.stringify(mydata),
             contentType: "application/json",
             dataType: 'json',
-            async: false,
+            cache: false,
             success: function (data, status, request) {
                 var status_url = request.getResponseHeader('Location');
                 updateProgress(status_url);
