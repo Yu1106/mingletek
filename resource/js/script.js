@@ -715,7 +715,7 @@ var step4Action = function () {
     };
     var updateProgress = function (statusUrl) {
         // send GET request to status URL
-        $.getJSON(statusUrl, function (data) {
+        $.getJSON(statusUrl + "&_=" + (new Date().getTime()), function (data) {
             var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
             $(".percent").text(percent + "%");
             // update UI
@@ -726,7 +726,6 @@ var step4Action = function () {
                 replaceProductDescription();
                 clearLoading();
             } else {
-                alert("Here");
                 // return in 2 seconds
                 setTimeout(function () {
                     updateProgress(statusUrl);
