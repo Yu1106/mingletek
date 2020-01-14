@@ -692,7 +692,7 @@ var step4Action = function () {
             }
         });
     };
-    var renewsentence = function (strings) {
+    var renewSentence = function (strings) {
         var mydata = [
             {"strings": strings}
         ];
@@ -708,7 +708,7 @@ var step4Action = function () {
                 updateProgress(status_url);
             },
             error: function () {
-                alert('Renewsentence error');
+                alert('RenewSentence error');
                 clearLoading();
             }
         });
@@ -798,7 +798,7 @@ var step4Action = function () {
                                 $.each(data.data.data, function (k, v) {
                                     productDescription.push(v);
                                 });
-                                renewsentence(data.data.strings);
+                                renewSentence(data.data.strings);
                             }
                         }
                     }
