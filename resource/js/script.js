@@ -715,7 +715,7 @@ var step4Action = function () {
     };
     var updateProgress = function (statusUrl) {
         // send GET request to status URL
-        $.getJSON(statusUrl + "&_=" + (new Date().getTime()), function (data) {
+        $.getJSON(statusUrl + "?_=" + (new Date().getTime()), function (data) {
             var percent = parseInt("" + data['current'] * 100 / data['total'] + "");
             $(".percent").text(percent + "%");
             // update UI
