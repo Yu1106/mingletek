@@ -7,7 +7,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="format-detection" content="address=no">
 
-		<link rel="Shortcut Icon" type="image/x-icon" href="images/favicon.ico">
+		<link rel="Shortcut Icon" type="image/x-icon" href="<?php echo RESOURCE_IMAGES_DIR ?>/favicon.ico">
 
         <!-- CSS -->
 		<?= $css ?>
@@ -22,13 +22,7 @@
 			</header>
 			<main>
 				<div class="breadcrumb">
-			        <label>拍賣</label>
-					&gt;
-					<label>女裝與服飾配件</label>
-					&gt;
-					<label>洋裝</label>
-					&gt;
-					<label>長袖洋裝</label>
+                    <label><?= \common\model\parameter\Yahoo::YahooType[$data['product']['yahoo_category']] ?></label>
 				</div>
 				<div class="sellerInfo">
 					<section class="sellerInfoBox">
@@ -41,7 +35,7 @@
 							<div class="mainInfoBox">
 								<div class="sellerProfileBox">
 									<div class="sellerNameBox">
-										<label class="aTag sellerName">MINGLETEK 模擬商店</label>
+										<label class="aTag sellerName"><?= $data['store']['name'] ?></label>
 									</div>
 									<div class="moreProfileBox">
 										<span>Y1234567890</span>
@@ -61,67 +55,69 @@
 					<div class="intro-section-left">
 						<div class="item-gallery">
 							<!-- Swiper -->
-							<div class="swiper-container gallery-top">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0002.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0003.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0004.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0005.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0026.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0007.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0038.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0009.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0050.jpg');"></div>
-								</div>
-							</div>
-							<div class="swiper-container gallery-thumbs">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0002.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0003.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0004.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0005.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0026.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0007.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0038.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0009.jpg');"></div>
-									<div class="swiper-slide" style="background-image: url('./images/uploadFile/dress_0050.jpg');"></div>
-								</div>
-							</div>
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
+									<?php foreach ($data['swiper']['picture'] as $val): ?>
+                                        <div class="swiper-slide"
+                                             style="background-image: url('<?= $val['path'] ?>');"></div>
+									<?php endforeach; ?>
+									<?php foreach ($data['swiper']['subPicture'] as $val): ?>
+                                        <div class="swiper-slide"
+                                             style="background-image: url('<?= $val['path'] ?>');"></div>
+									<?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+									<?php foreach ($data['swiper']['picture'] as $val): ?>
+                                        <div class="swiper-slide"
+                                             style="background-image: url('<?= $val['path'] ?>');"></div>
+									<?php endforeach; ?>
+									<?php foreach ($data['swiper']['subPicture'] as $val): ?>
+                                        <div class="swiper-slide"
+                                             style="background-image: url('<?= $val['path'] ?>');"></div>
+									<?php endforeach; ?>
+                                </div>
+                            </div>
 						</div>
 						<div class="item-share"></div>
 					</div>
 					<div class="intro-section-right">
 						<div class="item-desc">
-							<h1 class="itemTitle">網紅必買側開叉長款毛衣連身裙 坑條紋綁帶收腰洋裝 過膝小香風長袖打底內搭針織連身裙</h1>
+							<h1 class="itemTitle"><?= $data['product']['name'] ?></h1>
 							<div class="watchlist">
 								<label class="watchWrap aTag"></label>
 								<lable class="likeCount">0</lable>
 							</div>
-							<p class="subtitle">網紅必買側開叉長款毛衣連身裙 坑條紋綁帶收腰洋裝 過膝小香風長袖打底內搭針織連身裙</p>
+							<p class="subtitle"><?= $data['product']['name'] ?></p>
 							<div class="item-purchase">
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">原價</span>
-									<label class="item-purchase-value orig-price">$2880</label>
+									<label class="item-purchase-value orig-price">$<?= $data['product']['price'] ?></label>
 								</div>
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">促銷</span>
-									<label class="item-purchase-value price">$1680</label>
+									<label class="item-purchase-value price">$<?= $data['product']['sell_price'] ?></label>
 									<label class="item-purchase-value soldQty">/ 售出 0 件</label>
 								</div>
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">尺寸</span>
-									<label for="" class="checkbox item-purchase-value">S</label>
-									<label for="" class="checkbox item-purchase-value">M</label>
-									<label for="" class="checkbox item-purchase-value">L</label>
-									<label for="" class="checkbox item-purchase-value">XL</label>
+									<?php if ($data['product']['size']) { ?><label for=""
+                                                                                   class="checkbox item-purchase-value"><?= $data['product']['size'] ?></label><?php } ?>
 								</div>
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">顏色</span>
-									<label for="" class="checkbox item-purchase-value">黑色</label>
-									<label for="" class="checkbox item-purchase-value">杏色</label>
-									<label for="" class="checkbox item-purchase-value">咖啡</label>
+									<?php if ($data['product']['color']) { ?>
+										<?php foreach (explode(",", $data['product']['color']) as $val): ?>
+											<?php if ($val == 'custom') { ?>
+                                                <label for=""
+                                                       class="checkbox item-purchase-value"><?= $data['product']['color_custom_field'] ?></label>
+											<?php } else { ?>
+                                                <label for=""
+                                                       class="checkbox item-purchase-value"><?= $val ?></label>
+											<?php } ?>
+										<?php endforeach; ?>
+									<?php } ?>
 								</div>
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">數量</span>
@@ -154,7 +150,7 @@
 								<div class="item-info-detail">
 									<div class="row">
 										<div class="row-title">商品狀況</div>
-										<label for="" class="row-value">全新品</label>
+										<label for="" class="row-value"><?= $data['product']['is_new'] ?></label>
 									</div>
 									<div class="row">
 										<div class="row-title">預購出貨</div>
@@ -162,7 +158,7 @@
 									</div>
 									<div class="row">
 										<div class="row-title">所在地區</div>
-										<label for="" class="row-value">台中市</label>
+										<label for="" class="row-value"><?= $data['product']['site'] ?></label>
 									</div>
 									<div class="row">
 										<div class="row-title">商品編號</div>
@@ -181,48 +177,20 @@
 					</div>
 					<div class="tab-container">
 						<div class="item-description">
-							<p>【尺寸】【單一尺寸】</p>
-							<p>全長127CM。胸圍42CM。腰寬24-44CM。下擺70CM。</p>
-							<p>材質：混棉/雪紡</p>
-							<p>※ 測量為【平放測量】，單位公分(cm).每批商品因追加製作時間不同，誤差尺寸 正負 ３ 公分內為正常範圍。</p>
-							<p>※ 不同批追加到貨商品尺寸及顏色，皆會有些許誤差。</p>
-							<p>※ 商品圖檔顏色會因燈光、個人電腦螢幕不同而有所差異，商品皆以實品為準。</p>
-							<p>※ 商品的尺寸、顏色、質料皆已清楚標 示於說明中，也已盡力完整呈現實品顏色，對色準嚴格要求的買家，還請您慎重考慮再下標，避免造成想像差異的困惱喔!!</p>
-							<p>※ 因工廠排版裁布製作時手法皆有些許不同故接縫處圖案並非完全對稱和平行，請能接受的買家再進行下標。</p>
-							<p>※ 請不要依據圖片想像衣服面料及大小，購買前請詳細閱讀尺寸說明，歡迎購買前詢問。</p>
-							<p>【出貨時間】</p>
-							<p>賣場採現貨 +預購，現貨1-3天出貨，預購商品約7-15天出貨。</p>
+							<?php foreach (explode("\n", $data['product']['product_description']) as $val): ?>
+                                <p><?= $val ?></p>
+							<?php endforeach; ?>
 						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0001.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0002.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0003.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0004.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0005.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0026.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0007.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0038.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0009.jpg" alt="">
-						</div>
-						<div class="item-image-wrap">
-							<img src="./images/uploadFile/dress_0050.jpg" alt="">
-						</div>
+						<?php foreach ($data['swiper']['picture'] as $val): ?>
+                            <div class="item-image-wrap">
+                                <img src="<?= $val['path'] ?>" alt="">
+                            </div>
+						<?php endforeach; ?>
+						<?php foreach ($data['swiper']['subPicture'] as $val): ?>
+                            <div class="item-image-wrap">
+                                <img src="<?= $val['path'] ?>" alt="">
+                            </div>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</main>

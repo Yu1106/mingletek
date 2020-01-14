@@ -28,11 +28,11 @@
                     <!-- Swiper -->
                     <div class="swiper-container gallery-top">
                         <div class="swiper-wrapper">
-                            <?php foreach($data['swiper']['picture'] as $val): ?>
+							<?php foreach ($data['swiper']['picture'] as $val): ?>
                                 <div class="swiper-slide"
                                      style="background-image: url('<?= $val['path'] ?>');"></div>
-                            <?php endforeach; ?>
-							<?php foreach($data['swiper']['subPicture'] as $val): ?>
+							<?php endforeach; ?>
+							<?php foreach ($data['swiper']['subPicture'] as $val): ?>
                                 <div class="swiper-slide"
                                      style="background-image: url('<?= $val['path'] ?>');"></div>
 							<?php endforeach; ?>
@@ -40,16 +40,14 @@
                     </div>
                     <div class="swiper-container gallery-thumbs">
                         <div class="swiper-wrapper">
-                            <div class="swiper-wrapper">
-								<?php foreach($data['swiper']['picture'] as $val): ?>
-                                    <div class="swiper-slide"
-                                         style="background-image: url('<?= $val['path'] ?>');"></div>
-								<?php endforeach; ?>
-								<?php foreach($data['swiper']['subPicture'] as $val): ?>
-                                    <div class="swiper-slide"
-                                         style="background-image: url('<?= $val['path'] ?>');"></div>
-								<?php endforeach; ?>
-                            </div>
+							<?php foreach ($data['swiper']['picture'] as $val): ?>
+                                <div class="swiper-slide"
+                                     style="background-image: url('<?= $val['path'] ?>');"></div>
+							<?php endforeach; ?>
+							<?php foreach ($data['swiper']['subPicture'] as $val): ?>
+                                <div class="swiper-slide"
+                                     style="background-image: url('<?= $val['path'] ?>');"></div>
+							<?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -62,9 +60,9 @@
                     <div class="item-memo">
                         <h3 class="item-memo-title">商品備註</h3>
                         <ul class="item-memo-list">
-                            <li class="status">物品狀況：&nbsp;全新</li>
-                            <li class="location">物品所在地：&nbsp;台灣.新北市</li>
-                            <li class="upload-time">上架時間：&nbsp;2019-10-23 08:55:29</li>
+                            <li class="status">物品狀況：&nbsp;<?= $data['product']['is_new'] ?></li>
+                            <li class="location">物品所在地：&nbsp;<?= $data['product']['site'] ?></li>
+                            <li class="upload-time">上架時間：&nbsp;<?= date("Y-m-d H:i:s") ?></li>
                             <!-- <li class="seven-eleven-limit">
 								<label class="title">超商取付、郵局到付與宅急便「黑貓PAY貨到付款」買家結帳條件：</label>cv
 								<span class="content">交易未完成次數必須 ≦ 2次</span>
@@ -74,7 +72,7 @@
 								<span class="content">近半年棄標次數 ≦ 2次</span>
 							</li> -->
                             <li class="initiation">物品開始價格：&nbsp;
-                                <span>$299元</span>
+                                <span>$<?= $data['product']['sell_price'] ?>元</span>
                             </li>
                             <li class="putforward">可能會提前結束販售</li>
                         </ul>
@@ -86,27 +84,34 @@
                     <div class="item-purchase">
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">直購價：</span>
-                            <label class="item-purchase-value price">$299</label>
+                            <label class="item-purchase-value price">$<?= $data['product']['sell_price'] ?></label>
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">規格：</span>
-                            <label for="" class="checkbox item-purchase-value">S</label>
-                            <label for="" class="checkbox item-purchase-value">M</label>
-                            <label for="" class="checkbox item-purchase-value">L</label>
-                            <label for="" class="checkbox item-purchase-value">XL</label>
+							<?php if ($data['product']['size']) { ?><label for=""
+                                                                           class="checkbox item-purchase-value"><?= $data['product']['size'] ?></label><?php } ?>
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">項目：</span>
-                            <label for="" class="checkbox item-purchase-value">黑色</label>
-                            <label for="" class="checkbox item-purchase-value">杏色</label>
-                            <label for="" class="checkbox item-purchase-value">咖啡</label>
+							<?php if ($data['product']['color']) { ?>
+								<?php foreach (explode(",", $data['product']['color']) as $val): ?>
+									<?php if ($val == 'custom') { ?>
+                                        <label for=""
+                                               class="checkbox item-purchase-value"><?= $data['product']['color_custom_field'] ?></label>
+									<?php } else { ?>
+                                        <label for=""
+                                               class="checkbox item-purchase-value"><?= $val ?></label>
+									<?php } ?>
+								<?php endforeach; ?>
+							<?php } ?>
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">數量：</span>
                             <label for="" class="qty-btn">-</label>
                             <label for="" class="input qty">0</label>
                             <label for="" class="qty-btn">+</label>
-                            <label for="" class="item-purchase-value stock">庫存大於<span>99</span>件</label>
+                            <label for=""
+                                   class="item-purchase-value stock">庫存大於<span><?= $data['product']['stock'] ?></span>件</label>
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title"></span>
@@ -174,28 +179,20 @@
             <div class="item-tab"></div>
             <div class="tab-container">
                 <div class="seller-board">
-                    <h3 class="seller-board-title">MINGLETEK</h3>
+                    <h3 class="seller-board-title"><?= $data['store']['name'] ?></h3>
                     <div class="seller-board-content"></div>
                 </div>
                 <div class="item-description">
-                    <p>【尺寸】【單一尺寸】</p>
-                    <p>全長127CM。胸圍42CM。腰寬24-44CM。下擺70CM。</p>
-                    <p>材質：混棉/雪紡</p>
-                    <p>※ 測量為【平放測量】，單位公分(cm).每批商品因追加製作時間不同，誤差尺寸 正負 ３ 公分內為正常範圍。</p>
-                    <p>※ 不同批追加到貨商品尺寸及顏色，皆會有些許誤差。</p>
-                    <p>※ 商品圖檔顏色會因燈光、個人電腦螢幕不同而有所差異，商品皆以實品為準。</p>
-                    <p>※ 商品的尺寸、顏色、質料皆已清楚標 示於說明中，也已盡力完整呈現實品顏色，對色準嚴格要求的買家，還請您慎重考慮再下標，避免造成想像差異的困惱喔!!</p>
-                    <p>※ 因工廠排版裁布製作時手法皆有些許不同故接縫處圖案並非完全對稱和平行，請能接受的買家再進行下標。</p>
-                    <p>※ 請不要依據圖片想像衣服面料及大小，購買前請詳細閱讀尺寸說明，歡迎購買前詢問。</p>
-                    <p>【出貨時間】</p>
-                    <p>賣場採現貨 +預購，現貨1-3天出貨，預購商品約7-15天出貨。</p>
+					<?php foreach (explode("\n", $data['product']['product_description']) as $val): ?>
+                        <p><?= $val ?></p>
+					<?php endforeach; ?>
                 </div>
-				<?php foreach($data['swiper']['picture'] as $val): ?>
+				<?php foreach ($data['swiper']['picture'] as $val): ?>
                     <div class="item-image-wrap">
                         <img src="<?= $val['path'] ?>" alt="">
                     </div>
 				<?php endforeach; ?>
-				<?php foreach($data['swiper']['subPicture'] as $val): ?>
+				<?php foreach ($data['swiper']['subPicture'] as $val): ?>
                     <div class="item-image-wrap">
                         <img src="<?= $val['path'] ?>" alt="">
                     </div>
