@@ -89,7 +89,7 @@
 								<label class="watchWrap aTag"></label>
 								<lable class="likeCount">0</lable>
 							</div>
-							<p class="subtitle"><?= $data['product']['name'] ?></p>
+							<p class="subtitle"></p>
 							<div class="item-purchase">
 								<div class="item-purchase-row">
 									<span class="item-purchase-title">原價</span>
