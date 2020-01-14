@@ -37,7 +37,7 @@ EOF;
 <link rel="stylesheet" type="text/css" href="resource/css/validationEngine.jquery.css">
 <link rel="stylesheet" type="text/css" href="resource/css/swiper.min.css">
 EOF;
-	static public $step4Js = <<<EOF
+	public static $step4Js = <<<EOF
 <script type="text/javascript" src="resource/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="resource/js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="resource/js/jquery.validationEngine-zh_TW.js"></script>
