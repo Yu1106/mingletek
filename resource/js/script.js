@@ -701,8 +701,8 @@ var step4Action = function () {
             url: '/renewsentence',
             data: JSON.stringify(mydata),
             contentType: "application/json",
-            async: false,
             dataType: 'json',
+            async: false,
             success: function (data, status, request) {
                 var status_url = request.getResponseHeader('Location');
                 updateProgress(status_url);
