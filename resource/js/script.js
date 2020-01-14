@@ -697,10 +697,11 @@ var step4Action = function () {
             {"strings": strings}
         ];
         $.ajax({
-            type: 'POST',
+            type: 'post',
             url: '/renewsentence',
             data: JSON.stringify(mydata),
             contentType: "application/json",
+            async: false,
             dataType: 'json',
             success: function (data, status, request) {
                 var status_url = request.getResponseHeader('Location');
