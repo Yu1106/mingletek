@@ -397,7 +397,7 @@ var step3Action = function () {
         }
         var data = [startProcessData];
         $.ajax({
-            type: 'POST',
+            type: 'post',
             url: '/longtask',
             data: JSON.stringify(data),
             contentType: "application/json",
@@ -726,6 +726,7 @@ var step4Action = function () {
                 replaceProductDescription();
                 clearLoading();
             } else {
+                alert("Here");
                 // return in 2 seconds
                 setTimeout(function () {
                     updateProgress(statusUrl);
