@@ -114,7 +114,7 @@ $(function () {
             showLoading();
             readURL(this, true);
             $.ajax({
-                type: 'POST',
+                type: 'post',
                 url: 'get_data.php',
                 data: {action: 'check'},
                 dataType: 'json',

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>露天拍賣 - 網紅必買側開叉長款毛衣連身裙 坑條紋綁帶收腰洋裝 過膝小香風長袖打底內搭針織連身裙</title>
+    <title>露天拍賣 - <?= $data['product']['name'] ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="address=no">
 
-    <link rel="Shortcut Icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="Shortcut Icon" type="image/x-icon" href="<?php echo RESOURCE_IMAGES_DIR ?>/favicon.ico">
 
     <!-- CSS -->
 	<?= $css ?>
@@ -28,50 +28,28 @@
                     <!-- Swiper -->
                     <div class="swiper-container gallery-top">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0002.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0003.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0004.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0005.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0026.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0007.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0038.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0009.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0050.jpg');"></div>
+                            <?php foreach($data['swiper']['picture'] as $val): ?>
+                                <div class="swiper-slide"
+                                     style="background-image: url('<?= $val['path'] ?>');"></div>
+                            <?php endforeach; ?>
+							<?php foreach($data['swiper']['subPicture'] as $val): ?>
+                                <div class="swiper-slide"
+                                     style="background-image: url('<?= $val['path'] ?>');"></div>
+							<?php endforeach; ?>
                         </div>
                     </div>
                     <div class="swiper-container gallery-thumbs">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0001.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0002.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0003.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0004.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0005.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0026.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0007.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0038.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0009.jpg');"></div>
-                            <div class="swiper-slide"
-                                 style="background-image: url('./images/uploadFile/dress_0050.jpg');"></div>
+                            <div class="swiper-wrapper">
+								<?php foreach($data['swiper']['picture'] as $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val['path'] ?>');"></div>
+								<?php endforeach; ?>
+								<?php foreach($data['swiper']['subPicture'] as $val): ?>
+                                    <div class="swiper-slide"
+                                         style="background-image: url('<?= $val['path'] ?>');"></div>
+								<?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -212,36 +190,16 @@
                     <p>【出貨時間】</p>
                     <p>賣場採現貨 +預購，現貨1-3天出貨，預購商品約7-15天出貨。</p>
                 </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0001.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0002.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0003.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0004.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0005.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0026.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0007.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0038.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0009.jpg" alt="">
-                </div>
-                <div class="item-image-wrap">
-                    <img src="./images/uploadFile/dress_0050.jpg" alt="">
-                </div>
+				<?php foreach($data['swiper']['picture'] as $val): ?>
+                    <div class="item-image-wrap">
+                        <img src="<?= $val['path'] ?>" alt="">
+                    </div>
+				<?php endforeach; ?>
+				<?php foreach($data['swiper']['subPicture'] as $val): ?>
+                    <div class="item-image-wrap">
+                        <img src="<?= $val['path'] ?>" alt="">
+                    </div>
+				<?php endforeach; ?>
             </div>
         </div>
     </main>

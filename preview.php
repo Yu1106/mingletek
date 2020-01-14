@@ -63,21 +63,21 @@ switch ($type) {
 	case StoreType::RUTEN:
 		$view = new View('ruten');
 		$view->assign('css', Asset::$rutenCss);
-		$view->assign('js', Asset::$indexJs);
+		$view->assign('js', Asset::$rutenJs);
 		$view->assign('data', $data);
 		echo $view->render();
 		break;
 	case StoreType::PCHOME:
 		$view = new View('pchome');
 		$view->assign('css', Asset::$pchomeCss);
-		$view->assign('js', Asset::$indexJs);
+		$view->assign('js', Asset::$pchomeJs);
 		$view->assign('data', $data);
 		echo $view->render();
 		break;
 	case StoreType::YAHOO:
 		$view = new View('yahoo');
 		$view->assign('css', Asset::$yahooCss);
-		$view->assign('js', Asset::$indexJs);
+		$view->assign('js', Asset::$yahooJs);
 		$view->assign('data', $data);
 		echo $view->render();
 		break;
