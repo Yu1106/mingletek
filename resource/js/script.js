@@ -811,6 +811,10 @@ var step4Action = function () {
             $.each(typeArr, function (k, v) {
                 window.open('preview.php?type=' + v + '&product_id=' + id);
             });
+        },
+        download: function () {
+            var id = $("#id").val();
+            window.open('csv_demo.php');
         }
     }
 }();

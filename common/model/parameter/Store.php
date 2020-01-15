@@ -5,12 +5,12 @@ namespace common\model\parameter;
 class Store
 {
 	const RUTEN = 0;
-	const PCHOME = 1;
-	const YAHOO = 2;
+	const YAHOO = 1;
+	const PCHOME = 2;
 
 	const StoreType = [
 		self::RUTEN => 'RUTEN',
-		self::PCHOME => 'PCHOME',
-		self::YAHOO => 'YAHOO'
+		self::YAHOO => 'YAHOO',
+		self::PCHOME => 'PCHOME'
 	];
 }

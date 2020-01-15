@@ -1,14 +1,15 @@
 <?php
 
-include 'library.php';
-
 use common\csv\Csv;
 use common\csv\vendor\pchome\PchomeRecord;
 use common\model\ExportFileLog;
-use common\model\parameter\Shop;
+use common\model\parameter\Store;
 
-$csv = Csv::factory(Shop::PCHOME);
+include 'library.php';
+
+$csv = Csv::factory(Store::PCHOME);
 $csvThread = $csv->createCsv();
+var_dump($csvThread);
 $pchomeRecord = new PchomeRecord();
 $pchomeRecord->title = 'test';
 $pchomeRecord->Field1 = 'test2';
@@ -28,7 +29,7 @@ $csv->writeCsv($csvThread);
 $array = array(['Field2' => 1, 'Field3' => 2, 'title' => '測試2,測試2,測試2', 'd' => 4, 'e' => 5], [4, 2, 3, 4, 56, "測試1", "測試2"]);
 $csv->writeArrayToCsv($csvThread, $array);
 
-$exportFileLog = ExportFileLog::findOneByUserId($_SESSION["USER_ID"], Shop::PCHOME);
+$exportFileLog = ExportFileLog::findOneByUserId($_SESSION["USER_ID"], Store::PCHOME);
 $csv->exportCvs($exportFileLog["file_name"]);
 
 

@@ -529,7 +529,7 @@ use common\model\parameter\Yahoo;
                 <a id="preview" style="visibility:<?= (!$data['first']['is_edit']) ? "hidden;" : "visible;" ?>" class="btn"
                    href="javascript:step4Action.previewProductPage('<?= $data['store']['upload_store_type'] ?>');">預覽商品頁</a>
                 <a style="visibility:<?= (!$data['isUpload']) ? "hidden;" : "visible" ?>" class="btn btnYellow"
-                   href="javascript:;">產生下載檔案</a>
+                   href="javascript:step4Action.download();">產生下載檔案</a>
             </div>
         </section>
     </form>
