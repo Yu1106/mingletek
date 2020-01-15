@@ -15,6 +15,8 @@ use common\model\parameter\Store as StoreType;
 
 include 'library.php';
 
+error_reporting(E_ALL);
+
 if (!Login::auth() || !UidUtil::auth()) {
 	exit;
 }
