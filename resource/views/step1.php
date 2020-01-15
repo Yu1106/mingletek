@@ -42,7 +42,7 @@
                         </label>
                     </div>
                     <div class="category radioWrap hoverRadio">
-                        <input id="clothes" class="validate[required] radio" type="radio" name="settings.category"
+                        <input disabled id="clothes" class="validate[required] radio" type="radio" name="settings.category"
                                value="1" data-prompt-target="formErrorMsg" data-errormessage="* 請選擇衣服種類">
                         <label for="clothes">
                             <span class="radioIcon"></span>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="sectionContent">
                     <div class="category radioWrap hoverRadio">
-                        <input id="pants" class="validate[required] radio" type="radio" name="settings.category"
+                        <input disabled id="pants" class="validate[required] radio" type="radio" name="settings.category"
                                value="2" data-prompt-target="formErrorMsg" data-errormessage="* 請選擇衣服種類">
                         <label for="pants">
                             <span class="radioIcon"></span>
@@ -64,7 +64,7 @@
                         </label>
                     </div>
                     <div class="category radioWrap hoverRadio">
-                        <input id="skirt" class="validate[required] radio" type="radio" name="settings.category"
+                        <input disabled id="skirt" class="validate[required] radio" type="radio" name="settings.category"
                                value="3" data-prompt-target="formErrorMsg" data-errormessage="* 請選擇衣服種類">
                         <label for="skirt">
                             <span class="radioIcon"></span>
