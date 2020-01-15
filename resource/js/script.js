@@ -814,7 +814,7 @@ var step4Action = function () {
         },
         download: function () {
             var id = $("#id").val();
-            window.open('csv_demo.php');
+            window.open('download.php');
         }
     }
 }();

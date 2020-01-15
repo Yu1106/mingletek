@@ -13,19 +13,22 @@ class ExportFileLog extends Model
 		return "export_file_log";
 	}
 
-	public static function addLog(int $userId, int $type, string $fileName)
+	public static function addLog(int $userId, int $storeId, string $uid, int $type, string $fileName)
 	{
 		return self::getDb()->save(
 			[
 				'user_id' => $userId,
+				'store_id' => $storeId,
+				'uid' => $uid,
+				'store_id' => $storeId,
 				'upload_store_type' => $type,
 				'file_name' => $fileName,
 				'create_date' => new DbExpression("now()")
 			], true, static::tableName());
 	}
 
-	public static function findOneByUserId(int $userId, int $type)
+	public static function findAllByUserIdAndStoreIdAndUid(int $userId, int $storeId, string $uid)
 	{
-		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where user_id = :user_id and upload_store_type = :upload_store_type order by id desc limit 1", [":user_id" => $userId, ":upload_store_type" => $type]);
+		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where user_id = :user_id and store_id = :store_id and uid = :uid order by id desc", [":user_id" => $userId, ":store_id" => $storeId, ":uid" => $uid]);
 	}
 }

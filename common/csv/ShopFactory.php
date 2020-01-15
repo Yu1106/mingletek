@@ -7,7 +7,6 @@ use common\csv\vendor\ruten\RutenRecord;
 use common\csv\vendor\yahoo\YahooRecord;
 use common\model\parameter\Store;
 use common\util\CvsUtil;
-use common\model\ExportFileLog;
 use common\PropertyRecord;
 use common\util\FileUtil;
 use common\util\LogUtil;
@@ -28,14 +27,6 @@ abstract class ShopFactory extends PropertyRecord
 		$this->setFileName();
 		$this->filePath = $this->getFilePath($this->fileName);
 		$this->delimiter = $this->setDelimiter();
-
-		$exportFileLog = new ExportFileLog();
-		$exportFileLog::addLog(
-			(int)$_SESSION['USER_ID'],
-			(int)$_SESSION['STORE_ID'],
-			(int)$this->shopType(),
-			$this->fileName
-		);
 	}
 
 	/**
@@ -51,7 +42,7 @@ abstract class ShopFactory extends PropertyRecord
 	/**
 	 * @return string
 	 */
-	protected function getFileName(): string
+	public function getFileName(): string
 	{
 		return $this->fileName;
 	}
