@@ -77,7 +77,6 @@ abstract class ShopFactory extends PropertyRecord
 			$log = new LogUtil("export-" . date("Ymd"));
 			$log->error('exportCvs failed' . $e);
 		}
-		die;
 	}
 
 	/**

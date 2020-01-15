@@ -7,6 +7,7 @@ use common\model\ExportFileLog;
 use common\model\Store;
 use common\util\CvsUtil;
 use common\util\FileUtil;
+use common\util\LogUtil;
 use common\util\UidUtil;
 use common\csv\Csv;
 use common\csv\vendor\pchome\PchomeRecord;
@@ -89,39 +90,45 @@ foreach ($storeType as $val) {
 
 $exportFileLog = ExportFileLog::findAllByUserIdAndStoreIdAndUid($_SESSION["USER_ID"], $_SESSION["STORE_ID"], $uid);
 
-if (count($exportFileLog) > 1) {
-	$array = array();
-	$zip = new ZipArchive();
-	$fileName = date("YmdHis") . rand(10000, 99999) . '-download.zip';
-	$filePath = FileUtil::CSV . $fileName;
-	$array[] = $filePath;
-	if ($zip->open($filePath, ZipArchive::CREATE) !== TRUE) {
-		exit("cannot open <$filePath>\n");
-	}//打開壓縮檔，若無此檔自動建立新檔
-	foreach ($exportFileLog as $val) {
-		$zip->addFile(FileUtil::CSV . $val['file_name'], $val['file_name']);
-		$array[] = FileUtil::CSV . $val['file_name'];
+if (is_array($exportFileLog)) {
+	if (count($exportFileLog) > 1) {
+		$array = array();
+		$zip = new ZipArchive();
+		$fileName = date("YmdHis") . rand(10000, 99999) . '-download.zip';
+		$filePath = FileUtil::CSV . $fileName;
+		$array[] = $filePath;
+		if ($zip->open($filePath, ZipArchive::CREATE) !== TRUE) {
+			exit("cannot open <$filePath>\n");
+		}//打開壓縮檔，若無此檔自動建立新檔
+		foreach ($exportFileLog as $val) {
+			$zip->addFile(FileUtil::CSV . $val['file_name'], $val['file_name']);
+			$array[] = FileUtil::CSV . $val['file_name'];
+		}
+		$zip->close();//關閉壓縮檔
+		ExportFileLog::addLog(
+			(int)$_SESSION['USER_ID'],
+			(int)$_SESSION['STORE_ID'],
+			$uid,
+			99,
+			$fileName
+		);
+		try {
+			$csv = new CvsUtil(CvsUtil::READ, $filePath);
+			$csv->output($fileName);
+		} catch (Exception $e) {
+			$log = new LogUtil("export-" . date("Ymd"));
+			$log->error('exportCvs failed' . $e);
+		}
+		foreach ($array as $val) {
+			unlink($val);
+		}
+		die;
+	} else if (count($exportFileLog) == 1) {
+		$fileName = $exportFileLog[0]['file_name'];
+		$filePath = FileUtil::CSV . $fileName;
+		$csv->exportCvs($fileName);
+		unlink($filePath);
+		die;
 	}
-	$zip->close();//關閉壓縮檔
-	ExportFileLog::addLog(
-		(int)$_SESSION['USER_ID'],
-		(int)$_SESSION['STORE_ID'],
-		$uid,
-		99,
-		$fileName
-	);
-	$csv = new CvsUtil(CvsUtil::READ, $filePath);
-	$csv->output($fileName);
-	foreach ($array as $val) {
-		unlink($val);
-	}
-	exit;
-} else if (count($exportFileLog) == 1) {
-	$fileName = $exportFileLog[0]['file_name'];
-	$filePath = FileUtil::CSV . $fileName;
-	$csv = new CvsUtil(CvsUtil::READ, $filePath);
-	$csv->output($fileName);
-	unlink($filePath);
-} else {
-	exit;
 }
+die;
