@@ -49,7 +49,6 @@ class CvsUtil
 	public function output(string $fileName)
 	{
 		$this->cvsRead->output($fileName);
-		die;
 	}
 
 	/**

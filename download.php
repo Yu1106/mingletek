@@ -5,6 +5,8 @@ use common\csv\vendor\yahoo\YahooRecord;
 use common\login\Login;
 use common\model\ExportFileLog;
 use common\model\Store;
+use common\util\CvsUtil;
+use common\util\FileUtil;
 use common\util\UidUtil;
 use common\csv\Csv;
 use common\csv\vendor\pchome\PchomeRecord;
@@ -86,10 +88,40 @@ foreach ($storeType as $val) {
 }
 
 $exportFileLog = ExportFileLog::findAllByUserIdAndStoreIdAndUid($_SESSION["USER_ID"], $_SESSION["STORE_ID"], $uid);
-var_dump($exportFileLog);
-//	$array = array(['Field2' => 1, 'Field3' => 2, 'title' => '測試2,測試2,測試2', 'd' => 4, 'e' => 5], [4, 2, 3, 4, 56, "測試1", "測試2"]);
-//	$csv->writeArrayToCsv($csvThread, $array);
-//
-//	$exportFileLog = ExportFileLog::findOneByUserId($_SESSION["USER_ID"], Store::PCHOME);
 
-die;
+if (count($exportFileLog) > 1) {
+	$array = array();
+	$zip = new ZipArchive();
+	$fileName = date("YmdHis") . rand(10000, 99999) . '-download.zip';
+	$filePath = FileUtil::CSV . $fileName;
+	$array[] = $filePath;
+	if ($zip->open($filePath, ZipArchive::CREATE) !== TRUE) {
+		exit("cannot open <$filePath>\n");
+	}//打開壓縮檔，若無此檔自動建立新檔
+	foreach ($exportFileLog as $val) {
+		$zip->addFile(FileUtil::CSV . $val['file_name'], $val['file_name']);
+		$array[] = FileUtil::CSV . $val['file_name'];
+	}
+	$zip->close();//關閉壓縮檔
+	ExportFileLog::addLog(
+		(int)$_SESSION['USER_ID'],
+		(int)$_SESSION['STORE_ID'],
+		$uid,
+		99,
+		$fileName
+	);
+	$csv = new CvsUtil(CvsUtil::READ, $filePath);
+	$csv->output($fileName);
+	foreach ($array as $val) {
+		unlink($val);
+	}
+	exit;
+} else if (count($exportFileLog) == 1) {
+	$fileName = $exportFileLog[0]['file_name'];
+	$filePath = FileUtil::CSV . $fileName;
+	$csv = new CvsUtil(CvsUtil::READ, $filePath);
+	$csv->output($fileName);
+	unlink($filePath);
+} else {
+	exit;
+}
