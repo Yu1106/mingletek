@@ -32,6 +32,7 @@ abstract class ShopFactory extends PropertyRecord
 		$exportFileLog = new ExportFileLog();
 		$exportFileLog::addLog(
 			(int)$_SESSION['USER_ID'],
+			(int)$_SESSION['STORE_ID'],
 			(int)$this->shopType(),
 			$this->fileName
 		);
