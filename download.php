@@ -15,9 +15,6 @@ use common\model\parameter\Store as StoreType;
 
 include 'library.php';
 
-ini_set("display_errors", "on");
-error_reporting(E_ALL);
-
 if (!Login::auth() || !UidUtil::auth()) {
 	exit;
 }
