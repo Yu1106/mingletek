@@ -6,12 +6,35 @@ use common\PropertyRecord;
 
 /**
  * Class Ruten
- * @property $title
- * @property $Field1
- * @property $Field2
- * @property $Field3
- * @property $Field4
- * @property $Field5
+ * @property $category
+ * @property $name
+ * @property $sell_price
+ * @property $stock
+ * @property $custom_category
+ * @property $product_description
+ * @property $is_new
+ * @property $picture1
+ * @property $picture2
+ * @property $picture3
+ * @property $site
+ * @property $score_greater_than
+ * @property $score_less_than
+ * @property $abandoned
+ * @property $handcraft
+ * @property $bag
+ * @property $original_warranty
+ * @property $seller_warranty
+ * @property $house
+ * @property $diy
+ * @property $counter_genuine
+ * @property $company_goods
+ * @property $parallel_input
+ * @property $billable
+ * @property $receipt
+ * @property $with_guarantee
+ * @property $with_appraisal
+ * @property $size
+ * @property $color
  */
 class RutenRecord extends PropertyRecord
 {
@@ -21,12 +44,35 @@ class RutenRecord extends PropertyRecord
 	public function properties(): array
 	{
 		return [
-			'title',
-			'Field1',
-			'Field2',
-			'Field3',
-			'Field4',
-			'Field5'
+			'category',
+			'name',
+			'sell_price',
+			'stock',
+			'custom_category',
+			'product_description',
+			'is_new',
+			'picture1',
+			'picture2',
+			'picture3',
+			'site',
+			'score_greater_than',
+			'score_less_than',
+			'abandoned',
+			'handcraft',
+			'bag',
+			'original_warranty',
+			'seller_warranty',
+			'house',
+			'diy',
+			'counter_genuine',
+			'company_goods',
+			'parallel_input',
+			'billable',
+			'receipt',
+			'with_guarantee',
+			'with_appraisal',
+			'size',
+			'color'
 		];
 	}
 }

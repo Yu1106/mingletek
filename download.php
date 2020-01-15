@@ -4,6 +4,7 @@ use common\csv\vendor\ruten\RutenRecord;
 use common\csv\vendor\yahoo\YahooRecord;
 use common\login\Login;
 use common\model\ExportFileLog;
+use common\model\Product;
 use common\model\Store;
 use common\util\CvsUtil;
 use common\util\FileUtil;
@@ -25,20 +26,29 @@ if (empty($store))
 
 $storeType = explode(",", $store['upload_store_type']);
 $uid = UidUtil::uid($_SESSION['USER_ID']);
+$product = Product::findByStoreId($_SESSION["STORE_ID"]);
 
 foreach ($storeType as $val) {
 	switch ($val) {
 		case StoreType::RUTEN:
-			$csv = Csv::factory(StoreType::RUTEN);
-			$csvThread = $csv->createCsv();
-			$rutenRecord = new RutenRecord();
-			$rutenRecord->title = 'test';
-			$rutenRecord->Field1 = 'test2';
-			$rutenRecord->Field2 = 'test3';
-			$rutenRecord->Field3 = 'test4';
-			$rutenRecord->Field4 = 'test5';
-			$csv->setData($rutenRecord);
-			$csv->writeCsv($csvThread);
+			if (is_array($product)) {
+				$csv = Csv::factory(StoreType::RUTEN);
+				$csvThread = $csv->createCsv();
+				foreach ($product as $value) {
+					$rutenRecord = new RutenRecord();
+					$rutenRecord->category = $value['ruten_category'];
+					$rutenRecord->name = $value['name'];
+					$rutenRecord->sell_price = $value['sell_price'];
+					$rutenRecord->stock = $value['stock'];
+					$rutenRecord->product_description = str_replace(array("\r", "\n", "\r\n", "\n\r"), '' , $value['product_description']);
+					$rutenRecord->is_new = $value['is_new'];
+					$rutenRecord->site = $value['site'];
+					$rutenRecord->size = $value['size'];
+					$rutenRecord->color = $value['color'];
+					$csv->setData($rutenRecord);
+					$csv->writeCsv($csvThread);
+				}
+			}
 			ExportFileLog::addLog(
 				(int)$_SESSION['USER_ID'],
 				(int)$_SESSION['STORE_ID'],

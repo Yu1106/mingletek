@@ -29,12 +29,35 @@ class Ruten extends ShopFactory
 	public function properties(): array
 	{
 		return [
-			'title' => '標頭',
-			'Field1' => '欄位1',
-			'Field2' => '欄位2',
-			'Field3' => '欄位3',
-			'Field4' => '欄位4',
-			'Field5' => '欄位5',
+			'category' => '類別',
+			'name' => '物品名稱',
+			'sell_price' => '直接購買價',
+			'stock' => '數量',
+			'custom_category' => '自訂賣場分類',
+			'product_description' => '物品說明',
+			'is_new' => '物品新舊',
+			'picture1' => '圖片1',
+			'picture2' => '圖片2',
+			'picture3' => '圖片3',
+			'site' => '物品所在地',
+			'score_greater_than' => '評價總分需大於',
+			'score_less_than' => '差勁評價需小於',
+			'abandoned' => '棄標不可超過次數',
+			'handcraft' => '手工製品',
+			'bag' => '附禮盒/提袋',
+			'original_warranty' => '原廠保固',
+			'seller_warranty' => '賣家保固',
+			'house' => '到府安裝',
+			'diy' => 'DIY安裝',
+			'counter_genuine' => '專櫃正品',
+			'company_goods' => '公司貨',
+			'parallel_input' => '平行輸入',
+			'billable' => '可開發票',
+			'receipt' => '可開收據',
+			'with_guarantee' => '附保證書',
+			'with_appraisal' => '附鑑定書',
+			'size' => '有多種尺寸',
+			'color' => '有多種顏色'
 		];
 	}
 }
