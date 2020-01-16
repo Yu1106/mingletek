@@ -6,6 +6,7 @@ use common\login\Login;
 use common\model\ExportFileLog;
 use common\model\Product;
 use common\model\Store;
+use common\model\SubPicture;
 use common\util\CvsUtil;
 use common\util\FileUtil;
 use common\util\LogUtil;
@@ -35,13 +36,30 @@ foreach ($storeType as $val) {
 				$csv = Csv::factory(StoreType::RUTEN);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
+					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
 					$rutenRecord = new RutenRecord();
 					$rutenRecord->category = $value['ruten_category'];
 					$rutenRecord->name = $value['name'];
-					$rutenRecord->sell_price = $value['sell_price'];
+					$rutenRecord->sell_price = $value['price'];
 					$rutenRecord->stock = $value['stock'];
-					$rutenRecord->product_description = str_replace(array("\r", "\n", "\r\n", "\n\r"), '' , $value['product_description']);
+					$rutenRecord->custom_category = '5400094';
+					$product_description = '';
+					if (isset($value['product_description']))
+						$product_description .= str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $value['product_description']);
+					if (isset($store['note']))
+						$product_description .= "," . str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $store['note']);
+					if (isset($store['return_notice']))
+						$product_description .= "," . str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $store['return_notice']);
+					$rutenRecord->product_description = $product_description;
 					$rutenRecord->is_new = $value['is_new'];
+					$rutenRecord->picture_1 = $value['picture'];
+					if (isset($subPicture[0]))
+						$rutenRecord->picture_2 = $subPicture[0]['picture'];
+					if (isset($subPicture[1]))
+						$rutenRecord->picture_3 = $subPicture[1]['picture'];
+					$rutenRecord->score_greater_than = 0;
+					$rutenRecord->score_less_than = '無';
+					$rutenRecord->abandoned = '無';
 					$rutenRecord->site = $value['site'];
 					$rutenRecord->size = $value['size'];
 					$rutenRecord->color = $value['color'];

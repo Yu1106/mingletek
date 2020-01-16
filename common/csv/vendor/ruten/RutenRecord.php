@@ -13,9 +13,9 @@ use common\PropertyRecord;
  * @property $custom_category
  * @property $product_description
  * @property $is_new
- * @property $picture1
- * @property $picture2
- * @property $picture3
+ * @property $picture_1
+ * @property $picture_2
+ * @property $picture_3
  * @property $site
  * @property $score_greater_than
  * @property $score_less_than
@@ -51,9 +51,9 @@ class RutenRecord extends PropertyRecord
 			'custom_category',
 			'product_description',
 			'is_new',
-			'picture1',
-			'picture2',
-			'picture3',
+			'picture_1',
+			'picture_2',
+			'picture_3',
 			'site',
 			'score_greater_than',
 			'score_less_than',

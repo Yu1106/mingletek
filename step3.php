@@ -13,8 +13,11 @@ use common\model\parameter\Feature3;
 use common\model\parameter\Feature4;
 use common\model\parameter\Feature5;
 use common\model\parameter\Neckline;
+use common\model\parameter\Pchome;
+use common\model\parameter\Ruten;
 use common\model\parameter\Sleeve;
 use common\model\parameter\SubCategory;
+use common\model\parameter\Yahoo;
 use common\model\Product;
 use common\model\Store;
 use common\model\SubPicture;
@@ -55,6 +58,36 @@ if ($_POST && CSRF::validate($_POST)) {
 					}
 				}
 				$array = array();
+				if (isset($data->sleeve)) {
+					if ($data->sleeve == Sleeve::SLEEVELESS || $data->sleeve == Sleeve::CAP)
+						$rutenCategory = Ruten::SLEEVELESS_DRESS;
+					if ($data->sleeve == Sleeve::SHORT || $data->sleeve == Sleeve::ELBOW)
+						$rutenCategory = Ruten::SHORT_SLEEVE_DRESS;
+					if ($data->sleeve == Sleeve::BRACELET || $data->sleeve == Sleeve::LONG)
+						$rutenCategory = Ruten::LONG_SLEEVE_DRESS;
+					if ($rutenCategory != '')
+						$array['ruten_category'] = $rutenCategory;
+				}
+				if (isset($data->sleeve)) {
+					if ($data->sleeve == Sleeve::SLEEVELESS || $data->sleeve == Sleeve::CAP)
+						$yahooCategory = Yahoo::SLEEVELESS_DRESS;
+					if ($data->sleeve == Sleeve::SHORT || $data->sleeve == Sleeve::ELBOW)
+						$yahooCategory = Yahoo::SHORT_SLEEVE_DRESS;
+					if ($data->sleeve == Sleeve::BRACELET || $data->sleeve == Sleeve::LONG)
+						$yahooCategory = Yahoo::LONG_SLEEVE_DRESS;
+					if ($yahooCategory != '')
+						$array['yahoo_category'] = $yahooCategory;
+				}
+				if (isset($data->sleeve)) {
+					if ($data->sleeve == Sleeve::SLEEVELESS || $data->sleeve == Sleeve::CAP)
+						$pchomeCategory = Pchome::SLEEVELESS_DRESS;
+					if ($data->sleeve == Sleeve::SHORT || $data->sleeve == Sleeve::ELBOW)
+						$pchomeCategory = Pchome::SHORT_SLEEVE_DRESS;
+					if ($data->sleeve == Sleeve::BRACELET || $data->sleeve == Sleeve::LONG)
+						$pchomeCategory = Pchome::LONG_SLEEVE_DRESS;
+					if ($pchomeCategory != '')
+						$array['pchome_category'] = $pchomeCategory;
+				}
 				if (isset($data->sub_category))
 					$array['sub_category'] = SubCategory::SubCategoryType[$data->sub_category];
 				if (isset($data->category))
