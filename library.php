@@ -33,3 +33,13 @@ function arrayToString(array $array):string
 	return implode(",", $returnData);
 }
 
+
+/**
+ * @param string $string
+ * @return string
+ */
+function replaceRN(string $string):string
+{
+	return str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $string);
+}
+

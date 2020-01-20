@@ -6,35 +6,35 @@ use common\PropertyRecord;
 
 /**
  * Class Ruten
- * @property $category
- * @property $name
- * @property $sell_price
- * @property $stock
- * @property $custom_category
- * @property $product_description
- * @property $is_new
- * @property $picture_1
- * @property $picture_2
- * @property $picture_3
- * @property $site
- * @property $score_greater_than
- * @property $score_less_than
- * @property $abandoned
- * @property $handcraft
- * @property $bag
- * @property $original_warranty
- * @property $seller_warranty
- * @property $house
- * @property $diy
- * @property $counter_genuine
- * @property $company_goods
- * @property $parallel_input
- * @property $billable
- * @property $receipt
- * @property $with_guarantee
- * @property $with_appraisal
- * @property $size
- * @property $color
+ * @property string $category
+ * @property string $name
+ * @property string $sell_price
+ * @property string $stock
+ * @property string $custom_category
+ * @property string $product_description
+ * @property string $is_new
+ * @property string $picture_1
+ * @property string $picture_2
+ * @property string $picture_3
+ * @property string $site
+ * @property string $score_greater_than
+ * @property string $score_less_than
+ * @property string $abandoned
+ * @property string $handcraft
+ * @property string $bag
+ * @property string $original_warranty
+ * @property string $seller_warranty
+ * @property string $house
+ * @property string $diy
+ * @property string $counter_genuine
+ * @property string $company_goods
+ * @property string $parallel_input
+ * @property string $billable
+ * @property string $receipt
+ * @property string $with_guarantee
+ * @property string $with_appraisal
+ * @property string $size
+ * @property string $color
  */
 class RutenRecord extends PropertyRecord
 {

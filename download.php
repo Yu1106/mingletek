@@ -17,6 +17,9 @@ use common\model\parameter\Store as StoreType;
 
 include 'library.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (!Login::auth() || !UidUtil::auth()) {
 	exit;
 }
@@ -44,12 +47,12 @@ foreach ($storeType as $val) {
 					$rutenRecord->stock = $value['stock'];
 					$rutenRecord->custom_category = '5400094';
 					$product_description = '';
-					if (isset($value['product_description']))
-						$product_description .= str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $value['product_description']);
-					if (isset($store['note']))
-						$product_description .= "," . str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $store['note']);
-					if (isset($store['return_notice']))
-						$product_description .= "," . str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $store['return_notice']);
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= replaceRN($value['product_description']);
+					if (isset($store['note']) && $store['note'] != '')
+						$product_description .= "," . replaceRN($store['note']);
+					if (isset($store['return_notice']) && $store['return_notice'] != '')
+						$product_description .= "," . replaceRN($store['return_notice']);
 					$rutenRecord->product_description = $product_description;
 					$rutenRecord->is_new = $value['is_new'];
 					$rutenRecord->picture_1 = $value['picture'];
@@ -76,16 +79,58 @@ foreach ($storeType as $val) {
 			);
 			break;
 		case StoreType::YAHOO:
-			$csv = Csv::factory(StoreType::YAHOO);
-			$csvThread = $csv->createCsv();
-			$yahooRecord = new YahooRecord();
-			$yahooRecord->title = 'test';
-			$yahooRecord->Field1 = 'test2';
-			$yahooRecord->Field2 = 'test3';
-			$yahooRecord->Field3 = 'test4';
-			$yahooRecord->Field4 = 'test5';
-			$csv->setData($yahooRecord);
-			$csv->writeCsv($csvThread);
+			if (is_array($product)) {
+				$csv = Csv::factory(StoreType::YAHOO);
+				$csvThread = $csv->createCsv();
+				foreach ($product as $value) {
+					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
+					$yahooRecord = new YahooRecord();
+					$yahooRecord->category = $value['yahoo_category'];
+					$yahooRecord->name = $value['name'];
+					$keyword = '';
+					if (isset($value['keyword']))
+						$keyword .= $value['keyword'];
+					if (isset($value['keyword_custom_field']))
+						$keyword .= "," . $value['keyword_custom_field'];
+					$keywordArr = explode(",", $keyword);
+					$keyword = '';
+					$i = 1;
+					foreach ($keywordArr as $val) {
+						if ($i > 1) $keyword .= ",";
+						if ($val != '') {
+							$keyword .= "#" . $val;
+							$i++;
+						}
+						if ($i == 6) break;
+					}
+					$yahooRecord->keyword = $keyword;
+					$product_description = '';
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= replaceRN($value['product_description']);
+					if (isset($store['note']) && $store['note'] != '')
+						$product_description .= "," . replaceRN($store['note']);
+					if (isset($store['return_notice']) && $store['return_notice'] != '')
+						$product_description .= "," . replaceRN($store['return_notice']);
+					$yahooRecord->product_description = $product_description;
+					$yahooRecord->site = $value['site'];
+					$yahooRecord->stock = $value['stock'];
+					$yahooRecord->price = $value['price'];
+					$yahooRecord->sell_price = $value['sell_price'];
+					$yahooRecord->posting_days = $value['posting_days'];
+					$yahooRecord->is_new = $value['is_new'];
+					$yahooRecord->picture_1 = $value['picture'];
+					$i = 0;
+					if (is_array($subPicture)) {
+						foreach ($subPicture as $val) {
+							$field = 'picture_' . ($i + 2);
+							$yahooRecord->$field = $subPicture[$i]['picture'];
+							$i++;
+						}
+					}
+					$csv->setData($yahooRecord);
+					$csv->writeCsv($csvThread);
+				}
+			}
 			ExportFileLog::addLog(
 				(int)$_SESSION['USER_ID'],
 				(int)$_SESSION['STORE_ID'],
@@ -95,14 +140,32 @@ foreach ($storeType as $val) {
 			);
 			break;
 		case StoreType::PCHOME:
-			$csv = Csv::factory(StoreType::PCHOME);
-			$csvThread = $csv->createCsv();
-			$pchomeRecord = new PchomeRecord();
-			$pchomeRecord->title = 'test';
-			$pchomeRecord->Field1 = 'test2';
-			$pchomeRecord->Field2 = 'test3';
-			$pchomeRecord->Field3 = 'test4';
-			$pchomeRecord->Field4 = 'test5';
+			if (is_array($product)) {
+				$csv = Csv::factory(StoreType::PCHOME);
+				$csvThread = $csv->createCsv();
+				foreach ($product as $value) {
+					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
+					$pchomeRecord = new PchomeRecord();
+					$pchomeRecord->name = $value['name'];
+					$pchomeRecord->category = $value['pchome_category'];
+					$pchomeRecord->price = $value['price'];
+					$pchomeRecord->sell_price = $value['sell_price'];
+					$pchomeRecord->standard = '顏色>尺寸';
+					$pchomeRecord->stock = $value['stock'];
+					$product_description = '';
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= replaceRN($value['product_description']);
+					if (isset($store['note']) && $store['note'] != '')
+						$product_description .= "," . replaceRN($store['note']);
+					if (isset($store['return_notice']) && $store['return_notice'] != '')
+						$product_description .= "," . replaceRN($store['return_notice']);
+					$pchomeRecord->product_description = $product_description;
+					$pchomeRecord->is_new = $value['is_new'];
+					$pchomeRecord->site = $value['site'];
+					$csv->setData($pchomeRecord);
+					$csv->writeCsv($csvThread);
+				}
+			}
 			ExportFileLog::addLog(
 				(int)$_SESSION['USER_ID'],
 				(int)$_SESSION['STORE_ID'],
@@ -148,14 +211,16 @@ if (is_array($exportFileLog)) {
 			$log->error('exportCvs failed' . $e);
 		}
 		foreach ($array as $val) {
-			unlink($val);
+			if (is_file($val))
+				unlink($val);
 		}
 		die;
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
 		$filePath = FileUtil::CSV . $fileName;
 		$csv->exportCvs($fileName);
-		unlink($filePath);
+		if (is_file($filePath))
+			unlink($filePath);
 		die;
 	}
 }

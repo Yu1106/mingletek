@@ -6,12 +6,18 @@ use common\PropertyRecord;
 
 /**
  * Class Pchome
- * @property $title
- * @property $Field1
- * @property $Field2
- * @property $Field3
- * @property $Field4
- * @property $Field5
+ * @property string $name
+ * @property string $category
+ * @property string $price
+ * @property string $sell_price
+ * @property string $standard
+ * @property string $size_color
+ * @property string $stock
+ * @property string $description
+ * @property string $product_description
+ * @property string $is_new
+ * @property string $picture
+ * @property string $site
  */
 class PchomeRecord extends PropertyRecord
 {
@@ -21,12 +27,18 @@ class PchomeRecord extends PropertyRecord
 	public function properties(): array
 	{
 		return [
-			'title',
-			'Field1',
-			'Field2',
-			'Field3',
-			'Field4',
-			'Field5'
+			'name',
+			'category',
+			'price',
+			'sell_price',
+			'standard',
+			'size_color',
+			'stock',
+			'description',
+			'product_description',
+			'is_new',
+			'picture',
+			'site'
 		];
 	}
 }
