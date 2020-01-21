@@ -22,7 +22,7 @@ if (isset($_SESSION['USER_ID'])) {
  * @param array $array
  * @return string
  */
-function arrayToString(array $array):string
+function arrayToString(array $array): string
 {
 	$returnData = array();
 	foreach ($array as $val) {
@@ -31,15 +31,5 @@ function arrayToString(array $array):string
 	}
 	$returnData = array_unique($returnData);
 	return implode(",", $returnData);
-}
-
-
-/**
- * @param string $string
- * @return string
- */
-function replaceRN(string $string):string
-{
-	return str_replace(array("\r", "\n", "\r\n", "\n\r"), '', $string);
 }
 
