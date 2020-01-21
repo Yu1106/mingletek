@@ -1257,20 +1257,18 @@ footer a {
 .fancybox-content.lightBox {
 	display: none;
 	width: 100%;
-	max-width: 800px;
+	max-width: 450px;
 	border-radius: 6px;
 	overflow: hidden;
 	transform: translateY(-50px);
 	transition: all .7s;
-	text-align: left;
+	text-align: center;
 }
 
-#loginBox.fancybox-content.lightBox,
-#logoutBox.fancybox-content.lightBox,
-#formErrorMsg.fancybox-content.lightBox,
-#alertMsgBox.fancybox-content.lightBox {
-	max-width: 450px;
-	text-align: center;
+#terms.fancybox-content.lightBox,
+#privacy.fancybox-content.lightBox {
+	max-width: 800px;
+	text-align: left;
 }
 
 .lightBox h4 {
@@ -1346,8 +1344,7 @@ footer a {
 
 
 /*========== Keyframe ==========*/
-@keyframes loading
-{
+@keyframes loading {
 	0% {transform: scale(0);}
 	50% {transform: scale(1);}
 	100% {transform: scale(0);}
