@@ -192,6 +192,8 @@ if (is_array($exportFileLog)) {
 			exit("cannot open <$filePath>\n");
 		}//打開壓縮檔，若無此檔自動建立新檔
 		foreach ($exportFileLog as $val) {
+			$csvNew = new CvsUtil(CvsUtil::READ, FileUtil::CSV . $val['file_name']);
+			file_put_contents(FileUtil::CSV . $val['file_name'], $csvNew->getContent());
 			$zip->addFile(FileUtil::CSV . $val['file_name'], $val['file_name']);
 			$array[] = FileUtil::CSV . $val['file_name'];
 		}

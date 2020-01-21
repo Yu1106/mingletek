@@ -35,16 +35,22 @@ class CvsUtil
 			case self::WRITE:
 				$this->cvsWrite = Writer::createFromPath($path, 'w+');
 				$this->cvsWrite->setDelimiter($delimiter);
-				$this->cvsWrite->setOutputBOM(Reader::BOM_UTF8);
 				break;
 			case self::WRITE_A:
 				$this->cvsWrite = Writer::createFromPath($path, 'a');
 				$this->cvsWrite->setDelimiter($delimiter);
-				$this->cvsWrite->setOutputBOM(Reader::BOM_UTF8);
 				break;
 			default:
 				exit();
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getContent()
+	{
+		return $this->cvsRead->getContent();
 	}
 
 	/**
