@@ -370,8 +370,8 @@ var formData = function () {
                 }
             }
         },
-        emptyFormData: function () {
-            form_data = new FormData();
+        emptyFileData: function () {
+            file_data = {};
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
@@ -808,7 +808,7 @@ var step4Action = function () {
         upload: function () {
             reset();
             var id = $("#id").val();
-            formData.emptyFormData();
+            formData.emptyFileData();
             formData.setFormData('#swiperupload', id);
             formData.setFile();
             formData.validate('step4');
