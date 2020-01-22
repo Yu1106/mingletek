@@ -358,6 +358,7 @@ var formData = function () {
         },
         emptyFormData: function(){
             form_data = new FormData();
+            validateData = [];
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
