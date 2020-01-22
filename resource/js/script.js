@@ -355,8 +355,10 @@ var formData = function () {
                 validateData = validateData.filter(function (element) {
                     return element != img;
                 });
+                form_data = form_data.filter(function (key, element) {
+                    return key != img;
+                });
             }
-            form_data.delete('file[' + img + ']');
             var el = $(e).parent(".previewThumbnail");
             el.remove();
         },
