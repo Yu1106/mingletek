@@ -346,7 +346,6 @@ var formData = function () {
             el.remove();
         },
         setFile: function () {
-            console.log(validateData);
             var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
             if (file_data.length == 0 || validateData.length == 0)
                 return false;
@@ -358,7 +357,6 @@ var formData = function () {
         },
         emptyFormData: function(){
             form_data = new FormData();
-            validateData = [];
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
