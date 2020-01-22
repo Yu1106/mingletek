@@ -110,8 +110,9 @@ $(function () {
             }
         });
 
-        $("#swiperupload").change(function (e) {
-            console.log(e);
+        $("#swiperupload").change(function () {
+            if ($("#swiperupload").val() == '')
+                return false;
             showLoading();
             readURL(this, true);
             $.ajax({
@@ -356,7 +357,7 @@ var formData = function () {
                 }
             }
         },
-        emptyFormData: function(){
+        emptyFormData: function () {
             form_data = new FormData();
         },
         setFormData: function (new_form_id, new_product_id) {
