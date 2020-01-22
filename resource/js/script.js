@@ -110,8 +110,8 @@ $(function () {
             }
         });
 
-        $("#swiperupload").change(function () {
-            alert(123);
+        $("#swiperupload").change(function (e) {
+            console.log(e);
             showLoading();
             readURL(this, true);
             $.ajax({
