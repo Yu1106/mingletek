@@ -111,6 +111,7 @@ $(function () {
         });
 
         $("#swiperupload").change(function () {
+            alert(123);
             showLoading();
             readURL(this, true);
             $.ajax({
