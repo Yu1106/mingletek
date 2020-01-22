@@ -229,11 +229,10 @@ var formData = function () {
         msg = '';
     };
     var setFormData = function () {
-
         form_data = new FormData();
         if (file_data.length == 0 || validateData.length == 0)
             return false;
-        $.each(file_data, function(i, v) {
+        $.each(file_data, function (i, v) {
             if ($.inArray(i, validateData) >= 0) {
                 form_data.append('file[' + i + ']', v);
             }
@@ -355,10 +354,9 @@ var formData = function () {
                 validateData = validateData.filter(function (element) {
                     return element != img;
                 });
-                form_data = form_data.filter(function (key, element) {
-                    return key != img;
-                });
             }
+            if (typeof (file_data[img]) != 'undefined')
+                delete file_data[img];
             var el = $(e).parent(".previewThumbnail");
             el.remove();
         },
