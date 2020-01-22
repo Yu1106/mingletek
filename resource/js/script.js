@@ -346,6 +346,7 @@ var formData = function () {
             el.remove();
         },
         setFile: function () {
+            console.log(validateData);
             var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
             if (file_data.length == 0 || validateData.length == 0)
                 return false;
@@ -354,6 +355,9 @@ var formData = function () {
                     form_data.append('file[' + file_data[i].name + ']', file_data[i]);
                 }
             }
+        },
+        emptyFormData: function(){
+            form_data = new FormData();
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
@@ -790,6 +794,7 @@ var step4Action = function () {
         upload: function () {
             reset();
             var id = $("#id").val();
+            formData.emptyFormData();
             formData.setFormData('#swiperupload', id);
             formData.setFile();
             formData.validate('step4');
