@@ -214,7 +214,8 @@ var formData = function () {
 
     var form_id = '#fileupload';
     var product_id = 0;
-    var form_data = new FormData();
+    var form_data;
+    var file_data = {};
     var status = false;
     var msg = '';
     var validateData = [];
@@ -227,11 +228,23 @@ var formData = function () {
         status = false;
         msg = '';
     };
+    var setFormData = function () {
+
+        form_data = new FormData();
+        if (file_data.length == 0 || validateData.length == 0)
+            return false;
+        $.each(file_data, function(i, v) {
+            if ($.inArray(i, validateData) >= 0) {
+                form_data.append('file[' + i + ']', v);
+            }
+        });
+        return true;
+    };
     return {
         validate: function (step) {
 
             reset();
-            if (validateData.length == 0) {
+            if (!setFormData()) {
                 clearLoading();
                 return false;
             }
@@ -274,7 +287,7 @@ var formData = function () {
         },
         upload: function (step) {
 
-            if (validateData.length == 0) {
+            if (!setFormData()) {
                 clearLoading();
                 return false;
             }
@@ -348,12 +361,12 @@ var formData = function () {
             el.remove();
         },
         setFile: function () {
-            var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
-            if (file_data.length == 0 || validateData.length == 0)
+            var files = $(form_id).prop('files');  //取得上傳檔案屬性
+            if (files.length == 0 || validateData.length == 0)
                 return false;
-            for (var i = 0; i < file_data.length; i++) {
-                if ($.inArray(file_data[i].name, validateData) >= 0) {
-                    form_data.append('file[' + file_data[i].name + ']', file_data[i]);
+            for (var i = 0; i < files.length; i++) {
+                if ($.inArray(files[i].name, validateData) >= 0) {
+                    file_data[files[i].name] = files[i];
                 }
             }
         },
