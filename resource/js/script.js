@@ -70,7 +70,7 @@ $(function () {
 
 
     $("#fileupload").change(function () {
-        $("#previewBox").html(""); // 清除預覽
+        // $("#previewBox").html(""); // 清除預覽
         $('.sectionPreview').fadeIn();
         readURL(this, false);
     });
@@ -200,6 +200,8 @@ $(function () {
                 }
                 reader.readAsDataURL(input.files[i]);
             }
+            if (!swiperUpload)
+                formData.setFile();
         }
     }
 
@@ -210,7 +212,7 @@ var formData = function () {
 
     var form_id = '#fileupload';
     var product_id = 0;
-    var form_data;
+    var form_data = new FormData();
     var status = false;
     var msg = '';
     var validateData = [];
@@ -223,24 +225,11 @@ var formData = function () {
         status = false;
         msg = '';
     };
-    var setFormData = function () {
-        form_data = new FormData(); //建構new FormData()
-        var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
-
-        if (file_data.length == 0 || validateData.length == 0)
-            return false;
-        for (var i = 0; i < file_data.length; i++) {
-            if ($.inArray(file_data[i].name, validateData) >= 0) {
-                form_data.append('file[]', file_data[i]);
-            }
-        }
-        return true;
-    };
     return {
         validate: function (step) {
 
             reset();
-            if (!setFormData()) {
+            if (validateData.length == 0) {
                 clearLoading();
                 return false;
             }
@@ -249,7 +238,6 @@ var formData = function () {
                 form_data.append('step', step);
             if (product_id > 0)
                 form_data.append('product_id', product_id);
-
             $.ajax({
                 url: 'upload.php',
                 cache: false,
@@ -284,7 +272,7 @@ var formData = function () {
         },
         upload: function (step) {
 
-            if (!setFormData()) {
+            if (validateData.length == 0) {
                 clearLoading();
                 return false;
             }
@@ -353,8 +341,19 @@ var formData = function () {
                     return element != img;
                 });
             }
+            form_data.delete('file[' + img + ']');
             var el = $(e).parent(".previewThumbnail");
             el.remove();
+        },
+        setFile: function () {
+            var file_data = $(form_id).prop('files');  //取得上傳檔案屬性
+            if (file_data.length == 0 || validateData.length == 0)
+                return false;
+            for (var i = 0; i < file_data.length; i++) {
+                if ($.inArray(file_data[i].name, validateData) >= 0) {
+                    form_data.append('file[' + file_data[i].name + ']', file_data[i]);
+                }
+            }
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
