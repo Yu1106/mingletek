@@ -791,6 +791,7 @@ var step4Action = function () {
             reset();
             var id = $("#id").val();
             formData.setFormData('#swiperupload', id);
+            formData.setFile();
             formData.validate('step4');
             getData(id);
         },
