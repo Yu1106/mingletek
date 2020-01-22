@@ -95,8 +95,19 @@ if ($_POST && CSRF::validate($_POST)) {
 			}
 			$array['color'] = arrayToString($colorArr);
 		}
-		if (isset($_POST['size']) && in_array($_POST['size'], Size::SizeType))
-			$array['size'] = $_POST['size'];
+		if (isset($_POST['size'])){
+			$sizeArr = array();
+			foreach ($_POST['size'] as $key => $val) {
+				if (in_array($val, Size::SizeType)) {
+					$sizeArr[] = $val;
+				} else if ($val == 'custom') {
+					$sizeArr[] = $val;
+					if ($_POST['size_custom_field'])
+						$array['size_custom_field'] = $_POST['size_custom_field'];
+				}
+			}
+			$array['size'] = arrayToString($sizeArr);
+		}
 		if (isset($_POST['collar']) && in_array($_POST['collar'], Collar::CollarType))
 			$array['collar'] = $_POST['collar'];
 		if (isset($_POST['collar']) && $_POST['collar'] == 'custom') {

@@ -24,6 +24,14 @@ use common\model\parameter\Yahoo;
     <div id="alertMsgBox" class="fancybox-content lightBox">分析錯誤!! 請砍掉重練</div>
     <form id="editForm" method="post" action="step4.php">
         <div id="formErrorMsg" class="fancybox-content lightBox"></div>
+        <div id="submitConfirm" class="fancybox-content lightBox">
+            <h4>請問確定要送出表單嗎?</h4>
+            <label class="noticeTxt">請再次確認，每個尺寸都已經填寫對應的庫存數量!</label>
+            <div class="flexBtnRow">
+                <a class="btn" href="javascript:step4Action.setSubmitCheck();">確認</a>
+                <a class="btn" href="javascript:;" data-fancybox-close>取消</a>
+            </div>
+        </div>
 		<?= \Volnix\CSRF\CSRF::getHiddenInputString(); ?>
         <input type="hidden" id="id" name="id" value="<?= $data['first']['id'] ?>">
 		<?php echo $section; ?>
@@ -161,10 +169,37 @@ use common\model\parameter\Yahoo;
                                    data-errormessage="* 請填寫商品售價/促銷">
                         </div>
                         <div class="formItem">
+                            <label class="formLabel required">尺寸 [複選]</label>
+                            <div class="checkboxWrap">
+								<?php foreach (Size::SizeType as $key => $val): ?>
+                                    <input id="<?= $val ?>" class="size validate[minCheckbox[1]] checkbox" type="checkbox"
+                                           name="size[]"
+                                           value="<?= $val ?>" data-prompt-target="formErrorMsg"
+                                           data-errormessage="* 請至少選擇一種尺寸"
+										<?= in_array($val, explode(",", $data['first']['size'])) ? "checked" : "" ?>>
+                                    <label for="<?= $val ?>">
+                                        <span class="radioIcon"></span>
+										<?= $val ?>
+                                    </label>
+								<?php endforeach; ?>
+                                <input id="sizeCustom" class="size customCheckbox validate[minCheckbox[1]] checkbox"
+                                       type="checkbox" name="size[]" value="custom" data-prompt-target="formErrorMsg"
+                                       data-errormessage="* 請至少選擇一種尺寸" <?= in_array('custom', explode(",", $data['first']['size'])) ? "checked" : "" ?>>
+                                <label for="sizeCustom">
+                                    <span class="checkboxIcon"></span>
+                                    自填
+                                </label>
+                                <input id="size_custom_field" name="size.custom.field" class="customField validate[condRequired[sizeCustom]]" type="text"
+                                       placeholder="填寫多個項目，請使用逗號區隔" data-prompt-target="formErrorMsg"
+                                       data-errormessage="* 您已勾選自填尺寸，請至少填寫一項"
+                                       value="<?= in_array('custom', explode(",", $data['first']['size'])) ? $data['first']['size_custom_field'] : "" ?>">
+                            </div>
+                        </div>
+                        <div class="formItem">
                             <label class="formLabel required">庫存</label>
-                            <input class="validate[required]" type="number" id="stock" name="stock" placeholder="庫存"
-                                   value="<?= $data['first']['stock'] ?>" min="0" data-prompt-target="formErrorMsg"
-                                   data-errormessage="* 請填寫庫存">
+                            <input class="validate[required]" type="text" id="stock" name="stock"
+                                   value="<?= $data['first']['stock'] ?>" placeholder="請填寫尺寸對應的數量，並使用逗號區隔"
+                                   data-prompt-target="formErrorMsg" data-errormessage="* 請填寫庫存">
                         </div>
                         <div class="formItem">
                             <label class="formLabel required">物品新舊</label>
@@ -268,22 +303,6 @@ use common\model\parameter\Yahoo;
                                 <input id="color_custom_field" class="customField" type="text" name="color.custom.field"
                                        placeholder="填寫多個項目，請使用逗號區隔"
                                        value="<?= in_array('custom', explode(",", $data['first']['color'])) ? $data['first']['color_custom_field'] : "" ?>">
-                            </div>
-                        </div>
-                        <div class="formItem">
-                            <label class="formLabel">尺寸</label>
-                            <div class="radioWrap">
-								<?php foreach (Size::SizeType as $key => $val): ?>
-                                    <input <?= ($data['first']['size'] == $val) ? "checked" : "" ?> id="<?= $key ?>"
-                                                                                                    type="radio"
-                                                                                                    class="size"
-                                                                                                    name="size"
-                                                                                                    value="<?= $val ?>">
-                                    <label for="<?= $key ?>">
-                                        <span class="radioIcon"></span>
-										<?= $val ?>
-                                    </label>
-								<?php endforeach; ?>
                             </div>
                         </div>
                         <div class="formItem">
@@ -526,7 +545,8 @@ use common\model\parameter\Yahoo;
             <div class="sectionContent flexBtnRow">
                 <a class="btn" href="javascript:step4Action.buildProductDescription();">產生商品特色說明</a>
                 <input class="btn" type="submit" value="儲存商品規格"/>
-                <a id="preview" style="visibility:<?= (!$data['first']['is_edit']) ? "hidden;" : "visible;" ?>" class="btn"
+                <a id="preview" style="visibility:<?= (!$data['first']['is_edit']) ? "hidden;" : "visible;" ?>"
+                   class="btn"
                    href="javascript:step4Action.previewProductPage('<?= $data['store']['upload_store_type'] ?>');">預覽商品頁</a>
                 <a style="visibility:<?= (!$data['isUpload']) ? "hidden;" : "visible" ?>" class="btn btnYellow"
                    href="javascript:step4Action.download();">產生下載檔案</a>

@@ -143,17 +143,35 @@ $(function () {
             maxErrorsPerField: 1,
             onValidationComplete: function (form, status) {
                 if (!status) {
-                    $.fancybox.open({
-                        src: '#formErrorMsg',
-                        afterClose: function () {
-                            $('#formErrorMsg').empty();
-                        }
-                    });
+                    showAlertMsg('#formErrorMsg', true);
                 } else {
-                    return true;
+                    if (step4Action.getSubmitCheck()) {
+                        return true;
+                    } else {
+                        checkStock();
+                    }
                 }
             }
         });
+
+        function checkStock() {
+            var customChecked = $('#sizeCustom').prop('checked');
+            var customLength = $('#sizeCustom').siblings('.customField').val().split(',').length;
+            var checkedLength = $("input[name='size[]']:checked").length;
+            var sizeLength;
+            var stockLength = $('input[name="stock"]').val().split(',').length;
+
+            if (customChecked) {
+                sizeLength = checkedLength - 1 + customLength;
+            } else {
+                sizeLength = checkedLength;
+            }
+            if (sizeLength != stockLength) {
+                showAlertMsg('#submitConfirm', false);
+            } else {
+                step4Action.setSubmitCheck();
+            }
+        }
     }
 
     function reload() {
@@ -457,6 +475,7 @@ var step3Action = function () {
 
 var step4Action = function () {
     var status = true;
+    var submitCheck = false;
     var picture;
     var sub_picture = {};
     var product = {};
@@ -507,6 +526,8 @@ var step4Action = function () {
             $("#color_custom_field").val('');
         if (typeof ($(".size")) != 'undefined')
             $(".size").attr("checked", false);
+        if (typeof ($("#size_custom_field")) != 'undefined')
+            $("#size_custom_field").val('');
         if (typeof ($(".collar")) != 'undefined')
             $(".collar").attr("checked", false);
         if (typeof ($("#collar_custom_field")) != 'undefined')
@@ -612,6 +633,8 @@ var step4Action = function () {
                     $("#color_custom_field").val(v);
                 if (k == 'size')
                     checked('size', v);
+                if (k == 'size_custom_field')
+                    $("#size_custom_field").val(v);
                 if (k == 'collar')
                     checked('collar', v);
                 if (k == 'collar_custom_field')
@@ -815,6 +838,13 @@ var step4Action = function () {
         download: function () {
             var id = $("#id").val();
             window.open('download.php');
+        },
+        setSubmitCheck: function () {
+            submitCheck = true;
+            $("#editForm").submit();
+        },
+        getSubmitCheck: function () {
+            return submitCheck;
         }
     }
 }();
@@ -831,11 +861,17 @@ function showLoading() {
 }
 
 //show alertMsgBox
-function showAlertMsg() {
-    $.fancybox.open({
-        src: '#alertMsgBox',
-        afterClose: function () {
-            $('#alertMsgBox').empty();
-        }
-    });
+function showAlertMsg(id, clear) {
+    if (clear) {
+        $.fancybox.open({
+            src: id,
+            afterClose: function () {
+                $(id).empty();
+            }
+        });
+    } else {
+        $.fancybox.open({
+            src: id
+        });
+    }
 }
