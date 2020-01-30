@@ -229,16 +229,7 @@ foreach ($storeType as $val) {
 						$product_description .= "," . $store['return_notice'];
 					$pchomeRecord->product_description = $product_description;
 					$pchomeRecord->is_new = $value['is_new'];
-					$picture = $value['picture'];
-					$i = 0;
-					if (is_array($subPicture)) {
-						foreach ($subPicture as $val) {
-							$picture .= ",";
-							$picture .= $val['picture'];
-							$i++;
-						}
-					}
-					$pchomeRecord->picture = $picture;
+					$pchomeRecord->picture = $value['picture'];
 					$pchomeRecord->site = $value['site'];
 					$csv->setData($pchomeRecord);
 					$csv->writeCsv($csvThread);
