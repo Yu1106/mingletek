@@ -23,6 +23,11 @@ class Ruten extends ShopFactory
 		return Store::RUTEN;
 	}
 
+	protected function setFileName()
+	{
+		$this->fileName = "ruten_auction2014.csv";
+	}
+
 	/**
 	 * @return array
 	 */

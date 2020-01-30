@@ -31,12 +31,15 @@ if (empty($store))
 $storeType = explode(",", $store['upload_store_type']);
 $uid = UidUtil::uid($_SESSION['USER_ID']);
 $product = Product::findByStoreId($_SESSION["STORE_ID"]);
+$email = $_SESSION['USER_EMAIL'];
+$directory = FileUtil::CSV . $email . "/";
 
 foreach ($storeType as $val) {
 	switch ($val) {
 		case StoreType::RUTEN:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::RUTEN);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -44,15 +47,16 @@ foreach ($storeType as $val) {
 					$rutenRecord->category = $value['ruten_category'];
 					$rutenRecord->name = $value['name'];
 					$rutenRecord->sell_price = $value['price'];
-					$rutenRecord->stock = $value['stock'];
+					$stockArr = explode(",", $value['stock']);
+					$rutenRecord->stock = array_sum($stockArr);
 					$rutenRecord->custom_category = '5400094';
 					$product_description = '';
 					if (isset($value['product_description']) && $value['product_description'] != '')
 						$product_description .= $value['product_description'];
 					if (isset($store['note']) && $store['note'] != '')
-						$product_description .= "," . $store['note'];
+						$product_description .= "\n" . $store['note'];
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
-						$product_description .= "," . $store['return_notice'];
+						$product_description .= "\n" . $store['return_notice'];
 					$rutenRecord->product_description = $product_description;
 					$rutenRecord->is_new = $value['is_new'];
 					$rutenRecord->picture_1 = $value['picture'];
@@ -60,10 +64,10 @@ foreach ($storeType as $val) {
 						$rutenRecord->picture_2 = $subPicture[0]['picture'];
 					if (isset($subPicture[1]))
 						$rutenRecord->picture_3 = $subPicture[1]['picture'];
+					$rutenRecord->site = $value['site'];
 					$rutenRecord->score_greater_than = 0;
 					$rutenRecord->score_less_than = '無';
 					$rutenRecord->abandoned = '無';
-					$rutenRecord->site = $value['site'];
 					$rutenRecord->size = $value['size'];
 					$rutenRecord->color = $value['color'];
 					$csv->setData($rutenRecord);
@@ -81,6 +85,7 @@ foreach ($storeType as $val) {
 		case StoreType::YAHOO:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::YAHOO);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -108,16 +113,47 @@ foreach ($storeType as $val) {
 					if (isset($value['product_description']) && $value['product_description'] != '')
 						$product_description .= $value['product_description'];
 					if (isset($store['note']) && $store['note'] != '')
-						$product_description .= "," . $store['note'];
+						$product_description .= "\n" . $store['note'];
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
-						$product_description .= "," . $store['return_notice'];
+						$product_description .= "\n" . $store['return_notice'];
 					$yahooRecord->product_description = $product_description;
 					$yahooRecord->site = $value['site'];
-					$yahooRecord->stock = $value['stock'];
+					$stockArr = explode(",", $value['stock']);
+					$yahooRecord->stock = array_sum($stockArr);
 					$yahooRecord->price = $value['price'];
 					$yahooRecord->sell_price = $value['sell_price'];
 					$yahooRecord->posting_days = $value['posting_days'];
 					$yahooRecord->is_new = $value['is_new'];
+					$yahooRecord->standard_name = '尺寸';
+					$sizeStr = str_replace("custom", $value['size_custom_field'], $value['size']);
+					$sizeArr = explode(",", $sizeStr);
+					$i = 1;
+					if (is_array($sizeArr)) {
+						foreach ($sizeArr as $val) {
+							$field = 'standard_' . ($i) . '_name';
+							$yahooRecord->$field = $val;
+							$i++;
+						}
+					}
+					$i = 1;
+					if (is_array($stockArr)) {
+						foreach ($stockArr as $val) {
+							$field = 'standard_' . ($i) . '_quantity';
+							$yahooRecord->$field = $val;
+							$i++;
+						}
+					}
+					$yahooRecord->pay_easily_cash = 'no';
+					$yahooRecord->pay_easily_credit_card = 'no';
+					$yahooRecord->pay_easily_family_mart = 'no';
+					$yahooRecord->pay_easily_seven_eleven = 'no';
+					$yahooRecord->pay_easily_cash_on_delivery = 'no';
+					$yahooRecord->ct_cash = 'no';
+					$yahooRecord->ct_credit_card = 'no';
+					$yahooRecord->ct_seven_eleven = 'no';
+					$yahooRecord->ct_contract_account = 'no';
+					$yahooRecord->ct_union_pay_cards = 'no';
+					$yahooRecord->family_mart_freight = 'no';
 					$yahooRecord->picture_1 = $value['picture'];
 					$i = 0;
 					if (is_array($subPicture)) {
@@ -142,6 +178,7 @@ foreach ($storeType as $val) {
 		case StoreType::PCHOME:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::PCHOME);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -151,7 +188,38 @@ foreach ($storeType as $val) {
 					$pchomeRecord->price = $value['price'];
 					$pchomeRecord->sell_price = $value['sell_price'];
 					$pchomeRecord->standard = '顏色>尺寸';
-					$pchomeRecord->stock = $value['stock'];
+
+					$size_color = '';
+					$sizeStr = str_replace("custom", $value['size_custom_field'], $value['size']);
+					$sizeArr = explode(",", $sizeStr);
+					$color = '';
+					$colorStr = str_replace("custom", $value['color_custom_field'], $value['color']);
+					$colorArr = explode(",", $colorStr);
+					foreach ($colorArr as $val) {
+						if ($val != "") {
+							$color = $val;
+							break;
+						}
+					}
+					$i = 0;
+					foreach ($sizeArr as $val) {
+						if ($i > 0)
+							$size_color .= "\n";
+						$size_color .= $val . ">" . $color;
+						$i++;
+					}
+					$pchomeRecord->size_color = $size_color;
+
+					$stock = '';
+					$stockArr = explode(",", $value['stock']);
+					$i = 0;
+					foreach ($stockArr as $val) {
+						if ($i > 0)
+							$stock .= "\n";
+						$stock .= $val;
+						$i++;
+					}
+					$pchomeRecord->stock = $stock;
 					$product_description = '';
 					if (isset($value['product_description']) && $value['product_description'] != '')
 						$product_description .= $value['product_description'];
@@ -161,6 +229,16 @@ foreach ($storeType as $val) {
 						$product_description .= "," . $store['return_notice'];
 					$pchomeRecord->product_description = $product_description;
 					$pchomeRecord->is_new = $value['is_new'];
+					$picture = $value['picture'];
+					$i = 0;
+					if (is_array($subPicture)) {
+						foreach ($subPicture as $val) {
+							$picture .= ",";
+							$picture .= $val['picture'];
+							$i++;
+						}
+					}
+					$pchomeRecord->picture = $picture;
 					$pchomeRecord->site = $value['site'];
 					$csv->setData($pchomeRecord);
 					$csv->writeCsv($csvThread);
@@ -193,10 +271,10 @@ if (is_array($exportFileLog)) {
 		}//打開壓縮檔，若無此檔自動建立新檔
 		foreach ($exportFileLog as $val) {
 			try {
-				$csvNew = new CvsUtil(CvsUtil::READ, FileUtil::CSV . $val['file_name']);
-				file_put_contents(FileUtil::CSV . $val['file_name'], $csvNew->getContent());
-				$zip->addFile(FileUtil::CSV . $val['file_name'], $val['file_name']);
-				$array[] = FileUtil::CSV . $val['file_name'];
+				$csvNew = new CvsUtil(CvsUtil::READ, $directory . $val['file_name']);
+				file_put_contents($directory . $val['file_name'], $csvNew->getContent());
+				$zip->addFile($directory . $val['file_name'], $val['file_name']);
+				$array[] = $directory . $val['file_name'];
 			} catch (Exception $e) {
 				$log = new LogUtil("export-" . date("Ymd"));
 				$log->error('exportCvs failed' . $e);
@@ -224,7 +302,7 @@ if (is_array($exportFileLog)) {
 		die;
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
-		$filePath = FileUtil::CSV . $fileName;
+		$filePath = $directory . $fileName;
 		$csv->exportCvs($fileName);
 		if (is_file($filePath))
 			unlink($filePath);

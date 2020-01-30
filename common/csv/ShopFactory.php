@@ -21,6 +21,7 @@ abstract class ShopFactory extends PropertyRecord
 	protected $fileName;
 	protected $filePath;
 	protected $delimiter;
+	protected $directory;
 
 	protected function init()
 	{
@@ -39,6 +40,13 @@ abstract class ShopFactory extends PropertyRecord
 		$this->fileName = Store::StoreType[$this->shopType()] . date("YmdHis") . rand(10000, 99999) . ".csv";
 	}
 
+	public function setDirectory($directory)
+	{
+		$this->directory = FileUtil::CSV . $directory . "/";
+		if (!file_exists($this->directory))
+			mkdir($this->directory, 0777, true);  // 建立目錄
+	}
+
 	/**
 	 * @return string
 	 */
@@ -53,7 +61,7 @@ abstract class ShopFactory extends PropertyRecord
 	 */
 	protected function getFilePath($fileName): string
 	{
-		return FileUtil::CSV . $fileName;
+		return $this->directory . $fileName;
 	}
 
 	/**
