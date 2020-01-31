@@ -68,8 +68,8 @@ foreach ($storeType as $val) {
 					$rutenRecord->score_greater_than = 0;
 					$rutenRecord->score_less_than = '無';
 					$rutenRecord->abandoned = '無';
-					$rutenRecord->size = $value['size'];
-					$rutenRecord->color = $value['color'];
+					$rutenRecord->size = str_replace("custom", $value['size_custom_field'], $value['size']);
+					$rutenRecord->color = str_replace("custom", $value['color_custom_field'], $value['color']);
 					$csv->setData($rutenRecord);
 					$csv->writeCsv($csvThread);
 				}
