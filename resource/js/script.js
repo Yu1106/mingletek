@@ -190,17 +190,19 @@ $(function () {
     function readURL(input, swiperUpload) {
         if (input.files && input.files.length >= 0) {
             for (var i = 0; i < input.files.length; i++) {
-                var reader = new FileReader();
-                reader.fileName = input.files[i].name;
-                formData.setValidate(input.files[i].name);
-                reader.onload = function (e) {
-                    if (!swiperUpload) {
-                        var img = $("<img class='previewImg'>").attr('src', e.target.result);
-                        var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
-                        $("#previewBox").prepend(thumbnail);
+                if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
+                    var reader = new FileReader();
+                    reader.fileName = input.files[i].name;
+                    formData.setValidate(input.files[i].name);
+                    reader.onload = function (e) {
+                        if (!swiperUpload) {
+                            var img = $("<img class='previewImg'>").attr('src', e.target.result);
+                            var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
+                            $("#previewBox").prepend(thumbnail);
+                        }
                     }
+                    reader.readAsDataURL(input.files[i]);
                 }
-                reader.readAsDataURL(input.files[i]);
             }
             if (!swiperUpload)
                 formData.setFile();
@@ -347,6 +349,9 @@ var formData = function () {
         },
         setValidate: function (e) {
             validateData.push(e);
+        },
+        getValidate: function () {
+            return validateData;
         },
         empty: function (e) {
             var img = $(e).attr('data-img');
