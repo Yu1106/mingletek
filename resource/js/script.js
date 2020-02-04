@@ -535,55 +535,55 @@ var step4Action = function () {
         if (typeof ($("#posting_days")) != 'undefined')
             $("#posting_days").val('');
         if (typeof ($(".sub_category")) != 'undefined')
-            $(".sub_category").attr("checked", false);
+            $(".sub_category").prop("checked", false);
         if (typeof ($("#sub_category_custom_field")) != 'undefined')
             $("#sub_category_custom_field").val('');
         if (typeof ($(".category")) != 'undefined')
-            $(".category").attr("checked", false);
+            $(".category").prop("checked", false);
         if (typeof ($(".fabric")) != 'undefined')
-            $(".fabric").attr("checked", false);
+            $(".fabric").prop("checked", false);
         if (typeof ($(".color")) != 'undefined')
-            $(".color").attr("checked", false);
+            $(".color").prop("checked", false);
         if (typeof ($("#color_custom_field")) != 'undefined')
             $("#color_custom_field").val('');
         if (typeof ($(".size")) != 'undefined')
-            $(".size").attr("checked", false);
+            $(".size").prop("checked", false);
         if (typeof ($("#size_custom_field")) != 'undefined')
             $("#size_custom_field").val('');
         if (typeof ($(".collar")) != 'undefined')
-            $(".collar").attr("checked", false);
+            $(".collar").prop("checked", false);
         if (typeof ($("#collar_custom_field")) != 'undefined')
             $("#collar_custom_field").val('');
         if (typeof ($(".neckline")) != 'undefined')
-            $(".neckline").attr("checked", false);
+            $(".neckline").prop("checked", false);
         if (typeof ($("#neckline_custom_field")) != 'undefined')
             $("#neckline_custom_field").val('');
         if (typeof ($(".sleeve")) != 'undefined')
-            $(".sleeve").attr("checked", false);
+            $(".sleeve").prop("checked", false);
         if (typeof ($("#sleeve_custom_field")) != 'undefined')
             $("#sleeve_custom_field").val('');
         if (typeof ($(".feature1")) != 'undefined')
-            $(".feature1").attr("checked", false);
+            $(".feature1").prop("checked", false);
         if (typeof ($("#feature1_custom_field")) != 'undefined')
             $("#feature1_custom_field").val('');
         if (typeof ($(".feature2")) != 'undefined')
-            $(".feature2").attr("checked", false);
+            $(".feature2").prop("checked", false);
         if (typeof ($("#feature2_custom_field")) != 'undefined')
             $("#feature2_custom_field").val('');
         if (typeof ($(".feature3")) != 'undefined')
-            $(".feature3").attr("checked", false);
+            $(".feature3").prop("checked", false);
         if (typeof ($("#feature3_custom_field")) != 'undefined')
             $("#feature3_custom_field").val('');
         if (typeof ($(".feature4")) != 'undefined')
-            $(".feature4").attr("checked", false);
+            $(".feature4").prop("checked", false);
         if (typeof ($("#feature4_custom_field")) != 'undefined')
             $("#feature4_custom_field").val('');
         if (typeof ($(".feature5")) != 'undefined')
-            $(".feature5").attr("checked", false);
+            $(".feature5").prop("checked", false);
         if (typeof ($("#feature5_custom_field")) != 'undefined')
             $("#feature5_custom_field").val('');
         if (typeof ($(".keyword")) != 'undefined')
-            $(".keyword").attr("checked", false);
+            $(".keyword").prop("checked", false);
         if (typeof ($("#keyword_custom_field")) != 'undefined')
             $("#keyword_custom_field").val('');
         if (typeof ($("#product_description")) != 'undefined')
@@ -706,7 +706,7 @@ var step4Action = function () {
         var className = "." + name;
         $.each($(className), function (k, v) {
             if (array.indexOf($(v).val()) != -1)
-                $(v).attr("checked", true);
+                $(v).prop("checked", true);
         });
     };
     var getCheckedData = function () {
