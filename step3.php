@@ -88,38 +88,69 @@ if ($_POST && CSRF::validate($_POST)) {
 					if ($pchomeCategory != '')
 						$array['pchome_category'] = $pchomeCategory;
 				}
-				if (isset($data->sub_category))
+				$name = '';
+				if (isset($data->sub_category)) {
 					$array['sub_category'] = SubCategory::SubCategoryType[$data->sub_category];
-				if (isset($data->category))
+					$name .= SubCategory::SubCategoryType[$data->sub_category];
+				}
+				if (isset($data->category)) {
 					$array['category'] = Category::CategoryType[$data->category];
-				if (isset($data->color_name))
+					$name .= Category::CategoryType[$data->category];
+				}
+				if (isset($data->color_name)) {
 					$array['color'] = Color::ColorType[$data->color_name];
-				if (isset($data->collar))
+					$name .= Color::ColorType[$data->color_name];
+				}
+				if (isset($data->collar)) {
 					$array['collar'] = Collar::CollarType[$data->collar];
-				if (isset($data->neckline))
+					$name .= Collar::CollarType[$data->collar];
+				}
+				if (isset($data->neckline)) {
 					$array['neckline'] = Neckline::NecklineType[$data->neckline];
-				if (isset($data->sleeve))
+					$name .= Neckline::NecklineType[$data->neckline];
+				}
+				if (isset($data->sleeve)) {
 					$array['sleeve'] = Sleeve::SleeveType[$data->sleeve];
+					$name .= Sleeve::SleeveType[$data->sleeve];
+				}
 				if (isset($data->texture_1) || isset($data->texture_2) || isset($data->texture_3) || isset($data->pattern)) {
 					$characteristic1 = array();
-					if (isset($data->texture_1))
+					if (isset($data->texture_1)) {
 						$characteristic1[] = Feature1::Feature1Type[$data->texture_1];
-					if (isset($data->texture_2))
+						$name .= Feature1::Feature1Type[$data->texture_1];
+					}
+					if (isset($data->texture_2)) {
 						$characteristic1[] = Feature1::Feature1Type[$data->texture_2];
-					if (isset($data->texture_3))
+						$name .= Feature1::Feature1Type[$data->texture_2];
+					}
+					if (isset($data->texture_3)) {
 						$characteristic1[] = Feature1::Feature1Type[$data->texture_3];
-					if (isset($data->pattern))
+						$name .= Feature1::Feature1Type[$data->texture_3];
+					}
+					if (isset($data->pattern)) {
 						$characteristic1[] = Feature1::Feature1Type[$data->pattern];
+						$name .= Feature1::Feature1Type[$data->pattern];
+					}
 					$array['feature_1'] = implode(",", $characteristic1);
 				}
-				if (isset($data->neckshoulder))
+				if (isset($data->neckshoulder)) {
 					$array['feature_2'] = Feature2::Feature2Type[$data->neckshoulder];
-				if (isset($data->accessory_1))
+					$name .= Feature2::Feature2Type[$data->neckshoulder];
+				}
+				if (isset($data->accessory_1)) {
 					$array['feature_3'] = Feature3::Feature3Type[$data->accessory_1];
-				if (isset($data->waist))
+					$name .= Feature3::Feature3Type[$data->accessory_1];
+				}
+				if (isset($data->waist)) {
 					$array['feature_4'] = Feature4::Feature4Type[$data->waist];
-				if (isset($data->texture_4))
+					$name .= Feature4::Feature4Type[$data->waist];
+				}
+				if (isset($data->texture_4)) {
 					$array['feature_5'] = Feature5::Feature5Type[$data->texture_4];
+					$name .= Feature5::Feature5Type[$data->texture_4];
+				}
+				if ($name != '')
+					$array['name'] = $name;
 				if (isset($data->collar_desc) || isset($data->neckline_desc) || isset($data->neckshoulder_desc) || isset($data->sleeve_desc)
 					|| isset($data->accessory_1_desc) || isset($data->pattern_desc) || isset($data->waist_desc) || isset($data->texture_1_desc)
 					|| isset($data->texture_2_desc) || isset($data->texture_3_desc) || isset($data->texture_4_desc)) {
