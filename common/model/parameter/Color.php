@@ -17,10 +17,11 @@ class Color
 	const VIOLET = 'violet';
 	const WHITE = 'white';
 	const BLACK = 'black';
-	const CYAN = 'cyan';
+	const NUDE = 'nude';
 	const GREY = 'grey';
 	const PINK = 'pink';
 	const BROWN = 'brown';
+	const CYAN = 'cyan';
 
 	const ColorType = [
 		self::RED => '紅色',
@@ -31,10 +32,11 @@ class Color
 		self::VIOLET => '紫色',
 		self::WHITE => '白色',
 		self::BLACK => '黑色',
-		self::CYAN => '青色',
+		self::NUDE => '膚色',
 		self::GREY => '灰色',
 		self::PINK => '粉色',
-		self::BROWN => '棕色'
+		self::BROWN => '棕色',
+		self::CYAN => '青色'
 	];
 
 	const ColorLBClass = [
@@ -46,9 +48,10 @@ class Color
 		self::VIOLET => 'lbPurple',
 		self::WHITE => 'lbWhite',
 		self::BLACK => 'lbBlack',
-		self::CYAN => 'lbCyan',
+		self::NUDE => 'lbNude',
 		self::GREY => 'lbGrey',
 		self::PINK => 'lbPink',
-		self::BROWN => 'lbBrown'
+		self::BROWN => 'lbBrown',
+		self::CYAN => 'lbCyan'
 	];
 }
