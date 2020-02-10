@@ -44,6 +44,12 @@ if ($_POST && CSRF::validate($_POST)) {
 
 UidUtil::unsetStoreId();
 
+$store = Store::findLastOneByUserId($_SESSION["USER_ID"]);
+
+$data = [
+	'store' => $store,
+];
+
 $view = new View('header');
 $view->assign('css', Asset::$stepCss);
 $view->assign('js', Asset::$stepJs);
@@ -57,4 +63,5 @@ $view = new View('step1');
 $view->assign('header', $header);
 $view->assign('section', $section);
 $view->assign('footer', $footer);
+$view->assign('data', $data);
 echo $view->render();
