@@ -56,4 +56,9 @@ class Store extends Model
 			static::tableName()
 		);
 	}
+
+	public static function findLastOneByUserId(int $userId)
+	{
+		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where user_id = :user_id order by id desc", [":user_id" => $userId]);
+	}
 }

@@ -15,6 +15,7 @@ use common\model\parameter\Pchome;
 use common\model\parameter\Ruten;
 use common\model\parameter\Size;
 use common\model\parameter\Sleeve;
+use common\model\parameter\Store;
 use common\model\parameter\SubCategory;
 use common\model\parameter\Yahoo;
 
@@ -113,42 +114,48 @@ use common\model\parameter\Yahoo;
                         </div>
                     </div>
                     <div id="tab-1" class="tabContent active">
-                        <div class="formItem">
-                            <label class="formLabel">pchome 類別</label>
-                            <div class="selectWrap icon-expand">
-                                <select id="pchome_category" name="pchome.category">
-                                    <option value="">類別</option>
-									<?php foreach (Pchome::PchomeType as $key => $val): ?>
-                                        <option <?= ($data['first']['pchome_category'] == $key) ? "selected" : "" ?>
-                                                value="<?= $key ?>"><?= $val ?></option>
-									<?php endforeach; ?>
-                                </select>
+						<?php if (in_array(Store::PCHOME, explode(",", $data['store']['upload_store_type']))): ?>
+                            <div class="formItem">
+                                <label class="formLabel">pchome 類別</label>
+                                <div class="selectWrap icon-expand">
+                                    <select id="pchome_category" name="pchome.category">
+                                        <option value="">類別</option>
+										<?php foreach (Pchome::PchomeType as $key => $val): ?>
+                                            <option <?= ($data['first']['pchome_category'] == $key) ? "selected" : "" ?>
+                                                    value="<?= $key ?>"><?= $val ?></option>
+										<?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="formItem">
-                            <label class="formLabel">露天類別</label>
-                            <div class="selectWrap icon-expand">
-                                <select id="ruten_category" name="ruten.category">
-                                    <option value="">類別</option>
-									<?php foreach (Ruten::RutenType as $key => $val): ?>
-                                        <option <?= ($data['first']['ruten_category'] == $key) ? "selected" : "" ?>
-                                                value="<?= $key ?>"><?= $val ?></option>
-									<?php endforeach; ?>
-                                </select>
+						<?php endif; ?>
+						<?php if (in_array(Store::RUTEN, explode(",", $data['store']['upload_store_type']))): ?>
+                            <div class="formItem">
+                                <label class="formLabel">露天類別</label>
+                                <div class="selectWrap icon-expand">
+                                    <select id="ruten_category" name="ruten.category">
+                                        <option value="">類別</option>
+										<?php foreach (Ruten::RutenType as $key => $val): ?>
+                                            <option <?= ($data['first']['ruten_category'] == $key) ? "selected" : "" ?>
+                                                    value="<?= $key ?>"><?= $val ?></option>
+										<?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="formItem">
-                            <label class="formLabel">yahoo 類別</label>
-                            <div class="selectWrap icon-expand">
-                                <select id="yahoo_category" name="yahoo.category">
-                                    <option value="">類別</option>
-									<?php foreach (Yahoo::YahooType as $key => $val): ?>
-                                        <option <?= ($data['first']['yahoo_category'] == $key) ? "selected" : "" ?>
-                                                value="<?= $key ?>"><?= $val ?></option>
-									<?php endforeach; ?>
-                                </select>
+						<?php endif; ?>
+						<?php if (in_array(Store::YAHOO, explode(",", $data['store']['upload_store_type']))): ?>
+                            <div class="formItem">
+                                <label class="formLabel">yahoo 類別</label>
+                                <div class="selectWrap icon-expand">
+                                    <select id="yahoo_category" name="yahoo.category">
+                                        <option value="">類別</option>
+										<?php foreach (Yahoo::YahooType as $key => $val): ?>
+                                            <option <?= ($data['first']['yahoo_category'] == $key) ? "selected" : "" ?>
+                                                    value="<?= $key ?>"><?= $val ?></option>
+										<?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+						<?php endif; ?>
                         <div class="formItem">
                             <label class="formLabel required">商品名稱</label>
                             <input class="validate[required]" type="text" id="name" name="name" placeholder="商品名稱"
@@ -172,7 +179,8 @@ use common\model\parameter\Yahoo;
                             <label class="formLabel required">尺寸 [複選]</label>
                             <div class="checkboxWrap">
 								<?php foreach (Size::SizeType as $key => $val): ?>
-                                    <input id="<?= $val ?>" class="size validate[minCheckbox[1]] checkbox" type="checkbox"
+                                    <input id="<?= $val ?>" class="size validate[minCheckbox[1]] checkbox"
+                                           type="checkbox"
                                            name="size[]"
                                            value="<?= $val ?>" data-prompt-target="formErrorMsg"
                                            data-errormessage="* 請至少選擇一種尺寸"
@@ -189,7 +197,8 @@ use common\model\parameter\Yahoo;
                                     <span class="checkboxIcon"></span>
                                     自填
                                 </label>
-                                <input id="size_custom_field" name="size.custom.field" class="customField validate[condRequired[sizeCustom]]" type="text"
+                                <input id="size_custom_field" name="size.custom.field"
+                                       class="customField validate[condRequired[sizeCustom]]" type="text"
                                        placeholder="填寫多個項目，請使用逗號區隔" data-prompt-target="formErrorMsg"
                                        data-errormessage="* 您已勾選自填尺寸，請至少填寫一項"
                                        value="<?= in_array('custom', explode(",", $data['first']['size'])) ? $data['first']['size_custom_field'] : "" ?>">
