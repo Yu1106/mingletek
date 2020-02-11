@@ -9,7 +9,7 @@
                 <div class="sectionTitle">
                     <h3>您已選擇<label
                                 class="shoppingBag"><?= \common\model\parameter\Clothes::ClothesType[$store["clothes_type"]] ?>
-                            <label></h3>
+                            </label></h3>
                 </div>
                 <label class="sectionDesc noticeTxt">請上傳商品圖片(可傳多張)，系統會為您匹配圖片，並產出商品介紹；如果沒有附圖可直接按下一步。<br/>照片長或寬的解析度不可小於600
                     pixels
