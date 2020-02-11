@@ -192,16 +192,18 @@ $(function () {
             for (var i = 0; i < input.files.length; i++) {
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
                     var reader = new FileReader();
-                    reader.fileName = input.files[i].name;
-                    formData.setValidate(input.files[i].name);
-                    reader.onload = function (e) {
-                        if (!swiperUpload) {
-                            var img = $("<img class='previewImg'>").attr('src', e.target.result);
-                            var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
-                            $("#previewBox").prepend(thumbnail);
+                    if (formData.extCheck(input.files[i].name)) {
+                        reader.fileName = input.files[i].name;
+                        formData.setValidate(input.files[i].name);
+                        reader.onload = function (e) {
+                            if (!swiperUpload) {
+                                var img = $("<img class='previewImg'>").attr('src', e.target.result);
+                                var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
+                                $("#previewBox").prepend(thumbnail);
+                            }
                         }
+                        reader.readAsDataURL(input.files[i]);
                     }
-                    reader.readAsDataURL(input.files[i]);
                 }
             }
             if (!swiperUpload)
@@ -393,6 +395,14 @@ var formData = function () {
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
             product_id = new_product_id;
+        },
+        extCheck: function (filePath) {
+            var extStart = filePath.lastIndexOf(".");
+            var ext = filePath.substring(extStart, filePath.length).toUpperCase();
+            if (ext == ".PNG" && ext == ".GIF" && ext == ".JPG")
+                return true;
+            else
+                return false;
         }
     }
 }();
@@ -491,14 +501,19 @@ var step3Action = function () {
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
-                        formData.validate('step3');
-                        if (formData.getStatus()) {
-                            startProcess();
+                        var validate = formData.getValidate();
+                        if (validate.length != 0) {
+                            formData.validate('step3');
+                            if (formData.getStatus()) {
+                                startProcess();
+                            } else {
+                                $.each($(".icon-x-square"), function (k, v) {
+                                    if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
+                                        formData.empty(v);
+                                });
+                            }
                         } else {
-                            $.each($(".icon-x-square"), function (k, v) {
-                                if ($.inArray($(v).attr("data-img"), formData.getEmptyData()) >= 0)
-                                    formData.empty(v);
-                            });
+                            startProcess();
                         }
                     }
                 }
