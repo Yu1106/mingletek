@@ -381,6 +381,7 @@ var formData = function () {
         },
         setFile: function () {
             var files = $(form_id).prop('files');  //取得上傳檔案屬性
+            console.log(validateData);
             if (files.length == 0 || validateData.length == 0)
                 return false;
             for (var i = 0; i < files.length; i++) {
