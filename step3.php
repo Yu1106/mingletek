@@ -88,31 +88,35 @@ if ($_POST && CSRF::validate($_POST)) {
 					if ($pchomeCategory != '')
 						$array['pchome_category'] = $pchomeCategory;
 				}
+				/**
+				 * name
+				 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
+				 */
 				$name = '';
-				if (isset($data->sub_category)) {
-					$array['sub_category'] = SubCategory::SubCategoryType[$data->sub_category];
-					$name .= SubCategory::SubCategoryType[$data->sub_category];
-				}
-				if (isset($data->category)) {
-					$array['category'] = Category::CategoryType[$data->category];
-					$name .= Category::CategoryType[$data->category];
-				}
-				if (isset($data->color_name)) {
-					$array['color'] = Color::ColorType[$data->color_name];
-					$name .= Color::ColorType[$data->color_name];
-				}
+				// 賣場名稱
+				$name .= $store['name'];
+				// 關鍵字 NULL
+				// 衣領
 				if (isset($data->collar)) {
 					$array['collar'] = Collar::CollarType[$data->collar];
 					$name .= Collar::CollarType[$data->collar];
 				}
+				// 領口
 				if (isset($data->neckline)) {
 					$array['neckline'] = Neckline::NecklineType[$data->neckline];
 					$name .= Neckline::NecklineType[$data->neckline];
 				}
+				// 特色二
+				if (isset($data->neckshoulder)) {
+					$array['feature_2'] = Feature2::Feature2Type[$data->neckshoulder];
+					$name .= Feature2::Feature2Type[$data->neckshoulder];
+				}
+				// 袖長
 				if (isset($data->sleeve)) {
 					$array['sleeve'] = Sleeve::SleeveType[$data->sleeve];
 					$name .= Sleeve::SleeveType[$data->sleeve];
 				}
+				// 特色一
 				if (isset($data->texture_1) || isset($data->texture_2) || isset($data->texture_3) || isset($data->pattern)) {
 					$characteristic1 = array();
 					if (isset($data->texture_1)) {
@@ -133,24 +137,40 @@ if ($_POST && CSRF::validate($_POST)) {
 					}
 					$array['feature_1'] = implode(",", $characteristic1);
 				}
-				if (isset($data->neckshoulder)) {
-					$array['feature_2'] = Feature2::Feature2Type[$data->neckshoulder];
-					$name .= Feature2::Feature2Type[$data->neckshoulder];
-				}
+				// 特色三
 				if (isset($data->accessory_1)) {
 					$array['feature_3'] = Feature3::Feature3Type[$data->accessory_1];
 					$name .= Feature3::Feature3Type[$data->accessory_1];
 				}
+				// 特色四
 				if (isset($data->waist)) {
 					$array['feature_4'] = Feature4::Feature4Type[$data->waist];
 					$name .= Feature4::Feature4Type[$data->waist];
 				}
+				// 特色五
 				if (isset($data->texture_4)) {
 					$array['feature_5'] = Feature5::Feature5Type[$data->texture_4];
 					$name .= Feature5::Feature5Type[$data->texture_4];
 				}
+				// 顏色
+				if (isset($data->color_name)) {
+					$array['color'] = Color::ColorType[$data->color_name];
+					$name .= Color::ColorType[$data->color_name];
+				}
+				// 次分類|主分類
+				if (isset($data->sub_category)) {
+					$array['sub_category'] = SubCategory::SubCategoryType[$data->sub_category];
+					$name .= SubCategory::SubCategoryType[$data->sub_category];
+				}
+				if (isset($data->category)) {
+					$array['category'] = Category::CategoryType[$data->category];
+					if (!isset($data->sub_category)) {
+						$name .= Category::CategoryType[$data->category];
+					}
+				}
 				if ($name != '')
 					$array['name'] = $name;
+
 				if (isset($data->collar_desc) || isset($data->neckline_desc) || isset($data->neckshoulder_desc) || isset($data->sleeve_desc)
 					|| isset($data->accessory_1_desc) || isset($data->pattern_desc) || isset($data->waist_desc) || isset($data->texture_1_desc)
 					|| isset($data->texture_2_desc) || isset($data->texture_3_desc) || isset($data->texture_4_desc)) {
