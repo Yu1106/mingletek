@@ -541,7 +541,7 @@ var step4Action = function () {
         if (typeof ($("#stock")) != 'undefined')
             $("#stock").val('');
         if (typeof ($("#is_new")) != 'undefined')
-            $("#is_new").val('');
+            $(".is_new").prop("checked", false);
         if (typeof ($("#site")) != 'undefined')
             $("#site").val('');
         if (typeof ($("#posting_days")) != 'undefined')
@@ -648,7 +648,7 @@ var step4Action = function () {
                 if (k == 'stock')
                     $("#stock").val(v);
                 if (k == 'is_new')
-                    $("#is_new").val(v);
+                    checked('is_new', v);
                 if (k == 'site')
                     $("#site").val(v);
                 if (k == 'posting_days')

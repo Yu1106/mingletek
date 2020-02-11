@@ -163,6 +163,12 @@
                         <img src="<?= $val['path'] ?>" alt="">
                     </div>
 				<?php endforeach; ?>
+                <div class="item-description">
+                    <p><?= $data['store']['note'] ?></p>
+                </div>
+                <div class="item-description">
+                    <p><?= $data['store']['return_notice'] ?></p>
+                </div>
             </div>
             <div class="btnRow">
                 <label for="" class="btn btnOrange">
