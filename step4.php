@@ -43,12 +43,21 @@ if ($_POST && CSRF::validate($_POST)) {
 		$array['is_edit'] = 1;
 		if (isset($_POST['product_description']))
 			$array['product_description'] = $_POST['product_description'] . "\n";
-		if (isset($_POST['pchome_category']))
+		if (isset($_POST['pchome_category'])) {
 			$array['pchome_category'] = $_POST['pchome_category'];
-		if (isset($_POST['ruten_category']))
+		} else {
+			$array['pchome_category'] = '';
+		}
+		if (isset($_POST['ruten_category'])) {
 			$array['ruten_category'] = $_POST['ruten_category'];
-		if (isset($_POST['yahoo_category']))
+		} else {
+			$array['ruten_category'] = '';
+		}
+		if (isset($_POST['yahoo_category'])) {
 			$array['yahoo_category'] = $_POST['yahoo_category'];
+		} else {
+			$array['yahoo_category'] = '';
+		}
 		if (isset($_POST['name']))
 			$array['name'] = $_POST['name'];
 		if (isset($_POST['price']))
@@ -63,14 +72,20 @@ if ($_POST && CSRF::validate($_POST)) {
 			$array['site'] = $_POST['site'];
 		if (isset($_POST['posting_days']))
 			$array['posting_days'] = $_POST['posting_days'];
-		if (isset($_POST['sub_category']) && in_array($_POST['sub_category'], SubCategory::SubCategoryType))
+		if (isset($_POST['sub_category']) && in_array($_POST['sub_category'], SubCategory::SubCategoryType)) {
 			$array['sub_category'] = $_POST['sub_category'];
-		if (isset($_POST['sub_category']) && $_POST['sub_category'] == 'custom') {
+		} else if (isset($_POST['sub_category']) && $_POST['sub_category'] == 'custom') {
 			$array['sub_category'] = $_POST['sub_category'];
 			$array['sub_category_custom_field'] = $_POST['sub_category_custom_field'];
+		} else {
+			$array['sub_category'] = '';
+			$array['sub_category_custom_field'] = '';
 		}
-		if (isset($_POST['category']) && in_array($_POST['category'], Category::CategoryType))
+		if (isset($_POST['category']) && in_array($_POST['category'], Category::CategoryType)) {
 			$array['category'] = $_POST['category'];
+		} else {
+			$array['category'] = '';
+		}
 		if (isset($_POST['fabric'])) {
 			$fabricArr = array();
 			foreach ($_POST['fabric'] as $key => $val) {
@@ -79,23 +94,16 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['fabric'] = arrayToString($fabricArr);
+		} else {
+			$array['fabric'] = '';
 		}
-		if (isset($_POST['category']) && in_array($_POST['category'], Category::CategoryType))
-			$array['category'] = $_POST['category'];
-		if (isset($_POST['color'])) {
-			$colorArr = array();
-			foreach ($_POST['color'] as $key => $val) {
-				if (in_array($val, Color::ColorType)) {
-					$colorArr[] = $val;
-				} else if ($val == 'custom') {
-					$colorArr[] = $val;
-					if ($_POST['color_custom_field'])
-						$array['color_custom_field'] = $_POST['color_custom_field'];
-				}
-			}
-			$array['color'] = arrayToString($colorArr);
+		if (isset($_POST['color']) && in_array($_POST['color'], Color::ColorType))
+			$array['color'] = $_POST['color'];
+		if (isset($_POST['color']) && $_POST['color'] == 'custom') {
+			$array['color'] = $_POST['color'];
+			$array['color_custom_field'] = $_POST['color_custom_field'];
 		}
-		if (isset($_POST['size'])){
+		if (isset($_POST['size'])) {
 			$sizeArr = array();
 			foreach ($_POST['size'] as $key => $val) {
 				if (in_array($val, Size::SizeType)) {
@@ -108,17 +116,23 @@ if ($_POST && CSRF::validate($_POST)) {
 			}
 			$array['size'] = arrayToString($sizeArr);
 		}
-		if (isset($_POST['collar']) && in_array($_POST['collar'], Collar::CollarType))
+		if (isset($_POST['collar']) && in_array($_POST['collar'], Collar::CollarType)) {
 			$array['collar'] = $_POST['collar'];
-		if (isset($_POST['collar']) && $_POST['collar'] == 'custom') {
+		} else if (isset($_POST['collar']) && $_POST['collar'] == 'custom') {
 			$array['collar'] = $_POST['collar'];
 			$array['collar_custom_field'] = $_POST['collar_custom_field'];
+		} else {
+			$array['collar'] = '';
+			$array['collar_custom_field'] = '';
 		}
-		if (isset($_POST['neckline']) && in_array($_POST['neckline'], Neckline::NecklineType))
+		if (isset($_POST['neckline']) && in_array($_POST['neckline'], Neckline::NecklineType)) {
 			$array['neckline'] = $_POST['neckline'];
-		if (isset($_POST['neckline']) && $_POST['neckline'] == 'custom') {
+		} else if (isset($_POST['neckline']) && $_POST['neckline'] == 'custom') {
 			$array['neckline'] = $_POST['neckline'];
 			$array['neckline_custom_field'] = $_POST['neckline_custom_field'];
+		} else {
+			$array['neckline'] = '';
+			$array['neckline_custom_field'] = '';
 		}
 		if (isset($_POST['sleeve']) && in_array($_POST['sleeve'], Sleeve::SleeveType))
 			$array['sleeve'] = $_POST['sleeve'];
@@ -138,6 +152,9 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['feature_1'] = arrayToString($feature1Arr);
+		} else {
+			$array['feature_1'] = '';
+			$array['feature_1_custom_field'] = '';
 		}
 		if (isset($_POST['feature2'])) {
 			$feature2Arr = array();
@@ -151,6 +168,9 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['feature_2'] = arrayToString($feature2Arr);
+		} else {
+			$array['feature_2'] = '';
+			$array['feature_2_custom_field'] = '';
 		}
 		if (isset($_POST['feature3'])) {
 			$feature3Arr = array();
@@ -164,12 +184,18 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['feature_3'] = arrayToString($feature3Arr);
+		} else {
+			$array['feature_3'] = '';
+			$array['feature_3_custom_field'] = '';
 		}
-		if (isset($_POST['feature4']) && in_array($_POST['feature4'], Feature4::Feature4Type))
+		if (isset($_POST['feature4']) && in_array($_POST['feature4'], Feature4::Feature4Type)) {
 			$array['feature_4'] = $_POST['feature4'];
-		if (isset($_POST['feature4']) && $_POST['feature4'] == 'custom') {
+		} else if (isset($_POST['feature4']) && $_POST['feature4'] == 'custom') {
 			$array['feature_4'] = $_POST['feature4'];
 			$array['feature_4_custom_field'] = $_POST['feature4_custom_field'];
+		} else {
+			$array['feature_4'] = '';
+			$array['feature_4_custom_field'] = '';
 		}
 		if (isset($_POST['feature5'])) {
 			$feature5Arr = array();
@@ -183,6 +209,9 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['feature_5'] = arrayToString($feature5Arr);
+		} else {
+			$array['feature_5'] = '';
+			$array['feature_5_custom_field'] = '';
 		}
 		if (isset($_POST['keyword'])) {
 			$keywordArr = array();
@@ -196,6 +225,9 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 			}
 			$array['keyword'] = arrayToString($keywordArr);
+		} else {
+			$array['keyword'] = '';
+			$array['keyword_custom_field'] = '';
 		}
 		Product::modifyProductData($_POST['id'], $array);
 

@@ -389,8 +389,8 @@ input[type="checkbox"]:checked + label::after {
 	display: none;
 }
 
-input[type="checkbox"] + label.lbColor {padding: 3px;}
-input[type="checkbox"]:checked + label.lbColor {border: 1.5px solid #f4aeac; border: 1.5px solid var(--pink);}
+input[type="radio"] + label.lbColor {padding: 3px;}
+input[type="radio"]:checked + label.lbColor {border: 1.5px solid #f4aeac; border: 1.5px solid var(--pink);}
 label.lbColor::before {content: ""; display: block; width: 70px; padding: 3px 0px;}
 label.lbRed::before {background-color: #b81c22;}
 label.lbOrange::before {background-color: #ff8a00;}

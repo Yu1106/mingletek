@@ -9,10 +9,12 @@ use common\model\parameter\Feature2;
 use common\model\parameter\Feature3;
 use common\model\parameter\Feature4;
 use common\model\parameter\Feature5;
+use common\model\parameter\isNew;
 use common\model\parameter\Keyword;
 use common\model\parameter\Neckline;
 use common\model\parameter\Pchome;
 use common\model\parameter\Ruten;
+use common\model\parameter\Site;
 use common\model\parameter\Size;
 use common\model\parameter\Sleeve;
 use common\model\parameter\Store;
@@ -212,15 +214,33 @@ use common\model\parameter\Yahoo;
                         </div>
                         <div class="formItem">
                             <label class="formLabel required">物品新舊</label>
-                            <input class="validate[required]" type="text" id="is_new" name="is.new" placeholder="物品新舊"
-                                   value="<?= $data['first']['is_new'] ?>"
-                                   data-prompt-target="formErrorMsg" data-errormessage="* 請填寫物品新舊">
+                            <div class="radioWrap">
+								<?php foreach (isNew::isNewType as $key => $val): ?>
+                                    <input <?= ($data['first']['is_new'] == $val) ? "checked" : "" ?> id="<?= $key ?>"
+                                                                                                      class="is_new validate[required]"
+                                                                                                      type="radio"
+                                                                                                      name="is_new"
+                                                                                                      value="<?= $val ?>"
+                                                                                                      data-prompt-target="formErrorMsg"
+                                                                                                      data-errormessage="* 請填寫物品新舊">
+                                    <label for="<?= $key ?>">
+                                        <span class="radioIcon"></span>
+										<?= $val ?>
+                                    </label>
+								<?php endforeach; ?>
+                            </div>
                         </div>
                         <div class="formItem">
                             <label class="formLabel required">物品所有地</label>
-                            <input class="validate[required]" type="text" id="site" name="site" placeholder="物品所有地"
-                                   value="<?= $data['first']['site'] ?>"
-                                   data-prompt-target="formErrorMsg" data-errormessage="* 請填寫物品所有地">
+                            <div class="selectWrap icon-expand">
+                                <select id="site" class="validate[required]" name="site" data-prompt-target="formErrorMsg" data-errormessage="* 請填寫物品所有地">
+                                    <option value=""></option>
+									<?php foreach (Site::SiteType as $key => $val): ?>
+                                        <option <?= ($data['first']['site'] == $key) ? "selected" : "" ?>
+                                                value="<?= $key ?>"><?= $val ?></option>
+									<?php endforeach; ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="formItem">
                             <label class="formLabel required">刊登天數</label>
@@ -236,7 +256,7 @@ use common\model\parameter\Yahoo;
                             <div class="radioWrap">
 								<?php foreach (SubCategory::SubCategoryType as $key => $val): ?>
                                     <input <?= ($data['first']['sub_category'] == $val) ? "checked" : "" ?>
-                                            id="<?= $key ?>" type="radio" class="sub_category" name="sub.category"
+                                            id="<?= $key ?>" type="radio" class="sub_category" name="sub_category"
                                             value="<?= $val ?>">
                                     <label for="<?= $key ?>">
                                         <span class="radioIcon"></span>
@@ -245,7 +265,7 @@ use common\model\parameter\Yahoo;
 								<?php endforeach; ?>
                                 <input <?= ($data['first']['sub_category'] == 'custom') ? "checked" : "" ?>
                                         id="subCategoryCustom" class="sub_category customRadio" type="radio"
-                                        name="sub.category"
+                                        name="sub_category"
                                         value="custom">
                                 <label for="subCategoryCustom">
                                     <span class="radioIcon"></span>
@@ -255,6 +275,8 @@ use common\model\parameter\Yahoo;
                                        name="sub.category.custom.field"
                                        value="<?= ($data['first']['sub_category'] == 'custom') ? $data['first']['sub_category_custom_field'] : "" ?>"
                                        placeholder="請填寫一個項目">
+                                <input id="sub_category_checked" name="sub_category_checked" type="hidden"
+                                       value="<?= $data['first']['sub_category'] ?>">
                             </div>
                         </div>
                         <div class="formItem">
@@ -271,6 +293,8 @@ use common\model\parameter\Yahoo;
 										<?= $val ?>
                                     </label>
 								<?php endforeach; ?>
+                                <input id="category_checked" name="category_checked" type="hidden"
+                                       value="<?= $data['first']['category'] ?>">
                             </div>
                         </div>
                         <div class="formItem">
@@ -288,29 +312,33 @@ use common\model\parameter\Yahoo;
                             </div>
                         </div>
                         <div class="formItem">
-                            <label class="formLabel">顏色 [複選]</label>
+                            <label class="formLabel required">顏色</label>
                             <div class="checkboxWrap">
 								<?php foreach (Color::ColorType as $key => $val): ?>
                                     <input <?= in_array($val, explode(",", $data['first']['color'])) ? "checked" : "" ?>
                                             id="<?= $key ?>"
-                                            type="checkbox"
-                                            class="color"
-                                            name="color[]"
-                                            value="<?= $val ?>">
+                                            type="radio"
+                                            class="color validate[required]"
+                                            name="color"
+                                            value="<?= $val ?>"
+                                            data-prompt-target="formErrorMsg"
+                                            data-errormessage="* 請填寫物品新舊">
                                     <label for="<?= $key ?>" class="tooltip lbColor <?= Color::ColorLBClass[$key] ?>">
-                                        <span class="checkboxIcon"></span>
+                                        <span class="radioIcon"></span>
                                         <span class="tooltipTxt"><?= $val ?></span>
                                     </label>
 								<?php endforeach; ?>
                                 <input <?= in_array('custom', explode(",", $data['first']['color'])) ? "checked" : "" ?>
-                                        id="colorCustom" class="color customCheckbox" type="checkbox" name="color[]"
-                                        value="custom">
+                                        id="colorCustom" class="color customCheckbox validate[required]" type="radio" name="color"
+                                        value="custom"
+                                        data-prompt-target="formErrorMsg"
+                                        data-errormessage="* 請填寫顏色">
                                 <label for="colorCustom">
-                                    <span class="checkboxIcon"></span>
+                                    <span class="radioIcon"></span>
                                     自填
                                 </label>
                                 <input id="color_custom_field" class="customField" type="text" name="color.custom.field"
-                                       placeholder="填寫多個項目，請使用逗號區隔"
+                                       placeholder="請填寫一個項目"
                                        value="<?= in_array('custom', explode(",", $data['first']['color'])) ? $data['first']['color_custom_field'] : "" ?>">
                             </div>
                         </div>
@@ -340,6 +368,8 @@ use common\model\parameter\Yahoo;
                                 <input id="collar_custom_field" class="customField" type="text"
                                        name="collar.custom.field" placeholder="請填寫一個項目"
                                        value="<?= ($data['first']['collar'] == 'custom') ? $data['first']['collar_custom_field'] : "" ?>">
+                                <input id="collar_checked" name="collar_checked" type="hidden"
+                                       value="<?= $data['first']['collar'] ?>">
                             </div>
                         </div>
                         <div class="formItem">
@@ -366,27 +396,33 @@ use common\model\parameter\Yahoo;
                                 <input id="neckline_custom_field" class="customField" type="text"
                                        name="neckline.custom.field" placeholder="請填寫一個項目"
                                        value="<?= ($data['first']['neckline'] == 'custom') ? $data['first']['neckline_custom_field'] : "" ?>">
+                                <input id="neckline_checked" name="neckline_checked" type="hidden"
+                                       value="<?= $data['first']['neckline'] ?>">
                             </div>
                         </div>
                         <div class="formItem">
-                            <label class="formLabel">袖長</label>
+                            <label class="formLabel required">袖長</label>
                             <div class="radioWrap">
 								<?php foreach (Sleeve::SleeveType as $key => $val): ?>
                                     <input <?= ($data['first']['sleeve'] == $val) ? "checked" : "" ?> id="<?= $key ?>"
                                                                                                       type="radio"
-                                                                                                      class="sleeve"
+                                                                                                      class="sleeve validate[required]"
                                                                                                       name="sleeve"
-                                                                                                      value="<?= $val ?>">
+                                                                                                      value="<?= $val ?>"
+                                                                                                      data-prompt-target="formErrorMsg"
+                                                                                                      data-errormessage="* 請填寫袖長">
                                     <label for="<?= $key ?>">
                                         <span class="radioIcon"></span>
 										<?= $val ?>
                                     </label>
 								<?php endforeach; ?>
                                 <input <?= ($data['first']['sleeve'] == 'custom') ? "checked" : "" ?> id="sleeveCustom"
-                                                                                                      class="sleeve customRadio"
+                                                                                                      class="sleeve customRadio validate[required]"
                                                                                                       type="radio"
                                                                                                       name="sleeve"
-                                                                                                      value="custom">
+                                                                                                      value="custom"
+                                                                                                      data-prompt-target="formErrorMsg"
+                                                                                                      data-errormessage="* 請填寫袖長">
                                 <label for="sleeveCustom">
                                     <span class="radioIcon"></span>
                                     自填
@@ -496,6 +532,8 @@ use common\model\parameter\Yahoo;
                                 <input id="feature4_custom_field" class="customField" type="text"
                                        name="feature4.custom.field" placeholder="請填寫一項"
                                        value="<?= ($data['first']['feature_4'] == 'custom') ? $data['first']['feature_4_custom_field'] : "" ?>">
+                                <input id="feature4_checked" name="feature4_checked" type="hidden"
+                                       value="<?= $data['first']['feature_4'] ?>">
                             </div>
                         </div>
                         <div class="formItem">

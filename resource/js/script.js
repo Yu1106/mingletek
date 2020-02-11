@@ -209,7 +209,19 @@ $(function () {
         }
     }
 
-
+    $("input[type='radio']").on('click', function () {
+        var name = $(this).attr('name');
+        var id = name + '_checked';
+        var checkedString = $("#" + id).val();
+        if (typeof (checkedString) != 'undefined') {
+            if (checkedString == $(this).val()) {
+                $("#" + id).val('');
+                $(this).prop("checked", false);
+            } else {
+                $("#" + id).val($(this).val());
+            }
+        }
+    });
 });
 
 var formData = function () {
