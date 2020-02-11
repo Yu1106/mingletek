@@ -389,8 +389,9 @@ var formData = function () {
                 }
             }
         },
-        emptyFileData: function () {
+        emptyUploadData: function () {
             file_data = {};
+            validateData = [];
         },
         setFormData: function (new_form_id, new_product_id) {
             form_id = new_form_id;
@@ -840,7 +841,7 @@ var step4Action = function () {
         upload: function () {
             reset();
             var id = $("#id").val();
-            formData.emptyFileData();
+            formData.emptyUploadData();
             formData.setFormData('#swiperupload', id);
             formData.setFile();
             formData.validate('step4');
