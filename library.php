@@ -33,3 +33,17 @@ function arrayToString(array $array): string
 	return implode(",", $returnData);
 }
 
+/**
+ * @param array $array
+ * @return string
+ */
+function intArrayToString(array $array): string
+{
+	$returnData = array();
+	foreach ($array as $val) {
+		if (isset($val))
+			$returnData[] = (int)$val;
+	}
+	return implode(",", $returnData);
+}
+

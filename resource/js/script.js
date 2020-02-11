@@ -147,33 +147,21 @@ $(function () {
                 if (!status) {
                     showAlertMsg('#formErrorMsg', true);
                 } else {
-                    if (step4Action.getSubmitCheck()) {
+                    var check = true;
+                    if (!step4Action.checkStock())
+                        check = false;
+                    if (!step4Action.checkPrice())
+                        check = false;
+                    if (!step4Action.checkColor())
+                        check = false;
+                    if (check) {
                         return true;
                     } else {
-                        checkStock();
+                        showAlertMsg('#formErrorMsg', true);
                     }
                 }
             }
         });
-
-        function checkStock() {
-            var customChecked = $('#sizeCustom').prop('checked');
-            var customLength = $('#sizeCustom').siblings('.customField').val().split(',').length;
-            var checkedLength = $("input[name='size[]']:checked").length;
-            var sizeLength;
-            var stockLength = $('input[name="stock"]').val().split(',').length;
-
-            if (customChecked) {
-                sizeLength = checkedLength - 1 + customLength;
-            } else {
-                sizeLength = checkedLength;
-            }
-            if (sizeLength != stockLength) {
-                showAlertMsg('#submitConfirm', false);
-            } else {
-                step4Action.setSubmitCheck();
-            }
-        }
     }
 
     function reload() {
@@ -238,7 +226,7 @@ var formData = function () {
     var emptyData = [];
     var showErrorAlert = function () {
         $("#alertMsgBox").html(msg);
-        showAlertMsg();
+        showAlertMsg('#formErrorMsg', true);
     };
     var reset = function () {
         status = false;
@@ -527,7 +515,6 @@ var step3Action = function () {
 
 var step4Action = function () {
     var status = true;
-    var submitCheck = false;
     var picture;
     var sub_picture = {};
     var product = {};
@@ -818,6 +805,14 @@ var step4Action = function () {
         });
         $("#product_description").val(string);
     };
+    var checkRate = function (nubmer) {
+        var r = /^\d+$/;
+        if (!r.test(nubmer)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     return {
         getPicture: function () {
             return picture;
@@ -894,13 +889,59 @@ var step4Action = function () {
             var id = $("#id").val();
             window.open('download.php');
         },
-        setSubmitCheck: function () {
-            submitCheck = true;
-            $("#editForm").submit();
+        checkStock: function () {
+            var customChecked = $('#sizeCustom').prop('checked');
+            var customLength = $('#sizeCustom').siblings('.customField').val().split(',').length;
+            var checkedLength = $("input[name='size[]']:checked").length;
+            var sizeLength;
+            var stockArray = $('input[name="stock"]').val().split(',');
+            var stockLength = stockArray.length;
+            var intCheck = true;
+
+            $.each(stockArray, function (i, v) {
+                if (!checkRate(v.trim()))
+                    intCheck = false;
+            });
+
+            if (!intCheck) {
+                $("#formErrorMsg").append("* 庫存數量須為正整數或0!<br>");
+            }
+
+            if (customChecked) {
+                sizeLength = checkedLength - 1 + customLength;
+            } else {
+                sizeLength = checkedLength;
+            }
+            if (sizeLength != stockLength) {
+                $("#formErrorMsg").append("* 請再次確認，每個尺寸都已經填寫對應的庫存數量!<br>");
+            }
+
+            if (sizeLength != stockLength || !intCheck) {
+                return false;
+            } else {
+                return true;
+            }
         },
-        getSubmitCheck: function () {
-            return submitCheck;
-        }
+        checkPrice: function () {
+            var price = $("#price").val();
+            var sellPrice = $("#sell_price").val();
+            if (parseInt(price) < parseInt(sellPrice)) {
+                $("#formErrorMsg").append("* 商品售價/促銷 須小於等於 原價!<br>");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        checkColor: function () {
+            var color = $("input[name='color']:checked").val();
+            var color_custom_field = $("#color_custom_field").val();
+            if (typeof (color) == 'undefined' || color == '' || (color == 'custom' && color_custom_field == '')) {
+                $("#formErrorMsg").append("* 請填寫顏色<br>");
+                return false;
+            } else {
+                return true;
+            }
+        },
     }
 }();
 

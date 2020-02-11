@@ -64,8 +64,11 @@ if ($_POST && CSRF::validate($_POST)) {
 			$array['price'] = $_POST['price'];
 		if (isset($_POST['sell_price']))
 			$array['sell_price'] = $_POST['sell_price'];
-		if (isset($_POST['stock']))
-			$array['stock'] = $_POST['stock'];
+		if (isset($_POST['stock'])) {
+			$stockArr = explode(",", $_POST['stock']);
+			$stock = intArrayToString($stockArr);
+			$array['stock'] = $stock;
+		}
 		if (isset($_POST['is_new']))
 			$array['is_new'] = $_POST['is_new'];
 		if (isset($_POST['site']))

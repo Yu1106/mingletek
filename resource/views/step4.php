@@ -26,13 +26,12 @@ use common\model\parameter\Yahoo;
 <main>
     <div id="alertMsgBox" class="fancybox-content lightBox">分析錯誤!! 請砍掉重練</div>
     <form id="editForm" method="post" action="step4.php">
-        <div id="formErrorMsg" class="fancybox-content lightBox"></div>
+        <div id="formErrorMsg" style="text-align: left;" class="fancybox-content lightBox"></div>
         <div id="submitConfirm" class="fancybox-content lightBox">
             <h4>請問確定要送出表單嗎?</h4>
             <label class="noticeTxt">請再次確認，每個尺寸都已經填寫對應的庫存數量!</label>
             <div class="flexBtnRow">
-                <a class="btn" href="javascript:step4Action.setSubmitCheck();">確認</a>
-                <a class="btn" href="javascript:;" data-fancybox-close>取消</a>
+                <a class="btn" href="javascript:;" data-fancybox-close>確認</a>
             </div>
         </div>
 		<?= \Volnix\CSRF\CSRF::getHiddenInputString(); ?>
@@ -121,7 +120,7 @@ use common\model\parameter\Yahoo;
                                 <label class="formLabel">pchome 類別</label>
                                 <div class="selectWrap icon-expand">
                                     <select id="pchome_category" name="pchome.category">
-                                        <option value="">類別</option>
+                                        <option value="">-- 請選擇 --</option>
 										<?php foreach (Pchome::PchomeType as $key => $val): ?>
                                             <option <?= ($data['first']['pchome_category'] == $key) ? "selected" : "" ?>
                                                     value="<?= $key ?>"><?= $val ?></option>
@@ -135,7 +134,7 @@ use common\model\parameter\Yahoo;
                                 <label class="formLabel">露天類別</label>
                                 <div class="selectWrap icon-expand">
                                     <select id="ruten_category" name="ruten.category">
-                                        <option value="">類別</option>
+                                        <option value="">-- 請選擇 --</option>
 										<?php foreach (Ruten::RutenType as $key => $val): ?>
                                             <option <?= ($data['first']['ruten_category'] == $key) ? "selected" : "" ?>
                                                     value="<?= $key ?>"><?= $val ?></option>
@@ -149,7 +148,7 @@ use common\model\parameter\Yahoo;
                                 <label class="formLabel">yahoo 類別</label>
                                 <div class="selectWrap icon-expand">
                                     <select id="yahoo_category" name="yahoo.category">
-                                        <option value="">類別</option>
+                                        <option value="">-- 請選擇 --</option>
 										<?php foreach (Yahoo::YahooType as $key => $val): ?>
                                             <option <?= ($data['first']['yahoo_category'] == $key) ? "selected" : "" ?>
                                                     value="<?= $key ?>"><?= $val ?></option>
@@ -233,8 +232,9 @@ use common\model\parameter\Yahoo;
                         <div class="formItem">
                             <label class="formLabel required">物品所有地</label>
                             <div class="selectWrap icon-expand">
-                                <select id="site" class="validate[required]" name="site" data-prompt-target="formErrorMsg" data-errormessage="* 請填寫物品所有地">
-                                    <option value=""></option>
+                                <select id="site" class="validate[required]" name="site"
+                                        data-prompt-target="formErrorMsg" data-errormessage="* 請填寫物品所有地">
+                                    <option value="">-- 請選擇 --</option>
 									<?php foreach (Site::SiteType as $key => $val): ?>
                                         <option <?= ($data['first']['site'] == $key) ? "selected" : "" ?>
                                                 value="<?= $key ?>"><?= $val ?></option>
@@ -329,7 +329,8 @@ use common\model\parameter\Yahoo;
                                     </label>
 								<?php endforeach; ?>
                                 <input <?= in_array('custom', explode(",", $data['first']['color'])) ? "checked" : "" ?>
-                                        id="colorCustom" class="color customCheckbox validate[required]" type="radio" name="color"
+                                        id="colorCustom" class="color customCheckbox validate[required]" type="radio"
+                                        name="color"
                                         value="custom"
                                         data-prompt-target="formErrorMsg"
                                         data-errormessage="* 請填寫顏色">
