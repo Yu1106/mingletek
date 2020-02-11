@@ -389,8 +389,10 @@ var formData = function () {
                 }
             }
         },
-        emptyUploadData: function () {
+        emptyFileData: function () {
             file_data = {};
+        },
+        emptyValidate: function () {
             validateData = [];
         },
         setFormData: function (new_form_id, new_product_id) {
@@ -841,10 +843,11 @@ var step4Action = function () {
         upload: function () {
             reset();
             var id = $("#id").val();
-            formData.emptyUploadData();
+            formData.emptyFileData();
             formData.setFormData('#swiperupload', id);
             formData.setFile();
             formData.validate('step4');
+            formData.emptyValidate();
             getData(id);
         },
         buildProductDescription: function () {
