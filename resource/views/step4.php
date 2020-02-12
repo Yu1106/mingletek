@@ -9,7 +9,7 @@ use common\model\parameter\Feature2;
 use common\model\parameter\Feature3;
 use common\model\parameter\Feature4;
 use common\model\parameter\Feature5;
-use common\model\parameter\isNew;
+use common\model\parameter\IsNew;
 use common\model\parameter\Keyword;
 use common\model\parameter\Neckline;
 use common\model\parameter\Pchome;
@@ -214,7 +214,7 @@ use common\model\parameter\Yahoo;
                         <div class="formItem">
                             <label class="formLabel required">物品新舊</label>
                             <div class="radioWrap">
-								<?php foreach (isNew::isNewType as $key => $val): ?>
+								<?php foreach (IsNew::IsNewType as $key => $val): ?>
                                     <input <?= ($data['first']['is_new'] == $val) ? "checked" : "" ?> id="<?= $key ?>"
                                                                                                       class="is_new validate[required]"
                                                                                                       type="radio"
