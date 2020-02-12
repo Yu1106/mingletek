@@ -103,8 +103,6 @@ foreach ($storeType as $val) {
 					$keyword = '';
 					if (isset($value['keyword']))
 						$keyword .= $value['keyword'];
-					if (isset($value['keyword_custom_field']))
-						$keyword .= "," . $value['keyword_custom_field'];
 					$keywordArr = explode(",", $keyword);
 					$keyword = '';
 					$i = 1;
@@ -116,7 +114,7 @@ foreach ($storeType as $val) {
 						}
 						if ($i == 6) break;
 					}
-					$yahooRecord->keyword = $keyword;
+					$yahooRecord->keyword = str_replace("custom", $value['keyword_custom_field'], $keyword);
 					$product_description = '';
 					if (isset($value['product_description']) && $value['product_description'] != '')
 						$product_description .= $value['product_description'];
