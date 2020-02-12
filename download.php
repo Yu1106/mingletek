@@ -58,7 +58,8 @@ foreach ($storeType as $val) {
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
 						$product_description .= "\n" . $store['return_notice'];
 					$rutenRecord->product_description = $product_description;
-					$rutenRecord->is_new = $value['is_new'];
+					$isNew = ($value['is_new'] == '新品') ? "全新" : "二手";
+					$rutenRecord->is_new = $isNew;
 					$rutenRecord->picture_1 = $value['picture'];
 					if (isset($subPicture[0]))
 						$rutenRecord->picture_2 = $subPicture[0]['picture'];
@@ -123,7 +124,8 @@ foreach ($storeType as $val) {
 					$yahooRecord->price = $value['price'];
 					$yahooRecord->sell_price = $value['sell_price'];
 					$yahooRecord->posting_days = $value['posting_days'];
-					$yahooRecord->is_new = $value['is_new'];
+					$isNew = ($value['is_new'] == '新品') ? "全新品" : "二手品";
+					$yahooRecord->is_new = $isNew;
 					$yahooRecord->standard_name = "尺寸";
 					$sizeStr = str_replace("custom", $value['size_custom_field'], $value['size']);
 					$sizeArr = explode(",", $sizeStr);
@@ -205,7 +207,7 @@ foreach ($storeType as $val) {
 					foreach ($sizeArr as $val) {
 						if ($i > 0)
 							$size_color .= "\n";
-						$size_color .= $val . ">" . $color;
+						$size_color .= $color . ">" . $val;
 						$i++;
 					}
 					$pchomeRecord->size_color = $size_color;
@@ -228,7 +230,8 @@ foreach ($storeType as $val) {
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
 						$product_description .= "," . $store['return_notice'];
 					$pchomeRecord->product_description = $product_description;
-					$pchomeRecord->is_new = $value['is_new'];
+					$isNew = ($value['is_new'] == '新品') ? "全新" : "二手";
+					$pchomeRecord->is_new = $isNew;
 					$pchomeRecord->picture = $value['picture'];
 					$pchomeRecord->site = $value['site'];
 					$csv->setData($pchomeRecord);
