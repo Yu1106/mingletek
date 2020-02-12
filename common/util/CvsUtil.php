@@ -3,7 +3,6 @@
 namespace common\util;
 
 use League\Csv\CannotInsertRecord;
-use League\Csv\EncloseField;
 use League\Csv\Exception;
 use League\Csv\Reader;
 use League\Csv\Writer;
@@ -68,7 +67,6 @@ class CvsUtil
 	 */
 	public function insertOne(array $data)
 	{
-		EncloseField::addTo($this->cvsWrite, "\t\x1f");
 		$this->cvsWrite->insertOne($data);
 	}
 
@@ -77,7 +75,6 @@ class CvsUtil
 	 */
 	public function insertAll(array $data)
 	{
-		EncloseField::addTo($this->cvsWrite, "\t\x1f");
 		$this->cvsWrite->insertAll($data);
 	}
 }

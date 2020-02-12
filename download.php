@@ -119,12 +119,12 @@ foreach ($storeType as $val) {
 					$yahooRecord->product_description = $product_description;
 					$yahooRecord->site = $value['site'];
 					$stockArr = explode(",", $value['stock']);
-					$yahooRecord->stock = array_sum($stockArr);
+					$yahooRecord->stock = '';
 					$yahooRecord->price = $value['price'];
 					$yahooRecord->sell_price = $value['sell_price'];
 					$yahooRecord->posting_days = $value['posting_days'];
 					$yahooRecord->is_new = $value['is_new'];
-					$yahooRecord->standard_name = '尺寸';
+					$yahooRecord->standard_name = "尺寸";
 					$sizeStr = str_replace("custom", $value['size_custom_field'], $value['size']);
 					$sizeArr = explode(",", $sizeStr);
 					$i = 1;
