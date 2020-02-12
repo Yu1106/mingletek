@@ -2,7 +2,7 @@
 
 namespace common\model\parameter;
 
-class isNew
+class IsNew
 {
 	const NEW = 'new';
 	const OLD = 'old';
