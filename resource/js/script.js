@@ -178,7 +178,6 @@ $(function () {
     function readURL(input, swiperUpload) {
         if (input.files && input.files.length >= 0) {
             for (var i = 0; i < input.files.length; i++) {
-                alert('test');
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
                     var reader = new FileReader();
 
