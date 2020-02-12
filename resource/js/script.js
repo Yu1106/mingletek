@@ -179,7 +179,9 @@ $(function () {
         if (input.files && input.files.length >= 0) {
             for (var i = 0; i < input.files.length; i++) {
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
+                    console.log(input.files[i].size);
                     var reader = new FileReader();
+
                     if (formData.extCheck(input.files[i].name)) {
                         reader.fileName = input.files[i].name;
                         formData.setValidate(input.files[i].name);
