@@ -392,6 +392,7 @@ var formData = function () {
         extCheck: function (filePath) {
             var extStart = filePath.lastIndexOf(".");
             var ext = filePath.substring(extStart, filePath.length).toUpperCase();
+            alert(ext);
             if (ext == ".PNG" || ext == ".GIF" || ext == ".JPG")
                 return true;
             else
