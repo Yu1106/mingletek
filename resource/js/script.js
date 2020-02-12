@@ -178,8 +178,8 @@ $(function () {
     function readURL(input, swiperUpload) {
         if (input.files && input.files.length >= 0) {
             for (var i = 0; i < input.files.length; i++) {
+                alert('test');
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
-                    console.log(input.files[i].size);
                     var reader = new FileReader();
 
                     if (formData.extCheck(input.files[i].name)) {
@@ -392,7 +392,6 @@ var formData = function () {
         extCheck: function (filePath) {
             var extStart = filePath.lastIndexOf(".");
             var ext = filePath.substring(extStart, filePath.length).toUpperCase();
-            alert(ext);
             if (ext == ".PNG" || ext == ".GIF" || ext == ".JPG")
                 return true;
             else
