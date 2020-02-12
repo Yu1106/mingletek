@@ -5,7 +5,7 @@
 		</section> -->
         <div id="alertMsgBox" class="fancybox-content lightBox">錯誤訊息!</div>
         <form id="settingsForm" method="post" action="step1.php">
-            <div id="formErrorMsg" class="fancybox-content lightBox"></div>
+            <div id="formErrorMsg" style="text-align: left;" class="fancybox-content lightBox"></div>
 			<?= \Volnix\CSRF\CSRF::getHiddenInputString(); ?>
 			<?php echo $section; ?>
             <section id="sectionSettings">

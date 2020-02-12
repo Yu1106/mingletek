@@ -177,26 +177,32 @@ $(function () {
 
     function readURL(input, swiperUpload) {
         if (input.files && input.files.length >= 0) {
+            var sizeCheck = true;
             for (var i = 0; i < input.files.length; i++) {
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
-                    var reader = new FileReader();
-
-                    if (formData.extCheck(input.files[i].name)) {
-                        reader.fileName = input.files[i].name;
-                        formData.setValidate(input.files[i].name);
-                        reader.onload = function (e) {
-                            if (!swiperUpload) {
-                                var img = $("<img class='previewImg'>").attr('src', e.target.result);
-                                var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
-                                $("#previewBox").prepend(thumbnail);
+                    if (formData.sizeCheck(input.files[i].name, input.files[i].size)) {
+                        if (formData.extCheck(input.files[i].name)) {
+                            var reader = new FileReader();
+                            reader.fileName = input.files[i].name;
+                            formData.setValidate(input.files[i].name);
+                            reader.onload = function (e) {
+                                if (!swiperUpload) {
+                                    var img = $("<img class='previewImg'>").attr('src', e.target.result);
+                                    var thumbnail = $('<div class="previewThumbnail"><a class="icon-x-square" href="javascript:void(0);" data-img="' + e.target.fileName + '" onclick="formData.empty(this);"></a></div>').append(img);
+                                    $("#previewBox").prepend(thumbnail);
+                                }
                             }
+                            reader.readAsDataURL(input.files[i]);
                         }
-                        reader.readAsDataURL(input.files[i]);
+                    } else {
+                        sizeCheck = false;
                     }
                 }
             }
             if (!swiperUpload)
                 formData.setFile();
+            if (!sizeCheck)
+                showAlertMsg('#formErrorMsg', true);
         }
     }
 
@@ -395,6 +401,13 @@ var formData = function () {
                 return true;
             else
                 return false;
+        },
+        sizeCheck: function (fileName, fileSize) {
+            if (parseInt(fileSize) > 512000) {
+                $("#formErrorMsg").append("* " + fileName + "超過500Kb<br>");
+                return false;
+            } else
+                return true;
         }
     }
 }();
