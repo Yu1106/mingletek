@@ -1,27 +1,28 @@
 {
-    "name": "jacky/mingletek",
-    "description": "mingletek's composer",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "jacky",
-            "email": "fish731106@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "common\\": "common/"
-        }
-    },
-    "require": {
-        "php": ">=7.2.0",
-        "facebook/graph-sdk": "^5.7",
-        "google/apiclient": "^2.2",
-        "monolog/monolog": "^2.0",
-        "volnix/csrf": "~1.0",
-        "ext-json": "^1.7",
-        "league/csv": "^9.4",
-        "ext-zip": "*"
+  "name": "jacky/mingletek",
+  "description": "mingletek's composer",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jacky",
+      "email": "fish731106@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "common\\": "common/"
+    }
+  },
+  "require": {
+    "php": ">=7.2.0",
+    "facebook/graph-sdk": "^5.7",
+    "google/apiclient": "^2.2",
+    "monolog/monolog": "^2.0",
+    "volnix/csrf": "~1.0",
+    "ext-json": "^1.7",
+    "league/csv": "^9.4",
+    "ext-zip": "*",
+    "ext-iconv": "*"
+  }
 }

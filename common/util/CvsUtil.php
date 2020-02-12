@@ -29,7 +29,6 @@ class CvsUtil
 			case self::READ:
 				$this->cvsRead = Reader::createFromPath($path, 'r');
 				$this->cvsRead->setDelimiter($delimiter);
-				$this->cvsRead->setOutputBOM(Reader::BOM_UTF8);
 				break;
 			case self::WRITE:
 				$this->cvsWrite = Writer::createFromPath($path, 'w+');

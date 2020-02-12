@@ -4,6 +4,7 @@ use common\csv\vendor\ruten\RutenRecord;
 use common\csv\vendor\yahoo\YahooRecord;
 use common\login\Login;
 use common\model\ExportFileLog;
+use common\model\parameter\Site;
 use common\model\Product;
 use common\model\Store;
 use common\model\SubPicture;
@@ -65,7 +66,13 @@ foreach ($storeType as $val) {
 						$rutenRecord->picture_2 = $subPicture[0]['picture'];
 					if (isset($subPicture[1]))
 						$rutenRecord->picture_3 = $subPicture[1]['picture'];
-					$rutenRecord->site = $value['site'];
+					$site = $value['site'];
+					if ($value['site'] == Site::GOLDEN_GATE) {
+						$site = "金門縣";
+					} else if ($value['site'] == Site::MATSU) {
+						$site = "連江縣";
+					}
+					$rutenRecord->site = $site;
 					$rutenRecord->score_greater_than = 0;
 					$rutenRecord->score_less_than = '無';
 					$rutenRecord->abandoned = '無';
@@ -145,7 +152,8 @@ foreach ($storeType as $val) {
 							$i++;
 						}
 					}
-					$yahooRecord->pay_easily_cash = 'no';
+					$yahooRecord->home_delivery = 100;
+					$yahooRecord->pay_easily_cash = 'yes';
 					$yahooRecord->pay_easily_credit_card = 'no';
 					$yahooRecord->pay_easily_family_mart = 'no';
 					$yahooRecord->pay_easily_seven_eleven = 'no';
@@ -156,7 +164,9 @@ foreach ($storeType as $val) {
 					$yahooRecord->ct_contract_account = 'no';
 					$yahooRecord->ct_union_pay_cards = 'no';
 					$yahooRecord->family_mart_freight = 'no';
+					$yahooRecord->self_pick = 1;
 					$yahooRecord->picture_1 = $value['picture'];
+					$yahooRecord->attribute_1 = "內裡/襯-:無內裡";
 					$i = 0;
 					if (is_array($subPicture)) {
 						foreach ($subPicture as $val) {
@@ -266,7 +276,8 @@ if (is_array($exportFileLog)) {
 		foreach ($exportFileLog as $val) {
 			try {
 				$csvNew = new CvsUtil(CvsUtil::READ, $directory . $val['file_name']);
-				file_put_contents($directory . $val['file_name'], $csvNew->getContent());
+				$content = iconv("UTF-8", "big5", $csvNew->getContent());
+				file_put_contents($directory . $val['file_name'], $content);
 				$zip->addFile($directory . $val['file_name'], $val['file_name']);
 				$array[] = $directory . $val['file_name'];
 			} catch (Exception $e) {
@@ -297,7 +308,16 @@ if (is_array($exportFileLog)) {
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
 		$filePath = $directory . $fileName;
-		$csv->exportCvs($fileName);
+		try {
+			$csvNew = new CvsUtil(CvsUtil::READ, $directory . $fileName);
+			$content = iconv("UTF-8", "big5", $csvNew->getContent());
+			file_put_contents($directory . $fileName, $content);
+			$csv = new CvsUtil(CvsUtil::READ, $filePath);
+			$csv->output($fileName);
+		} catch (Exception $e) {
+			$log = new LogUtil("export-" . date("Ymd"));
+			$log->error('exportCvs failed' . $e);
+		}
 		if (is_file($filePath))
 			unlink($filePath);
 		die;
