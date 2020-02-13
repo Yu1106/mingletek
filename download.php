@@ -274,7 +274,7 @@ if (is_array($exportFileLog)) {
 			try {
 				$path = FileUtil::getCsvPath($email, $val['file_name']);
 				$csvNew = new CvsUtil(CvsUtil::READ, $path);
-				$content = iconv("UTF-8", "big5//ignore", $csvNew->getContent());
+				$content = iconv("UTF-8", "big5//IGNORE", $csvNew->getContent());
 				file_put_contents($path, $content);
 				$zip->addFile($path, $val['file_name']);
 				$array[] = $path;
@@ -308,7 +308,7 @@ if (is_array($exportFileLog)) {
 		$filePath = FileUtil::getCsvPath($email, $fileName);
 		try {
 			$csvNew = new CvsUtil(CvsUtil::READ, $filePath);
-			$content = iconv("UTF-8", "big5//ignore", $csvNew->getContent());
+			$content = iconv("UTF-8", "big5//IGNORE", $csvNew->getContent());
 			file_put_contents($filePath, $content);
 			$csv = new CvsUtil(CvsUtil::READ, $filePath);
 			$csv->output($fileName);
