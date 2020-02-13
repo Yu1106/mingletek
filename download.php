@@ -315,8 +315,8 @@ if (is_array($exportFileLog)) {
 			$log = new LogUtil("export-" . date("Ymd"));
 			$log->error('exportCvs failed' . $e);
 		}
-		if (is_file($filePath))
-			unlink($filePath);
+//		if (is_file($filePath))
+//			unlink($filePath);
 		die;
 	}
 }
