@@ -18,8 +18,8 @@ use common\model\parameter\Store as StoreType;
 
 include 'library.php';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 if (!Login::auth() || !UidUtil::auth()) {
 	exit;
