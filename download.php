@@ -18,9 +18,6 @@ use common\model\parameter\Store as StoreType;
 
 include 'library.php';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 if (!Login::auth() || !UidUtil::auth()) {
 	exit;
 }
@@ -298,10 +295,10 @@ if (is_array($exportFileLog)) {
 			$log = new LogUtil("export-" . date("Ymd"));
 			$log->error('exportCvs failed' . $e);
 		}
-//		foreach ($array as $val) {
-//			if (is_file($val))
-//				unlink($val);
-//		}
+		foreach ($array as $val) {
+			if (is_file($val))
+				unlink($val);
+		}
 		die;
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
@@ -316,8 +313,8 @@ if (is_array($exportFileLog)) {
 			$log = new LogUtil("export-" . date("Ymd"));
 			$log->error('exportCvs failed' . $e);
 		}
-//		if (is_file($filePath))
-//			unlink($filePath);
+		if (is_file($filePath))
+			unlink($filePath);
 		die;
 	}
 }

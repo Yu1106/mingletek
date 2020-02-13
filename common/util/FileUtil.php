@@ -10,9 +10,9 @@ class FileUtil
 	const IMG_UPLOAD_PATH = '/var/www/users/';
 	const IMG_HTTP_PATH = 'mingletek/storage/upload/users/';
 
-	const UPLOAD_DRESS = '/upload_dress';
-	const UPLOAD_RELATED_DRESS = '/upload_related_dress';
-	const CSV = '/csv';
+	const UPLOAD_DRESS = '/upload_dress/';
+	const UPLOAD_RELATED_DRESS = '/upload_related_dress/';
+	const CSV = '/csv/';
 
 	/**
 	 * @param string $account
@@ -21,7 +21,7 @@ class FileUtil
 	 */
 	public static function getPicturePath(string $account, string $fileName)
 	{
-		return HttpUtil::WEB_BASIC . self::IMG_HTTP_PATH . $account . self::UPLOAD_DRESS . "/" . $fileName;
+		return HttpUtil::WEB_BASIC . self::IMG_HTTP_PATH . $account . self::UPLOAD_DRESS . $fileName;
 	}
 
 	/**
@@ -31,7 +31,7 @@ class FileUtil
 	 */
 	public static function getSubPicturePath(string $account, string $fileName)
 	{
-		return HttpUtil::WEB_BASIC . self::IMG_HTTP_PATH . $account . self::UPLOAD_RELATED_DRESS . "/" . $fileName;
+		return HttpUtil::WEB_BASIC . self::IMG_HTTP_PATH . $account . self::UPLOAD_RELATED_DRESS . $fileName;
 	}
 
 	/**
@@ -41,7 +41,16 @@ class FileUtil
 	 */
 	public static function getCsvPath(string $account, string $fileName)
 	{
-		return self::CSV_DOWNLOAD_PATH . $account . self::CSV . "/" . $fileName;
+		return self::CSV_DOWNLOAD_PATH . $account . self::CSV . $fileName;
+	}
+
+	/**
+	 * @param string $account
+	 * @return string
+	 */
+	public static function getCsvDir(string $account)
+	{
+		return self::CSV_DOWNLOAD_PATH . $account . self::CSV;
 	}
 
 	public static function mkdir(string $dir)
