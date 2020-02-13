@@ -39,6 +39,7 @@ foreach ($storeType as $val) {
 		case StoreType::RUTEN:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::RUTEN);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -91,6 +92,7 @@ foreach ($storeType as $val) {
 		case StoreType::YAHOO:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::YAHOO);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -185,6 +187,7 @@ foreach ($storeType as $val) {
 		case StoreType::PCHOME:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::PCHOME);
+				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
