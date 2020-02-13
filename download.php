@@ -33,14 +33,12 @@ $storeType = explode(",", $store['upload_store_type']);
 $uid = UidUtil::uid($_SESSION['USER_ID']);
 $product = Product::findByStoreId($_SESSION["STORE_ID"]);
 $email = $_SESSION['USER_EMAIL'];
-$directory = FileUtil::CSV . $email . "/";
 
 foreach ($storeType as $val) {
 	switch ($val) {
 		case StoreType::RUTEN:
 			if (is_array($product)) {
 				$csv = Csv::factory(StoreType::RUTEN);
-				$csv->setDirectory($email);
 				$csvThread = $csv->createCsv();
 				foreach ($product as $value) {
 					$subPicture = SubPicture::findByStoreIdAndProductId($_SESSION["STORE_ID"], $value['id']);
@@ -273,11 +271,12 @@ if (is_array($exportFileLog)) {
 		}//打開壓縮檔，若無此檔自動建立新檔
 		foreach ($exportFileLog as $val) {
 			try {
-				$csvNew = new CvsUtil(CvsUtil::READ, $directory . $val['file_name']);
+				$path = FileUtil::getCsvPath($email, $val['file_name']);
+				$csvNew = new CvsUtil(CvsUtil::READ, $path);
 				$content = iconv("UTF-8", "big5", $csvNew->getContent());
-				file_put_contents($directory . $val['file_name'], $content);
-				$zip->addFile($directory . $val['file_name'], $val['file_name']);
-				$array[] = $directory . $val['file_name'];
+				file_put_contents($path, $content);
+				$zip->addFile($path, $val['file_name']);
+				$array[] = $path;
 			} catch (Exception $e) {
 				$log = new LogUtil("export-" . date("Ymd"));
 				$log->error('exportCvs failed' . $e);
@@ -305,11 +304,11 @@ if (is_array($exportFileLog)) {
 		die;
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
-		$filePath = $directory . $fileName;
+		$filePath = FileUtil::getCsvPath($email, $fileName);
 		try {
-			$csvNew = new CvsUtil(CvsUtil::READ, $directory . $fileName);
+			$csvNew = new CvsUtil(CvsUtil::READ, $filePath);
 			$content = iconv("UTF-8", "big5", $csvNew->getContent());
-			file_put_contents($directory . $fileName, $content);
+			file_put_contents($filePath, $content);
 			$csv = new CvsUtil(CvsUtil::READ, $filePath);
 			$csv->output($fileName);
 		} catch (Exception $e) {
