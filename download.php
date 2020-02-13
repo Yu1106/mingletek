@@ -298,10 +298,10 @@ if (is_array($exportFileLog)) {
 			$log = new LogUtil("export-" . date("Ymd"));
 			$log->error('exportCvs failed' . $e);
 		}
-		foreach ($array as $val) {
-			if (is_file($val))
-				unlink($val);
-		}
+//		foreach ($array as $val) {
+//			if (is_file($val))
+//				unlink($val);
+//		}
 		die;
 	} else if (count($exportFileLog) == 1) {
 		$fileName = $exportFileLog[0]['file_name'];
