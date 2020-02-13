@@ -265,7 +265,7 @@ if (is_array($exportFileLog)) {
 		$array = array();
 		$zip = new ZipArchive();
 		$fileName = date("YmdHis") . rand(10000, 99999) . '-download.zip';
-		$filePath = FileUtil::CSV . $fileName;
+		$filePath = FileUtil::getCsvPath($email, $fileName);
 		$array[] = $filePath;
 		if ($zip->open($filePath, ZipArchive::CREATE) !== TRUE) {
 			exit("cannot open <$filePath>\n");
