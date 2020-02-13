@@ -41,7 +41,7 @@ class FileUtil
 	 */
 	public static function getCsvPath(string $account, string $fileName)
 	{
-		return HttpUtil::WEB_BASIC . self::CSV_DOWNLOAD_PATH . $account . self::CSV . "/" . $fileName;
+		return self::CSV_DOWNLOAD_PATH . $account . self::CSV . "/" . $fileName;
 	}
 
 	public static function mkdir(string $dir)
