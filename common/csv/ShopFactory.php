@@ -43,6 +43,7 @@ abstract class ShopFactory extends PropertyRecord
 	public function setDirectory($directory)
 	{
 		$this->directory = FileUtil::CSV_DOWNLOAD_PATH . $directory . FileUtil::CSV;
+		var_dump($this->directory);
 	}
 
 	/**
