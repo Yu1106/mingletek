@@ -24,9 +24,9 @@ if ((isset($_GET['type']) && !in_array($_GET['type'], Vendor::VENDOR_LIST))
 }
 
 $response = new LoginInformation();
-$response->id = '105455461039769';
-$response->email = 'mingleteksso@gmail.com';
-$response->name = '鼎洋';
+$response->id = '103336381140338';
+$response->email = 'lziqovbybc_1574304011@tfbnw.net';
+$response->name = 'Sandra Aldciaibhggjh Adeagbostein';
 
 $mingletek = new Mingletek();
 $account = $response->email;
