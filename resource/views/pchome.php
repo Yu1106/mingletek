@@ -165,7 +165,6 @@
 				<?php endforeach; ?>
 				<?php if ($data['store']['note'] != ''): ?>
                     <div class="item-description">
-                        <p>注意事項</p>
 						<?php foreach (explode("\n", $data['store']['note']) as $val): ?>
                             <p><?= $val ?></p>
 						<?php endforeach; ?>
@@ -173,7 +172,6 @@
 				<?php endif; ?>
 				<?php if ($data['store']['return_notice'] != ''): ?>
                     <div class="item-description">
-                        <p>退換貨政策</p>
 						<?php foreach (explode("\n", $data['store']['return_notice']) as $val): ?>
                             <p><?= $val ?></p>
 						<?php endforeach; ?>
