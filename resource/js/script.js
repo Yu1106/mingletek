@@ -948,7 +948,7 @@ var step4Action = function () {
                 if (sizeLength > stockLength) {
                     $("#formErrorMsg").append("* 再次檢查！您設定" + sizeLength + "個尺寸，只有" + stockLength + "個尺寸有填寫庫存數量<br>");
                 } else {
-                    $("#formErrorMsg").append("* 再次檢查！您設定" + sizeLength + "個尺寸，卻有" + stockLength + "個尺寸有填寫庫存數量<br>");
+                    $("#formErrorMsg").append("* 再次檢查！您設定" + sizeLength + "個尺寸，卻有" + stockLength + "個庫存數量<br>");
                 }
             }
 
