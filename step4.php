@@ -37,7 +37,6 @@ $subPictureArr = array();
 $swiperArr = array();
 
 $store = Store::findById($_SESSION["STORE_ID"]);
-$product = Product::findByStoreId($_SESSION["STORE_ID"]);
 
 if ($_POST && CSRF::validate($_POST)) {
 	$check = Product::findByIdAndStoreId($_POST['id'], $_SESSION["STORE_ID"]);
@@ -313,6 +312,7 @@ if ($_POST && CSRF::validate($_POST)) {
 }
 
 $isUpload = true;
+$product = Product::findByStoreId($_SESSION["STORE_ID"]);
 
 if (is_array($product) || is_object($product)) {
 	foreach ($product as $val) {
