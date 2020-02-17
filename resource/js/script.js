@@ -957,8 +957,11 @@ var step4Action = function () {
         checkPrice: function () {
             var price = $("#price").val();
             var sellPrice = $("#sell_price").val();
-            if (parseInt(price) < parseInt(sellPrice)) {
-                $("#formErrorMsg").append("* 商品售價/促銷 須小於等於 原價!<br>");
+            if (parseInt(price) <= parseInt(sellPrice)) {
+                $("#formErrorMsg").append("* 商品售價/促銷 須小於 原價!<br>");
+                return false;
+            } else if (parseInt(price) == 0 || parseInt(sellPrice) == 0) {
+                $("#formErrorMsg").append("* 商品售價/促銷和原價須大於0!<br>");
                 return false;
             } else {
                 return true;
