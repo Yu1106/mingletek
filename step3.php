@@ -94,7 +94,7 @@ if ($_POST && CSRF::validate($_POST)) {
 				 */
 				$name = '';
 				// 賣場名稱
-				$name .= $store['name'];
+				$name .= $store['name'] . "  ";
 				// 關鍵字 NULL
 				// 衣領
 				if (isset($data->collar)) {
