@@ -94,4 +94,19 @@ class Product extends Model
 	{
 		return self::getDb()->queryOne("select * from `" . static::tableName() . "` where store_id = :store_id and picture = :picture", [":store_id" => $storeId, ":picture" => $picture]);
 	}
+
+	/**
+	 * @param int $id
+	 * @param string $productDescription
+	 * @return bool
+	 */
+	public static function modifyProductDescription(int $id, string $productDescription)
+	{
+		return self::getDb()->update(
+			['product_description' => $productDescription],
+			"id = :id",
+			['id' => $id],
+			static::tableName()
+		);
+	}
 }

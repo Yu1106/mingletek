@@ -68,9 +68,9 @@ if ($_POST['action'] === 'check') {
 		die();
 	$id = (int)$_POST['id'];
 	$product = Product::findById($id);
-	$string = $_POST['id'];
-	var_dump($id, $string);
-	if ($product)
+	$string = $_POST['string'];
+	$status = Product::modifyProductDescription($id, $string);
+	if ($status)
 		echo json_encode(['status' => 1]);
 	else
 		echo json_encode(['status' => 0]);
