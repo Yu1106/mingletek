@@ -822,7 +822,7 @@ var step4Action = function () {
         $.ajax({
             type: 'POST',
             url: 'get_data.php',
-            data: {action: 'saveProductDescription', string: string},
+            data: {action: 'saveProductDescription', id: id, string: string},
             async: false,
             dataType: 'json',
             success: function (data) {
