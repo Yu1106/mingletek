@@ -811,13 +811,31 @@ var step4Action = function () {
     };
     var replaceProductDescription = function () {
         var string = "";
+        var id = $("#id").val();
+
         $.each(productDescription, function (k, v) {
             if (string == "")
                 string += v;
             else
                 string += "\n" + v;
         });
-        $("#product_description").val(string);
+        $.ajax({
+            type: 'POST',
+            url: 'get_data.php',
+            data: {action: 'saveProductDescription', string: string},
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    if (!data.status) {
+                        status = false;
+                        clearLoading();
+                    } else {
+                        $("#product_description").val(string);
+                    }
+                }
+            }
+        });
     };
     var checkRate = function (nubmer) {
         var r = /^\d+$/;

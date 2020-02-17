@@ -56,12 +56,22 @@ if ($_POST['action'] === 'check') {
 			$data[$val] = $analysis[$val];
 		else
 			$strings .= $val . " ";
-
 	}
 	$strings = trim($strings);
 
 	if ($product)
 		echo json_encode(['status' => 1, 'data' => ['strings' => $strings, 'data' => $data]]);
+	else
+		echo json_encode(['status' => 0]);
+} else if ($_POST['action'] === 'saveProductDescription' && Login::auth() && UidUtil::auth()) {
+	if (empty($_POST['id']) && (int)$_POST['id'] <= 0)
+		die();
+	$id = (int)$_POST['id'];
+	$product = Product::findById($id);
+	$string = $_POST['id'];
+	var_dump($id, $string);
+	if ($product)
+		echo json_encode(['status' => 1]);
 	else
 		echo json_encode(['status' => 0]);
 } else {

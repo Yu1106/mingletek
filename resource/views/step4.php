@@ -99,7 +99,7 @@ use common\model\parameter\Yahoo;
                         <textarea id="product_description" class="validate[required]" name="product_description"
                                   rows="4"
                                   data-prompt-target="formErrorMsg"
-                                  data-errormessage="* 請填寫商品說明"><?= ($data['first']['product_description'] != '') ? $data['first']['product_description'] : "" ?></textarea>
+                                  data-errormessage="* 請填寫商品說明" disabled><?= ($data['first']['product_description'] != '') ? $data['first']['product_description'] : "" ?></textarea>
                     </div>
                 </div>
                 <div class="editRight">
@@ -161,7 +161,7 @@ use common\model\parameter\Yahoo;
                             <label class="formLabel required">商品名稱</label>
                             <input class="validate[required]" type="text" id="name" name="name" placeholder="商品名稱"
                                    value="<?= $data['first']['name'] ?>"
-                                   data-prompt-target="formErrorMsg" data-errormessage="* 請填寫商品名稱">
+                                   data-prompt-target="formErrorMsg" data-errormessage="* 請填寫商品名稱" disabled>
                         </div>
                         <div class="formItem">
                             <label class="formLabel required">原價</label>
