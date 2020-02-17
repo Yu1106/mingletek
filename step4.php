@@ -101,7 +101,7 @@ if ($_POST && CSRF::validate($_POST)) {
 			$array['size'] = arrayToString($sizeArr);
 		}
 		/**
-		 * name
+		 * name[start]
 		 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
 		 */
 		// 賣場名稱
@@ -284,7 +284,10 @@ if ($_POST && CSRF::validate($_POST)) {
 		}
 		if ($name != '')
 			$array['name'] = $name;
-
+		/**
+		 * name[end]
+		 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
+		 */
 		Product::modifyProductData($_POST['id'], $array);
 
 		$firstArr = Product::findByIdAndStoreId($_POST['id'], $_SESSION["STORE_ID"]);
