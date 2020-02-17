@@ -225,6 +225,11 @@ foreach ($storeType as $val) {
 					foreach ($stockArr as $val) {
 						if ($i > 0)
 							$stock .= "\n";
+						if ($val <= 0) {
+							$val = 1;
+						} else if ($val > 499) {
+							$val = 499;
+						}
 						$stock .= $val;
 						$i++;
 					}
