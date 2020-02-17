@@ -89,7 +89,7 @@ if ($_POST && CSRF::validate($_POST)) {
 						$array['pchome_category'] = $pchomeCategory;
 				}
 				/**
-				 * name
+				 * name[start]
 				 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
 				 */
 				$name = '';
@@ -170,7 +170,10 @@ if ($_POST && CSRF::validate($_POST)) {
 				}
 				if ($name != '')
 					$array['name'] = $name;
-
+				/**
+				 * name[end]
+				 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
+				 */
 				if (isset($data->collar_desc) || isset($data->neckline_desc) || isset($data->neckshoulder_desc) || isset($data->sleeve_desc)
 					|| isset($data->accessory_1_desc) || isset($data->pattern_desc) || isset($data->waist_desc) || isset($data->texture_1_desc)
 					|| isset($data->texture_2_desc) || isset($data->texture_3_desc) || isset($data->texture_4_desc)) {
