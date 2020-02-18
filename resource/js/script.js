@@ -72,7 +72,6 @@ $(function () {
     $("#fileupload").on('change', function () {
         // $("#previewBox").html(""); // 清除預覽
         $('.sectionPreview').fadeIn();
-        alert(1);
         readURL(this, false);
     });
 
@@ -177,16 +176,12 @@ $(function () {
     }
 
     function readURL(input, swiperUpload) {
-        alert(2);
         if (input.files && input.files.length >= 0) {
-            alert(3);
             var sizeCheck = true;
             for (var i = 0; i < input.files.length; i++) {
-                alert(4);
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
-                    alert(5);
                     if (formData.sizeCheck(input.files[i].name, input.files[i].size)) {
-                        alert(6);
+                        alert(1);
                         if (formData.extCheck(input.files[i].name)) {
                             alert(7);
                             var reader = new FileReader();
@@ -402,8 +397,11 @@ var formData = function () {
             product_id = new_product_id;
         },
         extCheck: function (filePath) {
+            alert(2);
             var extStart = filePath.lastIndexOf(".");
             var ext = filePath.substring(extStart, filePath.length).toUpperCase();
+            alert(extStart);
+            alert(ext);
             if (ext == ".PNG" || ext == ".GIF" || ext == ".JPG")
                 return true;
             else
