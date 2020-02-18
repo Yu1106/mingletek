@@ -70,6 +70,7 @@ $(function () {
 
 
     $("#fileupload").on('change', function () {
+        alert(456);
         // $("#previewBox").html(""); // 清除預覽
         $('.sectionPreview').fadeIn();
         alert(123);
