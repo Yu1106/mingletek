@@ -72,7 +72,6 @@ $(function () {
     $("#fileupload").change(function () {
         // $("#previewBox").html(""); // 清除預覽
         $('.sectionPreview').fadeIn();
-        alert(1);
         readURL(this, false);
     });
 
@@ -177,7 +176,6 @@ $(function () {
     }
 
     function readURL(input, swiperUpload) {
-        alert(2);
         if (input.files && input.files.length >= 0) {
             var sizeCheck = true;
             for (var i = 0; i < input.files.length; i++) {
