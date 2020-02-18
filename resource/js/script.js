@@ -176,10 +176,14 @@ $(function () {
     }
 
     function readURL(input, swiperUpload) {
+        alert(1);
         if (input.files && input.files.length >= 0) {
+            alert(2);
             var sizeCheck = true;
             for (var i = 0; i < input.files.length; i++) {
+                alert(3);
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
+                    alert(4);
                     if (formData.sizeCheck(input.files[i].name, input.files[i].size)) {
                         if (formData.extCheck(input.files[i].name)) {
                             var reader = new FileReader();
