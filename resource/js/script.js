@@ -181,9 +181,7 @@ $(function () {
             for (var i = 0; i < input.files.length; i++) {
                 if ($.inArray(input.files[i].name, formData.getValidate()) < 0) {
                     if (formData.sizeCheck(input.files[i].name, input.files[i].size)) {
-                        alert(1);
                         if (formData.extCheck(input.files[i].name)) {
-                            alert(7);
                             var reader = new FileReader();
                             reader.fileName = input.files[i].name;
                             formData.setValidate(input.files[i].name);
@@ -397,12 +395,9 @@ var formData = function () {
             product_id = new_product_id;
         },
         extCheck: function (filePath) {
-            alert(2);
             var extStart = filePath.lastIndexOf(".");
             var ext = filePath.substring(extStart, filePath.length).toUpperCase();
-            alert(extStart);
-            alert(ext);
-            if (ext == ".PNG" || ext == ".GIF" || ext == ".JPG")
+            if (ext == ".PNG" || ext == ".GIF" || ext == ".JPG" || ext == ".JPEG")
                 return true;
             else
                 return false;

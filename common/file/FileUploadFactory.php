@@ -36,7 +36,7 @@ abstract class FileUploadFactory
 	private $uploadPath;
 
 	protected $ext;
-	protected $allowExt = array('jpg', 'gif', 'png');
+	protected $allowExt = array('jpg', 'gif', 'png', 'jpeg');
 	protected $maxSize = 512000;
 	protected $flag = true;
 	protected $msg;
