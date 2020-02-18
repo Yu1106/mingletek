@@ -72,6 +72,7 @@ $(function () {
     $("#fileupload").on('change', function () {
         // $("#previewBox").html(""); // 清除預覽
         $('.sectionPreview').fadeIn();
+        alert(123);
         readURL(this, false);
     });
 
