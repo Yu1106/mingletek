@@ -115,9 +115,11 @@ if ($_POST && CSRF::validate($_POST)) {
 					$name .= $val;
 				} else if ($val == 'custom') {
 					$keywordArr[] = $val;
-					if ($_POST['keyword_custom_field']) {
+					if (isset($_POST['keyword_custom_field']) && $_POST['keyword_custom_field']) {
 						$array['keyword_custom_field'] = $_POST['keyword_custom_field'];
-						$name .= $_POST['keyword_custom_field'];
+						foreach (explode(",", $_POST['keyword_custom_field']) as $val2) {
+							$name .= $val2;
+						}
 					}
 				}
 			}
@@ -159,9 +161,11 @@ if ($_POST && CSRF::validate($_POST)) {
 					$name .= $val;
 				} else if ($val == 'custom') {
 					$feature2Arr[] = $val;
-					if ($_POST['feature2_custom_field']) {
+					if (isset($_POST['feature2_custom_field']) && $_POST['feature2_custom_field']) {
 						$array['feature_2_custom_field'] = $_POST['feature2_custom_field'];
-						$name .= $_POST['feature2_custom_field'];
+						foreach (explode(",", $_POST['feature2_custom_field']) as $val2) {
+							$name .= $val2;
+						}
 					}
 				}
 			}
@@ -189,9 +193,11 @@ if ($_POST && CSRF::validate($_POST)) {
 					$name .= $val;
 				} else if ($val == 'custom') {
 					$feature1Arr[] = $val;
-					if ($_POST['feature1_custom_field']) {
+					if (isset($_POST['feature1_custom_field']) && $_POST['feature1_custom_field']) {
 						$array['feature_1_custom_field'] = $_POST['feature1_custom_field'];
-						$name .= $_POST['feature1_custom_field'];
+						foreach (explode(",", $_POST['feature1_custom_field']) as $val2) {
+							$name .= $val2;
+						}
 					}
 				}
 			}
@@ -209,9 +215,11 @@ if ($_POST && CSRF::validate($_POST)) {
 					$name .= $val;
 				} else if ($val == 'custom') {
 					$feature3Arr[] = $val;
-					if ($_POST['feature3_custom_field']) {
+					if (isset($_POST['feature3_custom_field']) && $_POST['feature3_custom_field']) {
 						$array['feature_3_custom_field'] = $_POST['feature3_custom_field'];
-						$name .= $_POST['feature3_custom_field'];
+						foreach (explode(",", $_POST['feature3_custom_field']) as $val2) {
+							$name .= $val2;
+						}
 					}
 				}
 			}
@@ -241,9 +249,11 @@ if ($_POST && CSRF::validate($_POST)) {
 					$name .= $val;
 				} else if ($val == 'custom') {
 					$feature5Arr[] = $val;
-					if ($_POST['feature5_custom_field']) {
+					if (isset($_POST['feature5_custom_field']) && $_POST['feature5_custom_field']) {
 						$array['feature_5_custom_field'] = $_POST['feature5_custom_field'];
-						$name .= $_POST['feature5_custom_field'];
+						foreach (explode(",", $_POST['feature5_custom_field']) as $val2) {
+							$name .= $val2;
+						}
 					}
 				}
 			}
@@ -276,7 +286,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		}
 		if (isset($_POST['category']) && in_array($_POST['category'], Category::CategoryType)) {
 			$array['category'] = $_POST['category'];
-			if (isset($_POST['sub_category']) && $_POST['sub_category'] == '') {
+			if (empty($_POST['sub_category'])) {
 				$name .= $_POST['category'];
 			}
 		} else {
