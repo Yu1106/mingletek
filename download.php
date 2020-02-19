@@ -57,12 +57,17 @@ foreach ($storeType as $val) {
 					$rutenRecord->stock = $stock;
 					$rutenRecord->custom_category = '5400094';
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '')
-						$product_description .= $value['product_description'];
+					if (isset($value['product_description']) && $value['product_description'] != '') {
+						$description = $value['product_description'];
+						$description = str_replace("，", "<br/>", $description);
+						$description = str_replace(",", "<br/>", $description);
+						$description = str_replace("\n", "<br/>", $description);
+						$product_description .= $description;
+					}
 					if (isset($store['note']) && $store['note'] != '')
-						$product_description .= "\n" . $store['note'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
-						$product_description .= "\n" . $store['return_notice'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['return_notice']);
 					$rutenRecord->product_description = $product_description;
 					$isNew = ($value['is_new'] == '新品') ? "全新" : "二手";
 					$rutenRecord->is_new = $isNew;
@@ -121,12 +126,17 @@ foreach ($storeType as $val) {
 					}
 					$yahooRecord->keyword = str_replace("custom", $value['keyword_custom_field'], $keyword);
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '')
-						$product_description .= $value['product_description'];
+					if (isset($value['product_description']) && $value['product_description'] != '') {
+						$description = $value['product_description'];
+						$description = str_replace("，", "<br/>", $description);
+						$description = str_replace(",", "<br/>", $description);
+						$description = str_replace("\n", "<br/>", $description);
+						$product_description .= $description;
+					}
 					if (isset($store['note']) && $store['note'] != '')
-						$product_description .= "\n" . $store['note'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
-						$product_description .= "\n" . $store['return_notice'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['return_notice']);
 					$yahooRecord->product_description = $product_description;
 					$yahooRecord->site = $value['site'];
 					$yahooRecord->stock = '';
@@ -246,12 +256,17 @@ foreach ($storeType as $val) {
 					}
 					$pchomeRecord->stock = $stock;
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '')
-						$product_description .= $value['product_description'];
+					if (isset($value['product_description']) && $value['product_description'] != '') {
+						$description = $value['product_description'];
+						$description = str_replace("，", "<br/>", $description);
+						$description = str_replace(",", "<br/>", $description);
+						$description = str_replace("\n", "<br/>", $description);
+						$product_description .= $description;
+					}
 					if (isset($store['note']) && $store['note'] != '')
-						$product_description .= "," . $store['note'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
-						$product_description .= "," . $store['return_notice'];
+						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['return_notice']);
 					$pchomeRecord->product_description = $product_description;
 					$isNew = ($value['is_new'] == '新品') ? "全新" : "二手";
 					$pchomeRecord->is_new = $isNew;
