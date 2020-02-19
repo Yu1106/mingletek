@@ -57,13 +57,8 @@ foreach ($storeType as $val) {
 					$rutenRecord->stock = $stock;
 					$rutenRecord->custom_category = '5400094';
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '') {
-						$description = $value['product_description'];
-						$description = str_replace("，", "<br/>", $description);
-						$description = str_replace(",", "<br/>", $description);
-						$description = str_replace("\n", "<br/>", $description);
-						$product_description .= $description;
-					}
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= str_replace("\n", "<br/>", $value['product_description']);
 					if (isset($store['note']) && $store['note'] != '')
 						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
@@ -126,13 +121,8 @@ foreach ($storeType as $val) {
 					}
 					$yahooRecord->keyword = str_replace("custom", $value['keyword_custom_field'], $keyword);
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '') {
-						$description = $value['product_description'];
-						$description = str_replace("，", "<br/>", $description);
-						$description = str_replace(",", "<br/>", $description);
-						$description = str_replace("\n", "<br/>", $description);
-						$product_description .= $description;
-					}
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= str_replace("\n", "<br/>", $value['product_description']);
 					if (isset($store['note']) && $store['note'] != '')
 						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
@@ -256,13 +246,8 @@ foreach ($storeType as $val) {
 					}
 					$pchomeRecord->stock = $stock;
 					$product_description = '';
-					if (isset($value['product_description']) && $value['product_description'] != '') {
-						$description = $value['product_description'];
-						$description = str_replace("，", "<br/>", $description);
-						$description = str_replace(",", "<br/>", $description);
-						$description = str_replace("\n", "<br/>", $description);
-						$product_description .= $description;
-					}
+					if (isset($value['product_description']) && $value['product_description'] != '')
+						$product_description .= str_replace("\n", "<br/>", $value['product_description']);
 					if (isset($store['note']) && $store['note'] != '')
 						$product_description .= "<br/>" . str_replace("\n", "<br/>", $store['note']);
 					if (isset($store['return_notice']) && $store['return_notice'] != '')
