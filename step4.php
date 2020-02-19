@@ -103,6 +103,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		 * name[start]
 		 * 賣場名稱→關鍵字→衣領→領口→特色二→袖長→特色一→特色三→特色四→特色五→ 顏色→[次分類|主分類]
 		 */
+		$name = '';
 		// 賣場名稱
 		$name .= $store['name'] . "  ";
 		// 關鍵字
@@ -275,7 +276,7 @@ if ($_POST && CSRF::validate($_POST)) {
 		}
 		if (isset($_POST['category']) && in_array($_POST['category'], Category::CategoryType)) {
 			$array['category'] = $_POST['category'];
-			if ($_POST['sub_category'] == '') {
+			if (isset($_POST['sub_category']) && $_POST['sub_category'] == '') {
 				$name .= $_POST['category'];
 			}
 		} else {

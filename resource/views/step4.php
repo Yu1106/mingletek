@@ -247,7 +247,7 @@ use common\model\parameter\Yahoo;
                             <input class="validate[required]" type="number" id="posting_days" name="posting.days"
                                    placeholder="刊登天數"
                                    value="<?= $data['first']['posting_days'] ?>"
-                                   min="0" data-prompt-target="formErrorMsg" data-errormessage="* 請填寫刊登天數">
+                                   min="1" data-prompt-target="formErrorMsg" data-errormessage="* 請填寫刊登天數">
                         </div>
                     </div>
                     <div id="tab-2" class="tabContent">

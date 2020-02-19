@@ -48,7 +48,13 @@ foreach ($storeType as $val) {
 					$rutenRecord->name = $value['name'];
 					$rutenRecord->sell_price = $value['price'];
 					$stockArr = explode(",", $value['stock']);
-					$rutenRecord->stock = array_sum($stockArr);
+					$stock = array_sum($stockArr);
+					if ($stock <= 0) {
+						$stock = 1;
+					} else if ($stock > 499) {
+						$stock = 499;
+					}
+					$rutenRecord->stock = $stock;
 					$rutenRecord->custom_category = '5400094';
 					$product_description = '';
 					if (isset($value['product_description']) && $value['product_description'] != '')
@@ -123,7 +129,6 @@ foreach ($storeType as $val) {
 						$product_description .= "\n" . $store['return_notice'];
 					$yahooRecord->product_description = $product_description;
 					$yahooRecord->site = $value['site'];
-					$stockArr = explode(",", $value['stock']);
 					$yahooRecord->stock = '';
 					$yahooRecord->price = $value['price'];
 					$yahooRecord->sell_price = $value['sell_price'];
@@ -141,10 +146,16 @@ foreach ($storeType as $val) {
 							$i++;
 						}
 					}
+					$stockArr = explode(",", $value['stock']);
 					$i = 1;
 					if (is_array($stockArr)) {
 						foreach ($stockArr as $val) {
 							$field = 'standard_' . ($i) . '_quantity';
+							if ($val <= 0) {
+								$val = 1;
+							} else if ($val > 499) {
+								$val = 499;
+							}
 							$yahooRecord->$field = $val;
 							$i++;
 						}

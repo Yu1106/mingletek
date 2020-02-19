@@ -88,8 +88,15 @@
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">規格：</span>
-							<?php if ($data['product']['size']) { ?><label for=""
-                                                                           class="checkbox item-purchase-value"><?= $data['product']['size'] ?></label><?php } ?>
+							<?php foreach (explode(",", $data['product']['size']) as $val) { ?>
+								<?php if ($val == 'custom'): ?>
+									<?php foreach (explode(",", $data['product']['size_custom_field']) as $val2): ?>
+                                        <label for="" class="checkbox item-purchase-value"><?= $val2 ?></label>
+									<?php endforeach; ?>
+								<?php else: ?>
+                                    <label for="" class="checkbox item-purchase-value"><?= $val ?></label>
+								<?php endif; ?>
+							<?php } ?>
                         </div>
                         <div class="item-purchase-row">
                             <span class="item-purchase-title">項目：</span>
