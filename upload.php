@@ -49,13 +49,13 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 		if ($v['status'] == 1) {
 			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
 			if (isset($product))
-				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
+				SubPicture::delByStoreIdAndProductIdAndPicture($storeId, $id, $v['name']);
 			SubPicture::addSubPicture($storeId, $v['name'], $id, 1);
 		}
 	}
 	echo json_encode($return);
-} else if ($_POST['action'] === 'delete' && $_POST['step'] === 'step4' && $_POST['image'] != '') {
-	SubPicture::delByStoreIdAndPicture($storeId, $_POST['image']);
+} else if ($_POST['action'] === 'delete' && $_POST['step'] === 'step4' && $_POST['product_id'] != '' && $_POST['image'] != '') {
+	SubPicture::delByStoreIdAndProductIdAndPicture($storeId, $_POST['product_id'], $_POST['image']);
 	$return = ['status' => 1, 'name' => $_POST['image']];
 	echo json_encode($return);
 }

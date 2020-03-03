@@ -103,7 +103,8 @@ $(function () {
         $('body').on("click", '.swiper-slide .icon-delete', function () {
             var i = $('.gallery-thumbs .swiper-slide').index($(this).closest(".swiper-slide"));
             var img = $(this).parent().attr("data-img");
-            formData.delete(img);
+            var id = $("#id").val();
+            formData.delete(id, img);
             if (formData.getStatus()) {
                 galleryThumbs.removeSlide(i);
                 galleryTop.removeSlide(i);
@@ -330,11 +331,11 @@ var formData = function () {
                 }
             });
         },
-        delete: function (img) {
+        delete: function (id, img) {
             reset();
             $.ajax({
                 url: 'upload.php',
-                data: {action: 'delete', step: 'step4', image: img},  //data只能指定單一物件
+                data: {action: 'delete', step: 'step4', product_id: id, image: img},  //data只能指定單一物件
                 type: 'post',
                 dataType: 'json',
                 async: false,

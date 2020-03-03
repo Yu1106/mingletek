@@ -31,15 +31,17 @@ class SubPicture extends Model
 
 	/**
 	 * @param int $storeId
+	 * @param int $productId
 	 * @param string $picture
 	 * @return bool
 	 */
-	public static function delByStoreIdAndPicture(int $storeId, string $picture)
+	public static function delByStoreIdAndProductIdAndPicture(int $storeId, int $productId, string $picture)
 	{
 		return self::getDb()->delete(
-			"store_id = :store_id and picture = :picture",
+			"store_id = :store_id and product_id = :product_id and picture = :picture",
 			[
 				'store_id' => $storeId,
+				'product_id' => $productId,
 				'picture' => $picture
 			],
 			static::tableName());
