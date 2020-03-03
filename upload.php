@@ -38,14 +38,6 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 	SubPicture::delByStoreId($storeId);
 	$fileUpload = new MultiFileUpload($filePath, $_FILES['file']);
 	$return = $fileUpload->upload();
-	foreach ($return as $k => $v) {
-		if ($v['status'] == 1) {
-			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
-			if (isset($product))
-				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
-			SubPicture::addSubPicture($storeId, $v['name']);
-		}
-	}
 	echo json_encode($return);
 } else if ($_POST['action'] === 'upload' && $_POST['step'] === 'step4' && isset($_FILES['file'])) {
 	if (empty($_POST['product_id']) && (int)$_POST['product_id'] <= 0)
@@ -58,13 +50,12 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
 			if (isset($product))
 				SubPicture::delByStoreIdAndPicture($storeId, $v['name']);
-			SubPicture::addSubPicture($storeId, $v['name'], $id);
+			SubPicture::addSubPicture($storeId, $v['name'], $id, 1);
 		}
 	}
 	echo json_encode($return);
 } else if ($_POST['action'] === 'delete' && $_POST['step'] === 'step4' && $_POST['image'] != '') {
-	$return = FileUpload::remove(FileUtil::IMG_UPLOAD_PATH . $filePath . "/" . $_POST['image']);
-	if ($return['status'] == 1)
-		SubPicture::delByStoreIdAndPicture($storeId, $_POST['image']);
+	SubPicture::delByStoreIdAndPicture($storeId, $_POST['image']);
+	$return = ['status' => 1, 'name' => $_POST['image']];
 	echo json_encode($return);
 }

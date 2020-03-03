@@ -15,36 +15,18 @@ class SubPicture extends Model
 	 * @param int $storeId
 	 * @param string $picture
 	 * @param int $productId
+	 * @param float $confidence
 	 * @return bool
 	 */
-	public static function addSubPicture(int $storeId, string $picture, int $productId = 0)
+	public static function addSubPicture(int $storeId, string $picture, int $productId = 0, float $confidence = 0)
 	{
 		return self::getDb()->save(
 			[
 				'store_id' => $storeId,
 				'picture' => $picture,
-				'product_id' => $productId
-			], true, static::tableName());
-	}
-
-	/**
-	 * @param int $storeId
-	 * @param string $picture
-	 * @param int $productId
-	 * @param float $confidence
-	 * @return bool
-	 */
-	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId, float $confidence)
-	{
-		return self::getDb()->update(
-			[
 				'product_id' => $productId,
 				'confidence' => $confidence
-			],
-			"store_id = :store_id and picture = :picture",
-			['store_id' => $storeId, ':picture' => $picture],
-			static::tableName()
-		);
+			], true, static::tableName());
 	}
 
 	/**
@@ -84,7 +66,7 @@ class SubPicture extends Model
 	 */
 	public static function findByStoreIdAndProductId(int $storeId, int $productId)
 	{
-		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id and product_id = :product_id order by confidence asc", [":store_id" => $storeId, ":product_id" => $productId]);
+		return self::getDb()->sqlQuery("select * from `" . static::tableName() . "` where store_id = :store_id and product_id = :product_id order by confidence, id asc", [":store_id" => $storeId, ":product_id" => $productId]);
 	}
 
 	/**
