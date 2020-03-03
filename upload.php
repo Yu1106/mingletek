@@ -47,7 +47,7 @@ if ($_POST['action'] === 'validate' && isset($_FILES['file'])) {
 	$return = $fileUpload->upload();
 	foreach ($return as $k => $v) {
 		if ($v['status'] == 1) {
-			$product = SubPicture::findByStoreIdAndPicture($storeId, $v['name']);
+			$product = SubPicture::findByStoreIdAndProductIdAndPicture($storeId, $id, $v['name']);
 			if (isset($product))
 				SubPicture::delByStoreIdAndProductIdAndPicture($storeId, $id, $v['name']);
 			SubPicture::addSubPicture($storeId, $v['name'], $id, 1);
