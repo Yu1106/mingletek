@@ -4,7 +4,7 @@ namespace common\util;
 
 class HttpUtil
 {
-	const WEB_BASIC = 'https://219.91.63.48/';
+	const WEB_BASIC = 'https://www.mingletek.com/';
 	const METHOD_GET = 'get';
 	const METHOD_POST = 'post';
 	const METHOD_WWW_URLENCODED = 'www-urlencoded';
