@@ -31,7 +31,7 @@ class SubPicture extends Model
 	 * @param int $storeId
 	 * @param string $picture
 	 * @param int $productId
-	 * @param int $confidence
+	 * @param float $confidence
 	 * @return bool
 	 */
 	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId, float $confidence)
