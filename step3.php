@@ -51,10 +51,11 @@ if ($_POST && CSRF::validate($_POST)) {
 			if (isset($product)) {
 				for ($i = 1; $i <= 10; $i++) {
 					$filename_add = 'filename_add_' . $i;
+					$confidence_add = $filename_add.'_confidence';
 					if (isset($data->$filename_add)) {
 						$subPicture = SubPicture::findByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add);
 						if ($subPicture)
-							SubPicture::modifyByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add, $product['id']);
+							SubPicture::modifyByStoreIdAndPicture($_SESSION["STORE_ID"], $data->$filename_add, $product['id'], $data->$confidence_add);
 					}
 				}
 				$array = array();

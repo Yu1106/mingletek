@@ -31,13 +31,15 @@ class SubPicture extends Model
 	 * @param int $storeId
 	 * @param string $picture
 	 * @param int $productId
+	 * @param int $confidence
 	 * @return bool
 	 */
-	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId)
+	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId, int $confidence)
 	{
 		return self::getDb()->update(
 			[
-				'product_id' => $productId
+				'product_id' => $productId,
+				'confidence' => $confidence
 			],
 			"store_id = :store_id and picture = :picture",
 			['store_id' => $storeId, ':picture' => $picture],
