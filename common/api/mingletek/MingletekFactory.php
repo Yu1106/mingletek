@@ -8,6 +8,6 @@ abstract class MingletekFactory extends HttpRequest
 {
 	public function endpointBase(): string
 	{
-		return 'https://219.91.63.48/';
+		return 'https://www.mingletek.com/';
 	}
 }
