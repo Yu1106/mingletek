@@ -61,21 +61,21 @@ if (isset($_GET['type']) && CSRF::validate($_GET)) {
 			$response = $sso->GoogleLoginResponse();
 		}
 
-		$mingletek = new Mingletek();
-		$account = $response->email;
-		$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
-		$CheckAccountRecord = new CheckAccountRecord();
-		$CheckAccountRecord->account = $account;
-		$check = $mingletek->CheckAccount($CheckAccountRecord);
-		$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($check));
-
-		if (!$check->response) {
-			$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
-			$CreateAccountRecord = new CreateAccountRecord();
-			$CreateAccountRecord->account = $account;
-			$create = $mingletek->CreateAccount($CreateAccountRecord);
-			$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($create));
-		}
+//		$mingletek = new Mingletek();
+//		$account = $response->email;
+//		$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CHECK_ACCOUNT, json_encode($response));
+//		$CheckAccountRecord = new CheckAccountRecord();
+//		$CheckAccountRecord->account = $account;
+//		$check = $mingletek->CheckAccount($CheckAccountRecord);
+//		$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($check));
+//
+//		if (!$check->response) {
+//			$mingletekApiLogId = MingletekApiLog::addLog(0, 0, MingletekApiLog::CREATE_ACCOUNT, json_encode($response));
+//			$CreateAccountRecord = new CreateAccountRecord();
+//			$CreateAccountRecord->account = $account;
+//			$create = $mingletek->CreateAccount($CreateAccountRecord);
+//			$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($create));
+//		}
 		if ($check->response || $create->response) {
 			$login = new Login($response);
 			$login->login();
