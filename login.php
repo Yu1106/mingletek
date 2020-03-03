@@ -76,14 +76,18 @@ if (isset($_GET['type']) && CSRF::validate($_GET)) {
 //			$create = $mingletek->CreateAccount($CreateAccountRecord);
 //			$mingletekApiLog = MingletekApiLog::modifyLogById($mingletekApiLogId, 0, '', json_encode($create));
 //		}
-		if ($check->response || $create->response) {
-			$login = new Login($response);
-			$login->login();
-		}else{
-			$log = new LogUtil("login-" . date("Ymd"));
-			$log->warning('social api failed' . json_encode(['check' => $check->response, 'create' => $create->response]));
-			HttpUtil::redirect();
-		}
+
+		$login = new Login($response);
+		$login->login();
+
+//		if ($check->response || $create->response) {
+//			$login = new Login($response);
+//			$login->login();
+//		}else{
+//			$log = new LogUtil("login-" . date("Ymd"));
+//			$log->warning('social api failed' . json_encode(['check' => $check->response, 'create' => $create->response]));
+//			HttpUtil::redirect();
+//		}
 	} else {
 		$log = new LogUtil("login-" . date("Ymd"));
 		$log->warning('social failed' . json_encode($_REQUEST));
