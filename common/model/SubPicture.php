@@ -34,7 +34,7 @@ class SubPicture extends Model
 	 * @param int $confidence
 	 * @return bool
 	 */
-	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId, int $confidence)
+	public static function modifyByStoreIdAndPicture(int $storeId, string $picture, int $productId, float $confidence)
 	{
 		return self::getDb()->update(
 			[
